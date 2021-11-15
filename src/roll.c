@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-int roll(int curr,char *map, char *Nama, int Maxroll){
+int roll(int curr,char *TI, char *Nama, int Maxroll){
  int dice1;
  srand ( time(NULL) );
  dice1 = (rand()%Maxroll + 1);
  printf ("%s mendapatkan angka %d\n", Nama,dice1);
-    if ((map[curr+dice1]=='#') && (map[curr-dice1]=='#')){
+    if ((TI[curr+dice1]=='#') && (TI[curr-dice1]=='#')){
          printf ("%s tidak dapat bergerak", Nama); }
     else {
-        if ((map[curr+dice1]=='.') && (map[curr-dice1]=='.')){
+        if ((TI[curr+dice1]=='.') && (TI[curr-dice1]=='.')){
             printf ("%s dapat maju dan mundur\n", Nama);
             printf ("Ke mana %s mau bergerak : \n", Nama);
             printf ("1. %d\n", (curr+1-dice1));
@@ -24,14 +24,14 @@ int roll(int curr,char *map, char *Nama, int Maxroll){
                 printf ("%s maju %d langkah\n", Nama,dice1);
                 curr = (curr + dice1);}
             printf ("%s berada di petak %d\n", Nama,curr+1);}
-        else if (((map[curr+dice1]=='.') && (map[curr-dice1]=='#')) || ((map[curr+dice1]=='.') && (curr - dice1 < 0)) ){
+        else if (((TI[curr+dice1]=='.') && (TI[curr-dice1]=='#')) || ((TI[curr+dice1]=='.') && (curr - dice1 < 0)) ){
             printf ("%s dapat maju\n", Nama);
             printf ("%s maju %d langkah\n", Nama,dice1);
             curr = (curr + dice1);
             printf ("%s berada di petak %d\n", Nama,curr+1); /*isi nanti
             if curr == Tele[i]{
                 ISI NANTI}*/}
-        else if ((map[curr+dice1]=='#') && (map[curr-dice1]=='.')){
+        else if ((TI[curr+dice1]=='#') && (TI[curr-dice1]=='.')){
             printf ("%s dapat mundur\n", Nama);
             printf ("%s mundur %d langkah\n",Nama,dice1);
             curr = (curr - dice1);
@@ -43,6 +43,8 @@ int roll(int curr,char *map, char *Nama, int Maxroll){
 }
 
 
+/*buat tes aja
 int main(){
     int curr = roll(0,".....#..","Tan",4);
 }
+*/
