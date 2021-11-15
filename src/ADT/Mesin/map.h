@@ -37,7 +37,9 @@ IdxType GetLastIdx (Map M);
 ElType GetElmt (Map M, IdxType i);
 
 ElType GetCurrPlace (Map M); //outputnya IdxType curr
+void readConfig(Map M);
 void outputMap(Map M);
+boolean isPlaceAvailable(Map M, IdxType i);
 
 
 

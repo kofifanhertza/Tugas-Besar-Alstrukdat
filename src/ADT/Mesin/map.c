@@ -46,3 +46,7 @@ void ChangeCurrPlace(Map M, IdxType idxAfter) {
     M.TI[temp] = ".";
     M.TI[idxAfter] = "*";
 }
+boolean isPlaceAvailable(Map M, IdxType i) {
+    return ((M.TI[i] == "." ) || (M.TI[i] == "*")); 
+    /* Kalau M.TI[i] == "#", nanti return false, terus nanti akan ada fungsi yang nentuin bakal gimana jalannya, kalau dapet roll dadu yang menghasilkan i untuk M.TI[i] == "#"*/
+}

@@ -6,8 +6,6 @@ LATIHAN MESIN KATA*/
 # include <stdio.h>
 # include "map.h"
 
-static char configFilename[] = "config.txt";
-
 static FILE * pita;
 boolean EndKata;
 Kata CKata;
@@ -26,31 +24,25 @@ void IgnoreBlank() {
           CC = BLANK atau CC = MARK;
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-void readConfig(){
-    Map M;
-    MakeEmpty(&M);
-    START("config.txt");
-    ignoreBlank();
+void readConfig(Map M){
+    STARTKATA();
     int i = 0;
     while ((CC != EOF)) {
-        if (CC == '\n') {
-            ADV();
-        }
-        else {
             i += 1;
             if (i == 1) {
-                ADVKata();
                 M.Length = intConverter(CKata);
-            } else if (i == 2) {
                 ADVKata();
+            } else if (i == 2) {
                 for(i=0;i<M.Length;i++) {
-                    M.TI[i] =  CKata.TabKata[i];} //untuk ngecopas CKata yang isinya '.' sama '#' ke array peta. M.TI adalah peta
+                    M.TI[i] =  CKata.TabKata[i];
+                    ADVKata();} //untuk ngecopas CKata yang isinya '.' sama '#' ke array peta. M.TI adalah peta
             } else if (i == 3) {
                 M.MaxRoll = intConverter(CKata);
+                ADVKata();
             } else if (i == 4) {
-                Teleporter(M); // bentar nunggu teleporter dari tania //
+                Teleporter(M);// bentar nunggu teleporter dari tania //
+                ADVKata();
             }
-        }
     }
 }
 void SalinKata() {
