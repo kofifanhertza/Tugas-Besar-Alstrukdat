@@ -5,9 +5,8 @@
 
 
 int main () {
-    List skillP1, skillP2 ;
-    CreateEmpty(&skillP1) ;
-    CreateEmpty(&skillP2) ;
+    Player P1 ;
+    CreateEmpty(&P1.SkillList) ;
 
     int Input;
     scanf("%d",&Input);
@@ -18,12 +17,12 @@ int main () {
             int skill,random  ;
             skill = skillRandomizer(random) ;
             if (skill != 0) {
-                InsVFirst(&skillP1, skill) ;
+                InsVFirst(&P1.SkillList, skill) ;
             }
         } 
 
         else if (Input == 2) {
-            CommandSkill(skillP1) ;
+            CommandSkill(P1) ;
         }
 
 

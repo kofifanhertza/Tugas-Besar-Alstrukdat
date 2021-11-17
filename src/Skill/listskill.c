@@ -51,9 +51,9 @@ return skill ;
 int NbSkill (List L) {
     int count = 0 ;
     if (!IsEmpty(L)) {
-        address p = First(L) ;
+        address p = Last(L) ;
         while (p != Nil) {
-            p = Next(p) ;
+            p = Prev(p) ;
             count = count + 1 ;
         }
     }
@@ -73,7 +73,7 @@ int UseSkill (List L,  int idx) {
     if (skill == 1) {
         printf("Skill Pintu Ga Ke Mana Mana berhasil digunakan!\n") ;
     }
-    if (skill == 2) {
+    else if (skill == 2) {
     int nSkill ;
         nSkill = NbSkill(L) ;
         if (nSkill > 9) {
@@ -83,20 +83,24 @@ int UseSkill (List L,  int idx) {
             printf("Skill Cermin Pengganda berhasil digunakan!\n") ;
         }
     }
-    if (skill == 3) {
+    else if (skill == 3) {
         printf("Skill Senter Pembesar Hoki berhasil digunakan!\n") ;
     }
-    if (skill == 4) {
+    else if (skill == 4) {
         printf("Skill Senter Pengecil Hoki berhasil digunakan!\n") ;
     }
-    if (skill == 5) {
+    else if (skill == 5) {
         printf("Skill Mesin Penukar Posisi berhasil digunakan!\n") ;
     }
+
     return skill ;
     
 }
 
 void PrintSkill (List L) {
+    if (IsEmpty(L)) {
+        return ;
+    }
     int i = 1 ;
     address q = Last(L) ;
     while (q != Nil) {   
@@ -121,20 +125,33 @@ void PrintSkill (List L) {
         
 }
 
-void CommandSkill (List L) {
+
+
+void CommandSkill (Player P) {
     int x ;
+    if (IsEmpty(P.SkillList)) {
+        printf("Anda tidak memiliki skill\n") ;
+        return ;
+    }
+    
     printf("Kamu memiliki Skill :\n") ;
-    PrintSkill(L) ;
+    PrintBackward(P.SkillList) ;
+    printf("\nAnda memiliki %d skill\n", NbSkill(P.SkillList)) ;
+    PrintSkill(P.SkillList) ;
     
     printf("\nTekan 0 untuk keluar\n\n") ;
     printf("Masukkan Skill : ") ;
     
     scanf("%d", &x) ;
     if (x != 0) {
-        int UsedSkill = UseSkill(L, x) ;
-        DelP(&L, UsedSkill) ;
+        int UsedSkill = UseSkill(P.SkillList, x) ;
+        if (NbSkill(P.SkillList) == 1) {
+            List LTemp ;
+            CreateEmpty(&LTemp) ;
+            P.SkillList = LTemp ;
+        }
+        DelP(&P.SkillList, UsedSkill) ;
     }
     
 }
-
 

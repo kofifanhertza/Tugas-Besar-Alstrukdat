@@ -1,5 +1,6 @@
 #include"listdp.h"
 #include"boolean.h" 
+#include "../player.h"
 
 int skillRandomizer () ;
 /* Mengenerate Random Skill berbentuk integer*/
@@ -13,4 +14,4 @@ int UseSkill(List L, int idx) ;
 void PrintSkill(List L) ;
 /* Menampilkan skill yang ada di List*/
 
-void CommandSkill (List L) ;
+void CommandSkill (Player P) ;
