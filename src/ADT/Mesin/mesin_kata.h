@@ -70,6 +70,6 @@ void ADVKATA();
           Jika CC = MARK, EndKata = true.
    Proses : Akuisisi kata menggunakan procedure SalinKata */
 int intConverter(Kata W);
-void readConfig(Map M);
+Map readConfig(Map M);
 
 #endif

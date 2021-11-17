@@ -23,27 +23,24 @@ void IgnoreBlank() {
           CC = BLANK atau CC = MARK;
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-void readConfig(Map M){
+Map readConfig(Map M){
     int i = 0;
     while ((CC != MARK)) {
             i += 1;
             int j;
             if (i == 1) {
                 M.Length = intConverter(CKata);
-                printf("Panjang peta: %d\n", M.Length);
                 ADVKATA();
             } else if (i == 2) {
                 for(j=IdxMin;j<=M.Length;j++) {
                     M.TI[j] =  CKata.TabKata[j];}
-                outputMap(M);
                 ADVKATA(); //untuk ngecopas CKata yang isinya '.' sama '#' ke array peta. M.TI adalah peta
             } else if (i == 3) {
                 M.MaxRoll = intConverter(CKata);
-                printf("Panjang Maxroll: %d\n", M.MaxRoll);
                 ADVKATA();
             }
     }
-    printf("end\n");
+    return M;
 }
 void SalinKata() {
     int i;
