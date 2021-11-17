@@ -1,12 +1,13 @@
-#include"boolean.h" 
 #include"stdlib.h"
 #include"stdio.h"
-#include"listdp.h"
+#include"listskill.h"
 #include"time.h"
 
 
-int skillRandomizer (int x) {
-    int skill ;
+int skillRandomizer () {
+    int skill, x;
+    srand(time(NULL));
+    x = rand() % 100 ;
     printf("%d\n", x) ;
 
     if (x > 0 && x <= 10) {
@@ -59,59 +60,46 @@ int NbSkill (List L) {
     return count ;   
 }
 
-int UseSkill (List L,  int skill) {
-    address addrSkill ;
-    addrSkill = Search(L, skill) ;
-    if (addrSkill == Nil) {
-        if (skill == 1) {
-            printf("Anda tidak memiliki skill Pintu Ga Ke Mana Mana\n") ;
-        }
-        if (skill == 2) {
-            printf("Anda tidak memiliki skill Cermin Pengganda\n") ;
-        }
-        if (skill == 3) {
-            printf("Anda tidak memiliki skill Senter Pembesar Hoki\n") ;
-        }
-        if (skill == 4) {
-            printf("Anda tidak memiliki skill Senter Pengecil Hoki\n") ;
-        }
-        if (skill == 5) {
-            printf("Anda tidak memiliki skill Mesin Penukar Posisi\n") ;
-        }
-        return 0 ;
+int UseSkill (List L,  int idx) {
+    int skill, i = 1 ;
+    address addrSkill = Last(L) ;
 
-    } else {
-        if (skill == 1) {
-            printf("Skill Pintu Ga Ke Mana Mana berhasil digunakan!\n") ;
-        }
-        if (skill == 2) {
-            int nSkill ;
-            nSkill = NbSkill(L) ;
-
-            if (nSkill > 9) {
-                printf("Anda tidak bisa menggunakan skill Cermin Pengganda!\n(Jumlah skill > 9)\n") ;
-                return 0 ;
-            } else {
-            printf("Skill Cermin Pengganda berhasil digunakan!\n") ;
-            }
-        }
-        if (skill == 3) {
-            printf("Skill Senter Pembesar Hoki berhasil digunakan!\n") ;
-        }
-        if (skill == 4) {
-            printf("Skill Senter Pengecil Hoki berhasil digunakan!\n") ;
-        }
-        if (skill == 5) {
-            printf("Skill Mesin Penukar Posisi berhasil digunakan!\n") ;
-        }
-        return skill ;
+    while (i != idx) {
+        addrSkill = Prev(addrSkill) ;
+        i = i + 1 ;
     }
+    skill = Info(addrSkill) ;
+
+    if (skill == 1) {
+        printf("Skill Pintu Ga Ke Mana Mana berhasil digunakan!\n") ;
+    }
+    if (skill == 2) {
+    int nSkill ;
+        nSkill = NbSkill(L) ;
+        if (nSkill > 9) {
+            printf("Anda tidak bisa menggunakan skill Cermin Pengganda!\n(Jumlah skill > 9)\n") ;
+            return 0;
+        } else {
+            printf("Skill Cermin Pengganda berhasil digunakan!\n") ;
+        }
+    }
+    if (skill == 3) {
+        printf("Skill Senter Pembesar Hoki berhasil digunakan!\n") ;
+    }
+    if (skill == 4) {
+        printf("Skill Senter Pengecil Hoki berhasil digunakan!\n") ;
+    }
+    if (skill == 5) {
+        printf("Skill Mesin Penukar Posisi berhasil digunakan!\n") ;
+    }
+    return skill ;
+    
 }
 
 void PrintSkill (List L) {
+    int i = 1 ;
     address q = Last(L) ;
     while (q != Nil) {   
-        int i = 1 ;
         if (Info(q) == 1) {
             printf("%d. Pintu Ga Ke Mana Mana\n", i) ;    
         } 
@@ -133,63 +121,20 @@ void PrintSkill (List L) {
         
 }
 
-
-
-/* BAGIAN TESTING SKILL */
-
-int main () {
-    List skillP1, skillP2 ;
-    CreateEmpty(&skillP1) ;
-    CreateEmpty(&skillP2) ;
-
-    int Input;
-    scanf("%d",&Input);
-
-    while (Input != 0) {
-        if (Input == 1) {
-
-            int skill,random  ;
-            srand(time(NULL));
-            random = rand() % 100 ;
-            skill = skillRandomizer(random) ;
-            if (skill != 0) {
-                InsVFirst(&skillP1, skill) ;
-            }
-        } 
-
-        else if (Input == 2) {
-            PrintSkill(skillP1) ;
-        }
-
-        else if (Input == 3) {
-            int skill, Used ;
-            printf("Skill yang akan digunakan : ") ;
-            scanf("%d", &skill) ;
-            Used = UseSkill(skillP1, skill) ;
-            DelP(&skillP1, skill) ;
-            if (Used == 2) {
-
-                int x,random, y  ;
-                srand(time(NULL));
-                random = rand() % 100 ;
-
-                x = skillRandomizer(random) ;
-                if (x != 0) {
-                    InsVFirst(&skillP1, x) ;
-                }
-
-                srand(time(NULL));
-                random = rand() % 100 ;
-                y = skillRandomizer(random) ;
-                if (y != 0) {
-                    InsVFirst(&skillP1, y) ;
-                }
-            }
-        }
-
-        scanf("%d",&Input);
-    }
-    return 0 ;
-}
+void CommandSkill (List L) {
+    int x ;
+    printf("Kamu memiliki Skill :\n") ;
+    PrintSkill(L) ;
     
+    printf("\nTekan 0 untuk keluar\n\n") ;
+    printf("Masukkan Skill : ") ;
+    
+    scanf("%d", &x) ;
+    if (x != 0) {
+        int UsedSkill = UseSkill(L, x) ;
+        DelP(&L, UsedSkill) ;
+    }
+    
+}
+
 
