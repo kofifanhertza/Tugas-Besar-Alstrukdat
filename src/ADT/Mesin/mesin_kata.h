@@ -15,10 +15,35 @@ typedef struct {
     int Length;
 } Kata;
 
+////////////////////////////////////////////////////////////////////BUAT MAP
+
+#define IdxMax 100
+#define IdxMin 1
+
+
+/* Definisi elemen dan koleksi objek */
+typedef int IdxType;
+typedef char ElType;
+
+typedef struct
+{
+	ElType TI [IdxMax-IdxMin+1]; /* penyimpanan isi peta; "." atau "#" atau "*" */
+	int Length;
+	IdxType curr; 
+    int Tele [IdxMax-IdxMin+1]; 
+	/* Untuk curr (indeks) = i di TI, apabila Tele[i] == i, brrti tidak ada tele. Kalau Tele[i] != i, 
+	nanti TI[i] yg awalnya "*" diubah ke "." lalu TI[Tele[i]] = "*"*/ 
+	int MaxRoll;
+} Map;
+
+////////////////////////////////////////////////////////////////////////////////
+
 /* State Mesin Kata */
 extern boolean EndKata;
 extern Kata CKata;
 
+void MakeEmpty (Map *M);
+void outputMap(Map M);
 void IgnoreBlank();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang
@@ -45,6 +70,6 @@ void ADVKATA();
           Jika CC = MARK, EndKata = true.
    Proses : Akuisisi kata menggunakan procedure SalinKata */
 int intConverter(Kata W);
-
+void readConfig(Map M);
 
 #endif

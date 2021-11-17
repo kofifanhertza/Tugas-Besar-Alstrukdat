@@ -4,7 +4,6 @@ LATIHAN MESIN KATA*/
 
 # include "mesin_kata.h"
 # include <stdio.h>
-# include "map.h"
 
 static FILE * pita;
 boolean EndKata;
@@ -25,25 +24,26 @@ void IgnoreBlank() {
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 void readConfig(Map M){
-    STARTKATA();
     int i = 0;
-    while ((CC != EOF)) {
+    while ((CC != MARK)) {
             i += 1;
+            int j;
             if (i == 1) {
                 M.Length = intConverter(CKata);
-                ADVKata();
+                printf("Panjang peta: %d\n", M.Length);
+                ADVKATA();
             } else if (i == 2) {
-                for(i=0;i<M.Length;i++) {
-                    M.TI[i] =  CKata.TabKata[i];
-                    ADVKata();} //untuk ngecopas CKata yang isinya '.' sama '#' ke array peta. M.TI adalah peta
+                for(j=IdxMin;j<=M.Length;j++) {
+                    M.TI[j] =  CKata.TabKata[j];}
+                outputMap(M);
+                ADVKATA(); //untuk ngecopas CKata yang isinya '.' sama '#' ke array peta. M.TI adalah peta
             } else if (i == 3) {
                 M.MaxRoll = intConverter(CKata);
-                ADVKata();
-            } else if (i == 4) {
-                Teleporter(M);// bentar nunggu teleporter dari tania //
-                ADVKata();
+                printf("Panjang Maxroll: %d\n", M.MaxRoll);
+                ADVKATA();
             }
     }
+    printf("end\n");
 }
 void SalinKata() {
     int i;
@@ -87,9 +87,23 @@ void ADVKATA() {
 int intConverter(Kata W){
     int result = 0;
     int temp;
-    for(int i = 0; i < W.Length; i++){
+    for(int i = IdxMin; i <= W.Length; i++){
         temp = W.TabKata[i] - '0';
         result = result * 10 + temp;
     }
     return result;
+}
+
+void MakeEmpty (Map *M){
+    (*M).Length = 0;
+    (*M).MaxRoll = 0;
+    (*M).curr = IdxMin;
+}
+void outputMap(Map M) {
+    // untuk membaca map
+    int i;
+    for(i=IdxMin;i<=M.Length;i++) {
+        printf("%c", M.TI[i]);
+    }
+    printf("\n");
 }
