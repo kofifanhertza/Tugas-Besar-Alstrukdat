@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include "mesin_kata.h"
 
-#include <stdio.h>
-#include "mesin_kata.h"
-
 int main(){
     Map User1;
     MakeEmpty(&User1);
