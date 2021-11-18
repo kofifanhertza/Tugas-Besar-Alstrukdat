@@ -32,5 +32,8 @@ typedef struct
 
 void SetPlayer (Player P); /* untuk menginisialisasi player dengan peta kosong */
 void outputPlayerMap(Player P); /*mengeluarkan peta player*/
+char CheckPetak (Player P, IdxType i); /* mengecheck kondisi suatu petak dalam peta*/
+int GetCurrPlace (Player P); /*mengeluarkan indeks lokasi Player berada */
+void ChangeCurrPlace(Player P, IdxType idxAfter); /*memindahkan posisi player*/
 
 #endif
