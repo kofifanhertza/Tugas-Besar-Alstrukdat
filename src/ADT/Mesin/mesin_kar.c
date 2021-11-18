@@ -6,6 +6,7 @@
 
 char CC;
 boolean EOP;
+boolean EndKata;
 static FILE * pita;
 static int retval;
 
@@ -17,7 +18,7 @@ void START() {
 
 void ADV() {
    retval = fscanf(pita, "%c", &CC);
-   EOP = (CC == MARK);
+   EOP = (EndKata == true);
    if (EOP) {
       fclose(pita);
    }

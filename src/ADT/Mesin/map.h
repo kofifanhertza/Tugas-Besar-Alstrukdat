@@ -1,3 +1,5 @@
+/* Kamus Umum */
+
 #include "boolean.h"
 
 #ifndef ARRAY_H 
@@ -15,32 +17,20 @@ typedef char ElType;
 
 typedef struct
 {
-	ElType TI [IdxMax-IdxMin+1]; /* penyimpanan isi peta; "." atau "#" atau "*" */
+	ElType Map [IdxMax-IdxMin+1]; /* penyimpanan isi peta; "." atau "#" atau "*" */
 	int Length;
-	IdxType curr; 
-    int Tele [IdxMax-IdxMin+1]; 
-	/* Untuk curr (indeks) = i di TI, apabila Tele[i] == i, brrti tidak ada tele. Kalau Tele[i] != i, 
-	nanti TI[i] yg awalnya "*" diubah ke "." lalu TI[Tele[i]] = "*"*/ 
+	IdxType Curr; 
 	int MaxRoll;
-} Map;
+} Player;
 
+typedef struct
+{
+   int BeforeTele [IdxMax-IdxMin+1]; /*array BeforeTele berisikan indeks-indeks pada peta yang mengandung teleporter*/
+   int AfterTele [IdxMax-IdxMin+1]; /* array AfterTele berisikan indeks letak tujuan teleporter */
+   int bykTele;
+} Tele;
 
-void MakeEmpty (Map *M);
-
-int MapLength (Map M);
-
-int MaxNbEl (Map M);
-
-IdxType GetFirstIdx (Map M);
-
-IdxType GetLastIdx (Map M);
-ElType GetElmt (Map M, IdxType i);
-
-ElType GetCurrPlace (Map M); //outputnya IdxType curr
-void readConfig(Map M);
-void outputMap(Map M);
-boolean isPlaceAvailable(Map M, IdxType i);
-
-
+void SetPlayer (Player P); /* untuk menginisialisasi player dengan peta kosong */
+void outputPlayerMap(Player P); /*mengeluarkan peta player*/
 
 #endif
