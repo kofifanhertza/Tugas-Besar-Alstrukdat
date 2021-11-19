@@ -12,34 +12,34 @@ int roll(Player P){
         if ((P.Curr+dice1=='.') && (P.Curr-dice1=='.')){
             printf ("%s dapat maju dan mundur\n", P.Name);
             printf ("Ke mana %s mau bergerak : \n", P.Name);
-            printf ("1. %d\n", (curr+1-dice1));
-            printf ("2. %d\n", (curr+1+dice1));
+            printf ("1. %d\n", P.Curr-dice1);
+            printf ("2. %d\n", P.Curr+dice1);
             int opsi;
             printf("Masukkan pilihan :\n");
             scanf ("%d", &opsi);
             if (opsi==1){
                 printf ("%s mundur %d langkah\n", P.Name,dice1);
-                curr = (curr - dice1);}
+                P.Curr = P.Curr-dice1;}
             else if (opsi ==2){
                 printf ("%s maju %d langkah\n", P.Name,dice1);
-                curr = (curr + dice1);}
-            printf ("%s berada di petak %d\n", P.Name,curr+1);}
+                P.Curr = P.Curr+dice1;}
+            printf ("%s berada di petak %d\n", P.Name,P.Curr);}
         else if (((P.Curr+dice1=='.') && (P.Curr-dice1=='#')) || ((P.Curr+dice1=='.') && (P.Curr-dice1 < 0)) ){
             printf ("%s dapat maju\n", P.Name);
             printf ("%s maju %d langkah\n", P.Name,dice1);
-            curr = (curr + dice1);
-            printf ("%s berada di petak %d\n", P.Name,curr+1); /*isi nanti
+            P.Curr = P.Curr+dice1;
+            printf ("%s berada di petak %d\n", P.Name,P.Curr); /*isi nanti
             if curr == Tele[i]{
                 ISI NANTI}*/}
         else if ((P.Curr+dice1=='#') && (P.Curr-dice1]=='.')){
             printf ("%s dapat mundur\n", P.Name);
             printf ("%s mundur %d langkah\n",P.Name,dice1);
-            curr = (curr - dice1);
-            printf ("%s berada di petak %d\n", P.Name,curr+1); /*isi nanti
+            P.Curr = P.Curr-dice1;
+            printf ("%s berada di petak %d\n", P.Name,P.Curr); /*isi nanti
             if teleporter found {
                 ISI NANTI}*/}
     }            
-    return curr;
+    return P.Curr;
 }
 
 
