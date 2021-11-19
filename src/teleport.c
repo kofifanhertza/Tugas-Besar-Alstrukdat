@@ -16,5 +16,5 @@ int teleport (Tele T, Player P){
     int a = search(Tele1,curr);
     if (a!=-1){
         P.Curr = T.AfterTele[a];}
-    return curr;}
+    return P.Curr;}
 
