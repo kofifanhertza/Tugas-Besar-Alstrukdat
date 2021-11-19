@@ -1,26 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "listlinier.c"
+#include "map.h"
 
-int search (int *Tele1, int curr){
+int search (Tele T, Player P){
     int i=0;
-    while (Tele1[i]!=curr){
+    while (T.BeforeTele[i] != P.Curr){
         i = i + 1;}
-    if (Tele1[i]==curr){
+    if (T.BeforeTele[i] == P.Curr){
         return i;}
     else {
         return -1;}}
 
-int teleport (int curr, int *Tele1, int *Tele2){
+int teleport (Tele T, Player P){
     int a = search(Tele1,curr);
     if (a!=-1){
-        curr = Tele2[a];}
+        P.Curr = T.AfterTele[a];}
     return curr;}
-
-/*int main(){
-    int Tele1[]={1,2,5};
-    int Tele2[]={6,7,8};
-    int curr = teleport(,Tele1,Tele2);
-    printf ("%d", curr);
-}*/
 
