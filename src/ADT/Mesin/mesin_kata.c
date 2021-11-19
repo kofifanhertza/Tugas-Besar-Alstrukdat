@@ -27,7 +27,7 @@ Player readPlayer(Player P){
                 ADVKATA(); //untuk ngecopas CKata yang isinya '.' sama '#' ke array peta. M.TI adalah peta
             } else if (i == 3) {
                 temp = intConverter(CKata);
-                P.MaxRoll = temp;
+                P.MaxRollAwal = temp;
                 EndKata = true;
             }  
      }  

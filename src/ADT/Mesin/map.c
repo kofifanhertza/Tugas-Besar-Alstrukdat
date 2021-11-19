@@ -4,8 +4,6 @@
 
 void SetPlayer (Player P){
     (P).Length = 0;
-    (P).MaxRoll = 0;
-    (P).Curr = IdxMin;
 }
 
 void outputPlayerMap(Player P) {
@@ -34,3 +32,23 @@ void ChangeCurrPlace(Player P, IdxType idxAfter) {
     P.Map[idxAfter] = "*";
 }
 */
+Player copyPlayer(Player Pawal) {
+    Player Pfix;
+    int i;
+    (Pfix).Length = Pawal.Length;
+    (Pfix).MaxRollAwal = Pawal.MaxRollAwal;
+    for (i=IdxMin;i<=Pawal.Length;i++){
+        (Pfix).Map[i] = (Pawal).Map[i];
+    }
+    return (Pfix);
+}
+Tele copyTele(Tele Tawal){
+    Tele T;
+    int i;
+    (T).bykTele = Tawal.bykTele;
+    for (i=IdxMin;i<=Tawal.bykTele;i++){
+        (T).BeforeTele[i] = Tawal.BeforeTele[i];
+        (T).AfterTele[i] = Tawal.AfterTele[i];
+    }
+    return (T);
+}

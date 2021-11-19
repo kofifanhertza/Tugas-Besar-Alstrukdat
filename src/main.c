@@ -4,8 +4,8 @@
 //#include "./ADT/List/listlinier.h"
 //#include "./ADT/List/queuelist.h"
 //#include "./ADT/List/stacklist.h"
-#include "./ADT/Mesin/map.h"
-#include "./ADT/Mesin/mesin_kata.h"
+#include "ADT/Mesin/map.h"
+#include "ADT/Mesin/mesin_kata.h"
 //#include "./Skill/listdp.h"
 
 #include <stdio.h>
@@ -94,32 +94,14 @@ void MainMenu(int *inputmenu){
     }
 } 
 
-void readConfig(Player *User1, Tele *T){
+void readConfig(Player *P, Tele *T){
     int i;
-    SetPlayer(*User1);
+    SetPlayer(*P);
 
     STARTKATA();
-    *User1 = readPlayer(*User1);
+    *P = readPlayer(*P);
     
-    printf("baca lagi: \n");
-    printf("Panjang peta: %d\n", (*User1).Length);
-    
-    outputPlayerMap(*User1);
-    
-    printf("MaxRoll:%d\n", (*User1).MaxRoll);
     *T = readTele(*T);
-    printf("Byk tele:%d\n", (*T).bykTele);
-    
-    printf("Before: ");
-    for(int i=1;i<=(*T).bykTele;i++) {   
-        printf("%d ", (*T).BeforeTele[i]);}
-    printf("\n");
-    
-    printf("After: ");
-    for(int i=1;i<=(*T).bykTele;i++) {   
-        printf("%d ", (*T).AfterTele[i]);
-    }
-    printf("\n");
 }
 
 /*
@@ -152,14 +134,48 @@ void Konfigurasi(char fileconfig){
         Tele TP1;
         readConfig(&P,&TP); 
     }*/
-    Player P1;
-    Player P2;
+    User U1, U2;
+    printf("Masukkan Nama Player 1 : ");scanf("%s", (U1.Nama));
+    printf("\nMasukkan Nama Player 2 : ");scanf("%s", (U2.Nama));
     Tele TP1, TP2;
-    readConfig(&P1,&TP1);
-    printf("\n");
-    readConfig(&P2,&TP1);
+    readConfig(&(U1.P),&(TP1));
+    printf("*****************************\n");
+    printf("\n\n");
+    (U1).MaxRoll = U1.P.MaxRollAwal;
+    printf("Player 1 : %s\n", (U1).Nama);
+    printConfig(&(U1.P), &(TP1));
+    printf("MaxRoll Player 1 saat ini: %d\n", U1.MaxRoll);
+    (U2.P) = copyPlayer(U1.P);
+    TP2 = copyTele(TP1);
+    printf("\n\n");
+    (U2).MaxRoll = U2.P.MaxRollAwal;
+    printf("Player 2 : %s\n", (U2).Nama);
+    printConfig(&(U2.P), &(TP2));
+    printf("MaxRoll Player 2 saat ini: %d\n", U2.MaxRoll);
 }
 
+void printConfig(Player *P, Tele *T){
+
+    printf("Panjang peta: %d\n", (*P).Length);
+    
+    outputPlayerMap((*P));
+    
+    printf("MaxRoll Awal:%d\n", (*P).MaxRollAwal);
+
+    printf("Byk tele:%d\n", (*T).bykTele);
+    
+    printf("Before: ");
+    for(int i=1;i<=(*T).bykTele;i++) {   
+        printf("%d ", (*T).BeforeTele[i]);}
+    printf("\n");
+    
+    printf("After: ");
+    for(int i=1;i<=(*T).bykTele;i++) {   
+        printf("%d ", (*T).AfterTele[i]);
+    }
+    printf("\n");
+}
+/*
 void startTurn(Player *P){
     char input;
     scanf("Masukkan command: %s",input);
@@ -197,7 +213,7 @@ void startRonde(int n, Player *P1, Player *P2){
         startTurn(P2);
     }
 }
-
+*/
 
 int main(){
     loading(3);
