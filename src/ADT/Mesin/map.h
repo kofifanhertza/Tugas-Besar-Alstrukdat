@@ -1,4 +1,5 @@
 #include "boolean.h"
+#include "../../Skill/listlinier.h"
 
 #ifndef ARRAY_H 
 #define ARRAY_H
@@ -32,6 +33,8 @@ typedef struct {
 	Player P;
 	int Curr;
 	int MaxRoll;
+	List SkillList ;
+	List ActiveSkill ;
 } User;
 
 void SetPlayer (Player P); /* untuk menginisialisasi player dengan peta kosong */

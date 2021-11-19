@@ -4,10 +4,10 @@
 #include"time.h"
 
 
-int skillRandomizer () {
+int Randomizer () {
     int skill, x;
     srand(time(NULL));
-    x = rand() % 100 ;
+    x = rand() % 50 ;
     printf("%d\n", x) ;
 
     if (x > 0 && x <= 10) {
@@ -48,24 +48,13 @@ int skillRandomizer () {
 return skill ;
 }
 
-int NbSkill (List L) {
-    int count = 0 ;
-    if (!IsEmpty(L)) {
-        address p = Last(L) ;
-        while (p != Nil) {
-            p = Prev(p) ;
-            count = count + 1 ;
-        }
-    }
-    return count ;   
-}
 
-int UseSkill (List L,  int idx) {
+int UseIdxSkill (List *L,  int idx) {
     int skill, i = 1 ;
-    address addrSkill = Last(L) ;
+    address addrSkill = First(*L) ;
 
     while (i != idx) {
-        addrSkill = Prev(addrSkill) ;
+        addrSkill = Next(addrSkill) ;
         i = i + 1 ;
     }
     skill = Info(addrSkill) ;
@@ -75,7 +64,7 @@ int UseSkill (List L,  int idx) {
     }
     else if (skill == 2) {
     int nSkill ;
-        nSkill = NbSkill(L) ;
+        nSkill = NbElmt(*L) ;
         if (nSkill > 9) {
             printf("Anda tidak bisa menggunakan skill Cermin Pengganda!\n(Jumlah skill > 9)\n") ;
             return 0;
@@ -97,12 +86,58 @@ int UseSkill (List L,  int idx) {
     
 }
 
-void PrintSkill (List L) {
+int DelIdxSkill (List *L,  int idx) {
+    int skill, i = 1 ;
+    address addrSkill = First(*L) ;
+
+    while (i != idx) {
+        addrSkill = Next(addrSkill) ;
+        i = i + 1 ;
+    }
+    skill = Info(addrSkill) ;
+
+    if (skill == 1) {
+        printf("Skill Pintu Ga Ke Mana Mana berhasil dihapus!\n") ;
+    }
+    else if (skill == 2) {
+        printf("Skill Cermin Pengganda berhasil dihapus!\n") ;
+
+    }
+    else if (skill == 3) {
+        printf("Skill Senter Pembesar Hoki berhasil dihapus!\n") ;
+    }
+    else if (skill == 4) {
+        printf("Skill Senter Pengecil Hoki berhasil dihapus!\n") ;
+    }
+    else if (skill == 5) {
+        printf("Skill Mesin Penukar Posisi berhasil dihapus!\n") ;
+    }
+
+    return skill ;
+    
+}
+
+int IdxSkill (List *L,  int idx) {
+    int skill, i = 1 ;
+    address addrSkill = First(*L) ;
+
+    while (i != idx) {
+        addrSkill = Next(addrSkill) ;
+        i = i + 1 ;
+    }
+    skill = Info(addrSkill) ;
+
+    return skill ;
+    
+}
+
+
+int PrintSkill (List L) {
     if (IsEmpty(L)) {
-        return ;
+        return 0;
     }
     int i = 1 ;
-    address q = Last(L) ;
+    address q = First(L) ;
     while (q != Nil) {   
         if (Info(q) == 1) {
             printf("%d. Pintu Ga Ke Mana Mana\n", i) ;    
@@ -119,39 +154,73 @@ void PrintSkill (List L) {
         else if (Info(q) == 5) {
             printf("%d. Mesin Penukar Posisi\n", i) ;
         }
-        q = Prev(q) ;
+        q = Next(q) ;
         i = i + 1 ;
         }
+    return 0 ;
         
 }
 
+int PrintBuff (List L) {
+    if (IsEmpty(L)) {
+        return 0 ;
+    }
+    int i = 1 ;
+    address q = First(L) ;
+    printf("Anda memiliki buff :\n") ;
+    while (q != Nil) {   
+        if (Info(q) == 1) {
+            printf("%d. Pintu Ga Ke Mana Mana\n", i) ;    
+        } 
+        else if (Info(q) == 2) {
+            printf("%d. Cermin Pengganda\n", i) ;
+        }
+        else if (Info(q) == 3) {
+            printf("%d. Senter Pembesar Hoki\n", i) ;
+       }
+        else if (Info(q) == 4) {
+            printf("%d. Senter Pengecil Hoki\n", i) ; 
+        }
+        else if (Info(q) == 5) {
+            printf("%d. Mesin Penukar Posisi\n", i) ;
+        }
+        q = Next(q) ;
+        i = i + 1 ;
+        }
+        return 0 ;
+}
 
-
-void CommandSkill (Player P) {
-    int x ;
-    if (IsEmpty(P.SkillList)) {
+int CommandSkill (User U) {
+    int x, UsedSkill = 0 ;
+    if (IsEmpty(U.SkillList)) {
         printf("Anda tidak memiliki skill\n") ;
-        return ;
+        return 0 ;
     }
     
     printf("Kamu memiliki Skill :\n") ;
-    PrintBackward(P.SkillList) ;
-    printf("\nAnda memiliki %d skill\n", NbSkill(P.SkillList)) ;
-    PrintSkill(P.SkillList) ;
+    PrintSkill(U.SkillList) ;
     
     printf("\nTekan 0 untuk keluar\n\n") ;
     printf("Masukkan Skill : ") ;
-    
     scanf("%d", &x) ;
-    if (x != 0) {
-        int UsedSkill = UseSkill(P.SkillList, x) ;
-        if (NbSkill(P.SkillList) == 1) {
-            List LTemp ;
-            CreateEmpty(&LTemp) ;
-            P.SkillList = LTemp ;
-        }
-        DelP(&P.SkillList, UsedSkill) ;
-    }
-    
+
+    return x ;
 }
+
+List UseSkill (User U, int x) {
+    int UsedSkill ;
+    UsedSkill = UseIdxSkill(&U.SkillList, x) ;
+    InsVLast(&U.ActiveSkill, UsedSkill) ;    
+    return U.ActiveSkill ;
+
+}
+
+List DelSkill (User U, int x) {
+    int DeletedSkill ;
+    DeletedSkill = IdxSkill(&U.SkillList, x) ;
+    DelP(&U.SkillList, DeletedSkill) ;    
+    return U.SkillList ;
+
+} 
+
 

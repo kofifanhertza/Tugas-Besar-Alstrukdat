@@ -1,17 +1,23 @@
-#include"listdp.h"
+#include"listlinier.h"
 #include"boolean.h" 
-#include "../player.h"
+#include"../ADT/Mesin/map.h"
 
-int skillRandomizer () ;
+int Randomizer () ;
 /* Mengenerate Random Skill berbentuk integer*/
 
-int NbSkill (List L) ;
-/* Menghasilkan Banyaknya skill dari dalam List Skill */
 
-int UseSkill(List L, int idx) ;
-/* Menghasilkan skill ke idx dari List dalam bentuk integer*/
+int UseIdxSkill(List *L, int idx) ;
+/* Mendapatkan skill pada ke idx dari List L */
 
-void PrintSkill(List L) ;
+int DelIdxSkill (List *L,  int idx) ;
+
+int PrintSkill(List L) ;
 /* Menampilkan skill yang ada di List*/
 
-void CommandSkill (Player P) ;
+int PrintBuff (List L) ;
+
+int CommandSkill (User U) ;
+
+List UseSkill (User U, int x) ;
+
+List DelSkill (User U, int x) ;
