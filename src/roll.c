@@ -24,20 +24,29 @@ int roll(Player P){
                 printf ("%s maju %d langkah\n", P.Name,dice1);
                 P.Curr = P.Curr+dice1;}
             printf ("%s berada di petak %d\n", P.Name,P.Curr);}
+            if (P.Curr != T.BeforeTele[i]){
+                printf("%s tidak menemukan teleporter", P.Name);}
+            else if (P.Curr == T.BeforeTele[i]){
+                printf("%s menemukan teleporter", P.Name);}//isi lagi nanti
         else if (((P.Curr+dice1=='.') && (P.Curr-dice1=='#')) || ((P.Curr+dice1=='.') && (P.Curr-dice1 < 0)) ){
             printf ("%s dapat maju\n", P.Name);
             printf ("%s maju %d langkah\n", P.Name,dice1);
             P.Curr = P.Curr+dice1;
-            printf ("%s berada di petak %d\n", P.Name,P.Curr); /*isi nanti
-            if curr == Tele[i]{
-                ISI NANTI}*/}
+            printf ("%s berada di petak %d\n", P.Name,P.Curr); 
+            if (P.Curr != T.BeforeTele[i]){
+                printf("%s tidak menemukan teleporter", P.Name);}
+            else if (P.Curr == T.BeforeTele[i]){
+                printf("%s menemukan teleporter", P.Name);}//isi lagi nanti
+               
         else if ((P.Curr+dice1=='#') && (P.Curr-dice1]=='.')){
             printf ("%s dapat mundur\n", P.Name);
             printf ("%s mundur %d langkah\n",P.Name,dice1);
             P.Curr = P.Curr-dice1;
-            printf ("%s berada di petak %d\n", P.Name,P.Curr); /*isi nanti
-            if teleporter found {
-                ISI NANTI}*/}
+            printf ("%s berada di petak %d\n", P.Name,P.Curr);
+            if (P.Curr != T.BeforeTele[i]){
+                printf("%s tidak menemukan teleporter", P.Name);}
+            else if (P.Curr == T.BeforeTele[i]){
+                printf("%s menemukan teleporter", P.Name);}//isi lagi nanti
     }            
     return P.Curr;
 }
