@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "mesin_kata.h"
-#include "map.h"
+#include "mesin_kata.c"
+#include "mesin_kar.c"
+#include "map.c"
 
 int main(){
     int i;
@@ -13,6 +14,8 @@ int main(){
     printf("Panjang peta: %d\n", User1.Length);
     outputPlayerMap(User1);
     printf("MaxRoll:%d\n", User1.MaxRoll);
+
+    
     T = readTele(T);
     printf("Byk tele:%d\n", T.bykTele);
     printf("Before: ");
@@ -21,7 +24,6 @@ int main(){
     printf("\n");
     printf("After: ");
     for(i=1;i<=T.bykTele;i++) {
-        
         printf("%d ", T.AfterTele[i]);
     }
     printf("\n");

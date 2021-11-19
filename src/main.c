@@ -1,13 +1,12 @@
-/*
-#include "./ADT/List/boolean.h"
-#include "./ADT/List/listdp.c"
-#include "./ADT/List/listlinier.c"
-#include "./ADT/List/queuelist.c"
-#include "./ADT/List/stacklist.c"
-#include "./ADT/Mesin/map.c"
-#include "./ADT/Mesin/mesin_kar.c"
-#include "./ADT/Mesin/mesin_kata.c"
-*/
+
+//#include "./ADT/List/boolean.h"
+//#include "./ADT/List/listdp.h"
+//#include "./ADT/List/listlinier.h"
+//#include "./ADT/List/queuelist.h"
+//#include "./ADT/List/stacklist.h"
+#include "./ADT/Mesin/map.h"
+#include "./ADT/Mesin/mesin_kata.h"
+//#include "./Skill/listdp.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,6 +20,7 @@ void InputAngka(int *angka)
     scanf("%d", angka);
 }
 
+/*
 void clear(){
     #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
         system("clear");
@@ -29,7 +29,7 @@ void clear(){
     #if defined(_WIN32) || defined(_WIN64)
         system("cls");
     #endif
-}
+}*/
 
 void delay(int milli_seconds)
 {
@@ -94,6 +94,72 @@ void MainMenu(int *inputmenu){
     }
 } 
 
+void readConfig(Player *User1, Tele *T){
+    int i;
+    SetPlayer(*User1);
+
+    STARTKATA();
+    *User1 = readPlayer(*User1);
+    
+    printf("baca lagi: \n");
+    printf("Panjang peta: %d\n", (*User1).Length);
+    
+    outputPlayerMap(*User1);
+    
+    printf("MaxRoll:%d\n", (*User1).MaxRoll);
+    *T = readTele(*T);
+    printf("Byk tele:%d\n", (*T).bykTele);
+    
+    printf("Before: ");
+    for(int i=1;i<=(*T).bykTele;i++) {   
+        printf("%d ", (*T).BeforeTele[i]);}
+    printf("\n");
+    
+    printf("After: ");
+    for(int i=1;i<=(*T).bykTele;i++) {   
+        printf("%d ", (*T).AfterTele[i]);
+    }
+    printf("\n");
+}
+
+/*
+void Teleport(Tele *T){
+    *T = readTele(*T);
+    printf("Byk tele:%d\n", (*T).bykTele);
+    
+    printf("Before: ");
+    for(int i=1;i<=(*T).bykTele;i++) {   
+        printf("%d ", (*T).BeforeTele[i]);}
+    printf("\n");
+    
+    printf("After: ");
+    for(int i=1;i<=(*T).bykTele;i++) {   
+        printf("%d ", (*T).AfterTele[i]);
+    }
+    printf("\n");
+}*/
+
+
+void Konfigurasi(char fileconfig){
+    //Memulai permainan
+    /*
+    int nplayer;
+    scanf("Masukkan jumlah pemain: %d", &nplayer);
+
+    for(int i = 0;i<nplayer;i++){
+        char name;scanf("Masukkan nama pemain: %s",name);
+        Player P1;
+        Tele TP1;
+        readConfig(&P,&TP); 
+    }*/
+    Player P1;
+    Player P2;
+    Tele TP1, TP2;
+    readConfig(&P1,&TP1);
+    printf("\n");
+    readConfig(&P2,&TP1);
+}
+
 int main(){
     loading(3);
     delay(250);
@@ -122,6 +188,10 @@ int main(){
         //kembali ke MainMenu
 
 
+        char fileConfig;
+        scanf("Masukkan nama file konfigurasi level: %s",fileConfig);
+        Konfigurasi(fileConfig);
+
 
 
     } else if (inputmenu == 2){
@@ -143,8 +213,6 @@ int main(){
         //Prosedur Command() akan meminta input command dari player yang sedang bermain(seperti Skill, Map, Buff, Inspect, Roll, Save, hingga player memasukkan EndTurn/Undo)
         //Prosedur Command() akan terus berjalan hingga terdapat satu pemenang (setiap ronde berakhir akan memanggil prosedur savestate, ronde berakhir ketika semua pemain telah menyelesaikan turn atau ketika terdapat pemenang)
         //Ketika terdapat pemain yang mencapai garis finish, memanggil prosedur Finish() yang akan menampilkan nama pemenang berdasarkan peringkat dan informasi bahwa game telah berakhir
-        //kembali ke MainMenu
-
-        
+        //kembali ke MainMenu        
     }
 }

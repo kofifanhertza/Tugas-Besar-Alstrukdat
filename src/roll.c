@@ -1,10 +1,13 @@
+#include "map.h"
+#include "mesin_kata.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-int roll(Player P, Tele T){
+ int roll(Player P, Tele T){
  int dice1;
  srand ( time(NULL) );
- dice1 = (rand()%Maxroll + 1);
+ dice1 = (rand()%(P.MaxRoll) + 1);
  printf ("%s mendapatkan angka %d\n", P.Name,dice1);
     if ((P.Curr+dice1 =='#') && (P.Curr-dice1=='#')){
          printf ("%s tidak dapat bergerak", P.Name); }
@@ -38,7 +41,7 @@ int roll(Player P, Tele T){
             else if (P.Curr == T.BeforeTele[i]){
                 printf("%s menemukan teleporter", P.Name);}//isi lagi nanti
                
-        else if ((P.Curr+dice1=='#') && (P.Curr-dice1]=='.')){
+        else if ((P.Curr+dice1=='#') && (P.Curr-dice1=='.')){
             printf ("%s dapat mundur\n", P.Name);
             printf ("%s mundur %d langkah\n",P.Name,dice1);
             P.Curr = P.Curr-dice1;
@@ -47,6 +50,7 @@ int roll(Player P, Tele T){
                 printf("%s tidak menemukan teleporter", P.Name);}
             else if (P.Curr == T.BeforeTele[i]){
                 printf("%s menemukan teleporter", P.Name);}//isi lagi nanti
+        }
     }            
     return P.Curr;
 }
