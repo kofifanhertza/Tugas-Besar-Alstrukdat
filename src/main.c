@@ -160,6 +160,45 @@ void Konfigurasi(char fileconfig){
     readConfig(&P2,&TP1);
 }
 
+void startTurn(Player *P){
+    char input;
+    scanf("Masukkan command: %s",input);
+
+    switch(input)
+    {
+        case 'SKILL':
+            //panggil fungsi untuk menggunakan atau membuang skill
+        case 'MAP':
+            //panggil prosedur untuk mencetak MAP di layar dan menunjukkan posisi setiap player
+        case 'BUFF':
+            //panggil prosedur untuk menampilkan daftar buff yang sedang dimiliki pemain
+        case 'INSPECT':
+            //menerawang petak 'x' untuk menunjukkan keberadaan teleporter
+        case 'ROLL':
+            //melakukan giliran rolling dadu untuk bergerak
+            //kalo player sampai finish, endGame = true
+        case 'SAVE':
+            //panggil fungsi untuk menggunakan atau membuang skill
+        case 'UNDO':
+            //panggil fungsi untuk menggunakan atau membuang skill
+        case 'ENDTURN':
+            //panggil fungsi untuk menggunakan atau membuang skill
+        default:
+            printf("Error! command is not correct.");
+    }
+}
+
+
+void startRonde(int n, Player *P1, Player *P2){
+    int ronde;//not yet complete
+    boolean endGame = false;
+    while (!endGame){
+        startTurn(P1);
+        startTurn(P2);
+    }
+}
+
+
 int main(){
     loading(3);
     delay(250);
@@ -192,10 +231,14 @@ int main(){
         scanf("Masukkan nama file konfigurasi level: %s",fileConfig);
         Konfigurasi(fileConfig);
 
+        //startRonde();
+        
+
 
 
     } else if (inputmenu == 2){
         printf("Keluar dari game, break all process.\n");
+        
 
         //Keluar dari game.
 
@@ -214,5 +257,11 @@ int main(){
         //Prosedur Command() akan terus berjalan hingga terdapat satu pemenang (setiap ronde berakhir akan memanggil prosedur savestate, ronde berakhir ketika semua pemain telah menyelesaikan turn atau ketika terdapat pemenang)
         //Ketika terdapat pemain yang mencapai garis finish, memanggil prosedur Finish() yang akan menampilkan nama pemenang berdasarkan peringkat dan informasi bahwa game telah berakhir
         //kembali ke MainMenu        
+                
+                
+        char fileConfig;
+        scanf("Masukkan nama file konfigurasi level yang telah disimpan: %s",fileConfig);
+        Konfigurasi(fileConfig);
+
     }
 }
