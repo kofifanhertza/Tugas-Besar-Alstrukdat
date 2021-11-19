@@ -21,6 +21,7 @@ typedef struct
 	int Length;
 	IdxType Curr; 
 	int MaxRoll;
+	char Name;
 } Player;
 
 typedef struct
