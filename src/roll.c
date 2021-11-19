@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-int roll(int curr,char *TI, char *Nama, int Maxroll){
+int roll(Player P){
  int dice1;
  srand ( time(NULL) );
  dice1 = (rand()%Maxroll + 1);
  printf ("%s mendapatkan angka %d\n", Nama,dice1);
-    if ((TI[curr+dice1]=='#') && (TI[curr-dice1]=='#')){
+    if ((P.Curr+dice1 =='#') && (P.Curr-dice1=='#')){
          printf ("%s tidak dapat bergerak", Nama); }
     else {
-        if ((TI[curr+dice1]=='.') && (TI[curr-dice1]=='.')){
+        if ((P.Curr+dice1=='.') && (TI[curr-dice1]=='.')){
             printf ("%s dapat maju dan mundur\n", Nama);
             printf ("Ke mana %s mau bergerak : \n", Nama);
             printf ("1. %d\n", (curr+1-dice1));
