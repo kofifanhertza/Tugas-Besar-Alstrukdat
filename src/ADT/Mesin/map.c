@@ -16,6 +16,7 @@ void outputPlayerMap(Player P) {
     }
     printf("\n");
 }
+/*
 char CheckPetak (Player P, IdxType i){
     return P.Map[i];
 }
@@ -32,3 +33,4 @@ void ChangeCurrPlace(Player P, IdxType idxAfter) {
     P.Map[temp] = ".";
     P.Map[idxAfter] = "*";
 }
+*/
