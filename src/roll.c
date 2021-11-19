@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-int roll(Player P){
+int roll(Player P, Tele T){
  int dice1;
  srand ( time(NULL) );
  dice1 = (rand()%Maxroll + 1);
