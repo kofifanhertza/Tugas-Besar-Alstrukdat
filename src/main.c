@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+
 void InputAngka(int *angka)
 /* Membaca input angka dari user */
 /* Nanti ini dimasukkin ADT Mesin Karakter aja*/
@@ -29,6 +30,37 @@ void clear(){
         system("cls");
     #endif
 }
+
+void delay(int milli_seconds)
+{
+    // Converting time into milli_seconds
+    /*int milli_seconds = 1000 * number_of_seconds;*/
+  
+    // Storing start time
+    clock_t start_time = clock();
+  
+    // looping till required time is not achieved
+    while (clock() < start_time + milli_seconds)
+        ;
+}
+
+void loading(int n){
+    printf("loading");
+    for(int i = 0;i<n;i++){
+        delay(200);
+        printf(".");    
+    }
+    printf("\n");
+    delay(1000);
+    printf("[");
+    for(int i = 0;i<30;i++){
+        delay(50);
+        printf("|");    
+    }
+    printf("]\n");
+
+}
+  
 
 void Logo(){
     printf(" ___________ \n");
@@ -62,9 +94,13 @@ void MainMenu(int *inputmenu){
     }
 } 
 
-
 int main(){
+    loading(3);
+    delay(250);
     Logo();
+    printf("\n");
+    delay(250);
+
     int inputmenu;
     MainMenu(&inputmenu);
     if (inputmenu == 1){
