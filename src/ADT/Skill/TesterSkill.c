@@ -20,9 +20,19 @@ int main () {
         else if (Input == 2) {
            int inputCommand = CommandSkill(U) ;
            if (inputCommand != 0) {
-               if (inputCommand > 0) {
-                    U.ActiveSkill = UseSkill(U, inputCommand) ;
-                    U.SkillList = DelSkill(U, inputCommand) ;
+                if (inputCommand > 0) {
+
+
+            
+                        if (Search(U.ActiveSkill, IdxSkill(&U.SkillList, inputCommand)) != Nil) {
+                            printf("Gagal menggunakan, Skill sudah aktif!\n") ;
+                        }  else {
+                            U.ActiveSkill = UseSkill(U, inputCommand) ;
+                            U.SkillList = DelSkill(U, inputCommand) ;
+                        }
+        
+
+                    
                } else if (inputCommand < 0) {
                     inputCommand = inputCommand * -1 ;
                     DelIdxSkill (&U.SkillList, inputCommand) ;

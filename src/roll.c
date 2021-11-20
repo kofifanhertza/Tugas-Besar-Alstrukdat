@@ -1,5 +1,6 @@
 #include "map.h"
 #include "mesin_kata.h"
+#include "ADT/Skill/listlinier.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,10 +9,10 @@ int roll(User P, Tele T){
     int i;
     int dice1;
     srand ( time(NULL) );
-    if (skill==3){ //diganti lagi nanti
+    if (Search(P.ActiveSkill, 3) != Nil){ 
         dice1 = (rand()%(P.MaxRoll-(P.MaxRoll/2)+1)) + (P.MaxRoll/2);
     }
-    else if (skill==4){//diganti lagi nanti
+    else if (Search(P.ActiveSkill, 4) != Nil){
         dice1 = (rand()%(P.MaxRoll/2)) + 1;
     }
     else{

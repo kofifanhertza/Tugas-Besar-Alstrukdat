@@ -218,4 +218,3 @@ void Konkat1 (List *L1, List *L2, List *L3){
     }
     First(*L2) = Nil;
 }
-

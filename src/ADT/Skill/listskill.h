@@ -9,6 +9,8 @@ int Randomizer () ;
 int UseIdxSkill(List *L, int idx) ;
 /* Mendapatkan skill pada ke idx dari List L */
 
+int IdxSkill (List *L,  int idx) ;
+
 int DelIdxSkill (List *L,  int idx) ;
 
 int PrintSkill(List L) ;

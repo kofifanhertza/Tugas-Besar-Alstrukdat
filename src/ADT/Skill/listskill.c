@@ -63,14 +63,7 @@ int UseIdxSkill (List *L,  int idx) {
         printf("Skill Pintu Ga Ke Mana Mana berhasil digunakan!\n") ;
     }
     else if (skill == 2) {
-    int nSkill ;
-        nSkill = NbElmt(*L) ;
-        if (nSkill > 9) {
-            printf("Anda tidak bisa menggunakan skill Cermin Pengganda!\n(Jumlah skill > 9)\n") ;
-            return 0;
-        } else {
-            printf("Skill Cermin Pengganda berhasil digunakan!\n") ;
-        }
+        
     }
     else if (skill == 3) {
         printf("Skill Senter Pembesar Hoki berhasil digunakan!\n") ;
@@ -131,7 +124,6 @@ int IdxSkill (List *L,  int idx) {
     
 }
 
-
 int PrintSkill (List L) {
     if (IsEmpty(L)) {
         return 0;
@@ -163,6 +155,7 @@ int PrintSkill (List L) {
 
 int PrintBuff (List L) {
     if (IsEmpty(L)) {
+        printf("Anda tidak memiliki buff") ;
         return 0 ;
     }
     int i = 1 ;
@@ -210,7 +203,19 @@ int CommandSkill (User U) {
 List UseSkill (User U, int x) {
     int UsedSkill ;
     UsedSkill = UseIdxSkill(&U.SkillList, x) ;
-    InsVLast(&U.ActiveSkill, UsedSkill) ;    
+    if (UsedSkill == 2) {
+        if (NbElmt(U.SkillList) > 9) {
+            printf("Cermin Pengganda Gagal Digunakan\n") ;
+        } else {
+            printf("Skill Cermin Pengganda berhasil digunakan!\n") ;
+            U.SkillList = SkillRandomizer(U) ;
+            U.SkillList = SkillRandomizer(U) ;
+        }
+    
+    } else {
+        InsVLast(&U.ActiveSkill, UsedSkill) ;
+    }
+        
     return U.ActiveSkill ;
 
 }
