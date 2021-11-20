@@ -1,5 +1,5 @@
 #include "boolean.h"
-#include "../../Skill/listlinier.h"
+#include "../Skill/listlinier.h"
 
 #ifndef ARRAY_H 
 #define ARRAY_H

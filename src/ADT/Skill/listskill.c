@@ -223,4 +223,41 @@ List DelSkill (User U, int x) {
 
 } 
 
+List SkillRandomizer (User U) {
+    int skill,random  ;
+    if (NbElmt(U.SkillList) < 10) {
+        skill = Randomizer(random) ;
+    }
+    
 
+    if (skill != 0) {
+        if (NbElmt(U.SkillList) >= 10) {
+            skill = Randomizer(random) ;
+            printf("Inventory skill anda sudah penuh!\n") ;
+            printf("Apakah anda ingin membuang skill? [1/0]\n") ;
+            printf("Tekan 0 apabila tidak ingin membuang skill\n") ;
+
+            char option ;
+            scanf("%d", &option) ;
+            if (option == 1) {
+                  
+                PrintSkill(U.SkillList) ;
+                printf("Masukkan Skill yang akan dihapus : ") ;
+                int deleted ;
+                scanf("%d", &deleted) ;
+                DelIdxSkill (&U.SkillList, deleted) ;
+                U.SkillList = DelSkill(U, deleted) ;
+                InsVLast(&U.SkillList, skill) ; 
+                return U.SkillList ;
+            }
+            else if (option == 0) {
+                return U.SkillList ;
+            }
+            
+        }
+        InsVLast(&U.SkillList, skill) ;     
+        
+        
+    }
+    return U.SkillList ;   
+}

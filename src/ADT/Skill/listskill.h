@@ -1,6 +1,6 @@
 #include"listlinier.h"
 #include"boolean.h" 
-#include"../ADT/Mesin/map.h"
+#include"../Mesin/map.h"
 
 int Randomizer () ;
 /* Mengenerate Random Skill berbentuk integer*/
@@ -21,3 +21,5 @@ int CommandSkill (User U) ;
 List UseSkill (User U, int x) ;
 
 List DelSkill (User U, int x) ;
+
+List SkillRandomizer (User U) ;
