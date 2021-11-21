@@ -94,11 +94,11 @@ void MainMenu(int *inputmenu){
     }
 } 
 
-void readConfig(Player *P, Tele *T){
+void readConfig(Player *P, Tele *T, char fileconfig[]){
     int i;
     SetPlayer(*P);
 
-    STARTKATA();
+    STARTKATA(fileconfig);
     *P = readPlayer(*P);
     
     *T = readTele(*T);
@@ -122,7 +122,7 @@ void Teleport(Tele *T){
 }*/
 
 
-void Konfigurasi(char fileconfig){
+void Konfigurasi(char fileconfig[]){
     //Memulai permainan
     /*
     int nplayer;
@@ -138,7 +138,7 @@ void Konfigurasi(char fileconfig){
     printf("Masukkan Nama Player 1 : ");scanf("%s", (U1.Nama));
     printf("\nMasukkan Nama Player 2 : ");scanf("%s", (U2.Nama));
     Tele TP1, TP2;
-    readConfig(&(U1.P),&(TP1));
+    readConfig(&(U1.P),&(TP1), fileconfig);
     printf("*****************************\n");
     printf("\n\n");
     (U1).MaxRoll = U1.P.MaxRollAwal;
@@ -243,7 +243,7 @@ int main(){
         //kembali ke MainMenu
 
 
-        char fileConfig;
+        char fileConfig[10];
         printf("Masukkan nama file konfigurasi level: "); scanf("%s",fileConfig);
         Konfigurasi(fileConfig);
 
@@ -275,7 +275,7 @@ int main(){
         //kembali ke MainMenu        
                 
                 
-        char fileConfig;
+        char fileConfig[10];
         scanf("Masukkan nama file konfigurasi level yang telah disimpan: %s",fileConfig);
         Konfigurasi(fileConfig);
 

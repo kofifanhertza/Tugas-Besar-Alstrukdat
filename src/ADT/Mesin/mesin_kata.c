@@ -59,8 +59,8 @@ void SalinKata() {
 }
 
 
-void STARTKATA() {
-    START();
+void STARTKATA(char fileconfig[]) {
+    START(fileconfig);
     IgnoreBlank();
     if (EndKata != true){
         SalinKata();

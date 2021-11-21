@@ -5,12 +5,13 @@
 #define __MESIN_KAR_H_
 
 #include "boolean.h"
+#include "string.h"
 extern boolean EndKata;
 /* State Mesin */
 extern char CC;
 extern boolean EOP;
 
-void START();
+void START(char fileconfig[]);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
