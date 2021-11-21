@@ -203,19 +203,7 @@ int CommandSkill (User U) {
 List UseSkill (User U, int x) {
     int UsedSkill ;
     UsedSkill = UseIdxSkill(&U.SkillList, x) ;
-    if (UsedSkill == 2) {
-        if (NbElmt(U.SkillList) > 9) {
-            printf("Cermin Pengganda Gagal Digunakan\n") ;
-        } else {
-            printf("Skill Cermin Pengganda berhasil digunakan!\n") ;
-            U.SkillList = SkillRandomizer(U) ;
-            U.SkillList = SkillRandomizer(U) ;
-        }
-    
-    } else {
-        InsVLast(&U.ActiveSkill, UsedSkill) ;
-    }
-        
+    InsVLast(&U.ActiveSkill, UsedSkill) ;   
     return U.ActiveSkill ;
 
 }

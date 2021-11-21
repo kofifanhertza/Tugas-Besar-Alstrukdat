@@ -11,9 +11,11 @@ int roll(User P, Tele T){
     srand ( time(NULL) );
     if (Search(P.ActiveSkill, 3) != Nil){ 
         dice1 = (rand()%(P.MaxRoll-(P.MaxRoll/2)+1)) + (P.MaxRoll/2);
+        DelP(&P.ActiveSkill, 3) ;
     }
     else if (Search(P.ActiveSkill, 4) != Nil){
         dice1 = (rand()%(P.MaxRoll/2)) + 1;
+        DelP(&P.ActiveSkill, 4) ;
     }
     else{
         dice1 = (rand()%(P.MaxRoll)) + 1;}
