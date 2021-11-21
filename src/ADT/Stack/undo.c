@@ -45,3 +45,5 @@ int main(){
     PopR(&Game, &R);
 
 }
+//void CreateEmptyRS(*RoundStack RS){;}
+
