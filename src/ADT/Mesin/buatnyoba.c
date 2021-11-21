@@ -13,7 +13,7 @@ int main(){
     printf("baca lagi: \n");
     printf("Panjang peta: %d\n", User1.Length);
     outputPlayerMap(User1);
-    printf("MaxRoll:%d\n", User1.MaxRoll);
+    printf("MaxRoll:%d\n", User1.MaxRollAwal);
 
     
     T = readTele(T);
