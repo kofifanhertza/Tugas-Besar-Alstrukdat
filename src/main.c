@@ -144,7 +144,7 @@ void Konfigurasi(char fileconfig){
     (U1).MaxRoll = U1.P.MaxRollAwal;
     printf("Player 1 : %s\n", (U1).Nama);
     printConfig(&(U1.P), &(TP1));
-    printf("MaxRoll Player 1 saat ini: %d\n", U1.MaxRoll);
+    printf("MaxRoll Player 1 saat ini: %d\n", U1.MaxRoll); //MaxRoll seorang user dapat berubah di tengah permainan
     (U2.P) = copyPlayer(U1.P);
     TP2 = copyTele(TP1);
     printf("\n\n");
@@ -160,7 +160,7 @@ void printConfig(Player *P, Tele *T){
     
     outputPlayerMap((*P));
     
-    printf("MaxRoll Awal:%d\n", (*P).MaxRollAwal);
+    printf("MaxRoll Awal:%d\n", (*P).MaxRollAwal); //MaxRollAwal sesuai dengan file konfigurasi
 
     printf("Byk tele:%d\n", (*T).bykTele);
     
