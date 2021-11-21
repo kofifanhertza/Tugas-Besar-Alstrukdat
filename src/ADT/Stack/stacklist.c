@@ -26,11 +26,11 @@ void Dealokasi (address P) {
 /* F.S. Alamat P didealokasi, dikembalikan ke sistem */ 
 
 /* ********* PROTOTYPE REPRESENTASI LOJIK STACK ***************/
-boolean IsEmpty (RoundStack S){
+boolean IsRSEmpty (RoundStack S){
     return (Top(S) == Nil);
 }
 /* Mengirim true jika Stack kosong: TOP(S) = Nil */
-void CreateEmpty (RoundStack * S) {
+void CreateEmptyRS (RoundStack * S) {
     Top(*S) = Nil;
 }
 /* I.S. sembarang */ 
