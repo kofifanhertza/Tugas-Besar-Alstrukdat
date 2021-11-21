@@ -5,7 +5,7 @@
 #define __MESIN_KAR_H_
 
 #include "boolean.h"
-#include "string.h"
+#include <string.h>
 extern boolean EndKata;
 /* State Mesin */
 extern char CC;
