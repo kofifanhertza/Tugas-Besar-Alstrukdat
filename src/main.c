@@ -244,7 +244,7 @@ int main(){
 
 
         char fileConfig;
-        scanf("Masukkan nama file konfigurasi level: %s",fileConfig);
+        printf("Masukkan nama file konfigurasi level: "); scanf("%s",fileConfig);
         Konfigurasi(fileConfig);
 
         //startRonde();
