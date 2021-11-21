@@ -25,3 +25,5 @@ List UseSkill (User U, int x) ;
 List DelSkill (User U, int x) ;
 
 List SkillRandomizer (User U) ;
+
+User SKILL (User U) ;
