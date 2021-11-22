@@ -271,7 +271,8 @@ void awalPermainan(int inputmenu, User U1, User U2){
         //Ketika terdapat pemain yang mencapai garis finish, memanggil prosedur Finish() yang akan menampilkan nama pemenang berdasarkan peringkat dan informasi bahwa game telah berakhir
         //kembali ke MainMenu
 
-
+        U1.Curr = IdxMin;
+        U2.Curr = IdxMin;
         char fileConfig[10];
         printf("Masukkan nama file konfigurasi level: "); scanf("%s",fileConfig);
         Konfigurasi(fileConfig, U1, U2);
