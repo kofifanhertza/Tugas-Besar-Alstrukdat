@@ -27,13 +27,20 @@ void Inspect(Tele T, Player P){
 }
 
 
-
+void MAP(User U1, User U2){
+    printf("%s      : ", U1.Nama);
+    outputPlayerMap(U1.P);
+    printf(" %d\n", Curr(U1));
+    printf("%s      : ", U1.Nama);
+    outputPlayerMap(U1.P);
+    printf(" %d\n", Curr(U1));
+}
 int main(){
     int i;
     Tele T;
     Player User1;
     SetPlayer(User1);
-    STARTKATA();
+    STARTKATA("config.txt");
     User1 = readPlayer(User1);
     /*
     printf("baca lagi: \n");

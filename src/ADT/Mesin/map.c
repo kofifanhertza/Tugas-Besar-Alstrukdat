@@ -12,7 +12,6 @@ void outputPlayerMap(Player P) {
     for(i=IdxMin;i<=P.Length;i++) {
         printf("%c", P.Map[i]);
     }
-    printf("\n");
 }
 /*
 char CheckPetak (Player P, IdxType i){
