@@ -19,21 +19,21 @@ int teleport (Tele T, User P){
     return P.Curr;}
 
 /*Inpect Teleport*/
-void Inspect(Tele T, User U){
+void Inspect(Tele T, Player P){
     int X, i;
     char symbol;
-    printf("Masukkan petak : "); scanf("%s",X);
+    printf("Masukkan petak : "); scanf("%d",&X);
 
     i = 1;
-    while (T.BeforeTele[i] != X && i <= U.P.Length){ //Mencari lokasi teleporter
+    while (T.BeforeTele[i] != X && i <= T.bykTele){ //Mencari lokasi teleporter dan isi peta
         i = i + 1;
-        symbol = U.P.Map[i];
+        symbol = P.Map[i];
     }
-
+    
     if (symbol == '#'){
         printf("Petak %d merupakan petak terlarang.",X);
     } else { //symbol == '.'
-        if (i <= U.P.Length){
+        if (i <= P.Length){
             printf("Petak %d memiliki teleporter menuju %d",X,T.AfterTele[i]);
         } else { //i > U.P.Length  
             printf("Petak %d merupakan petak kosong.",X);
