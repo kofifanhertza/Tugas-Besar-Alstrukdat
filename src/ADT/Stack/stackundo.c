@@ -24,15 +24,8 @@ boolean IsEmpty (Stack S) {
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void PushU (Stack * S, User P1) {
-    if (!IsEmpty(*S))
-    {
-        Top(*S)++;
-    }
-    else
-    {
-        Top(*S) = 1;
-    }
-    InfoTop(*S) = P1;
+    (*S).TOP++;
+    (*S).T[(*S).TOP-1] = P1;
 }
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
@@ -40,8 +33,8 @@ void PushU (Stack * S, User P1) {
 
 /* ************ Menghapus sebuah elemen Stack ************ */
 void PopU (Stack * S, User P2) {
-    *P2 = InfoTop(*S);
-    Top(*S)--;
+    (*P2) = (*S).T[(*S).TOP-1];
+    (*S).TOP--;
 }
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
