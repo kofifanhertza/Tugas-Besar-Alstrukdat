@@ -188,6 +188,7 @@ void startTurn(User *U){
     switch(input[10])
     {
         case 'SKILL':
+            commandSkill();
             //panggil fungsi untuk menggunakan atau membuang skill
         case 'MAP':
             commandMAP();
@@ -195,6 +196,7 @@ void startTurn(User *U){
         case 'BUFF':
             //panggil prosedur untuk menampilkan daftar buff yang sedang dimiliki pemain
         case 'INSPECT':
+            Inspect();
             //menerawang petak 'x' untuk menunjukkan keberadaan teleporter
         case 'ROLL':
             //melakukan giliran rolling dadu untuk bergerak
