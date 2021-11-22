@@ -220,6 +220,34 @@ void startTurn(User *U1, User *U2, Tele T){
     //setiap turn memunculkan konfigurasi peta, 
     //buff Cermin Pengganda, Senter Pembesar Hoki dan Senter Pengecil Hoki akan di-reset, 
     //serta pemain akan mendapatkan 1 skill secara random.
+<<<<<<< HEAD
+=======
+    switch(input[10])
+    {
+        case 'SKILL':
+            commandSkill();
+            //panggil fungsi untuk menggunakan atau membuang skill
+        case 'MAP':
+            commandMAP();
+            //panggil prosedur untuk mencetak MAP di layar dan menunjukkan posisi setiap player
+        case 'BUFF':
+            //panggil prosedur untuk menampilkan daftar buff yang sedang dimiliki pemain
+        case 'INSPECT':
+            Inspect();
+            //menerawang petak 'x' untuk menunjukkan keberadaan teleporter
+        case 'ROLL':
+            //melakukan giliran rolling dadu untuk bergerak
+            //kalo player sampai finish, endGame = true
+        case 'SAVE':
+            //panggil fungsi untuk menggunakan atau membuang skill
+        case 'UNDO':
+            //panggil fungsi untuk menggunakan atau membuang skill
+        case 'ENDTURN':
+            //panggil fungsi untuk menggunakan atau membuang skill
+        default:
+            printf("Error! command is not correct.");
+    }
+>>>>>>> b862f7cc2c4dcd08c4cdace5f47752f62d9d4cb2
 }
 
 /*void commandMAP(){
