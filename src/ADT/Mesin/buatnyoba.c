@@ -1,7 +1,8 @@
 #include <stdio.h>
-#include "mesin_kata.c"
-#include "mesin_kar.c"
-#include "map.c"
+#include "mesin_kata.h"
+#include "mesin_kar.h"
+#include "map.h"
+
 
 void Inspect(Tele T, Player P){
     int X, i;
@@ -27,13 +28,13 @@ void Inspect(Tele T, Player P){
 }
 
 
-void MAP(User U1, User U2){
+void commandMAP(){
     printf("%s      : ", U1.Nama);
     outputPlayerMap(U1.P);
     printf(" %d\n", Curr(U1));
-    printf("%s      : ", U1.Nama);
-    outputPlayerMap(U1.P);
-    printf(" %d\n", Curr(U1));
+    printf("%s      : ", U2.Nama);
+    outputPlayerMap(U2.P);
+    printf(" %d\n", Curr(U2));
 }
 int main(){
     int i;

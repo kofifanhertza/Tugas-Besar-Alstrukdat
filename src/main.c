@@ -13,6 +13,7 @@
 #include <time.h>
 boolean endGame;
 int rondeKe;
+
 void InputAngka(int *angka)
 /* Membaca input angka dari user */
 /* Nanti ini dimasukkin ADT Mesin Karakter aja*/
@@ -177,16 +178,19 @@ void printConfig(Player *P, Tele *T){
 }
 
 void startTurn(User *U){
-    char input;
-    scanf("Masukkan command: %s",input);
+    commandMAP();
+    char input[10];
+    printf("Masukkan Command: ");
+    scanf(" %s", input);
     //setiap turn memunculkan konfigurasi peta, 
     //buff Cermin Pengganda, Senter Pembesar Hoki dan Senter Pengecil Hoki akan di-reset, 
     //serta pemain akan mendapatkan 1 skill secara random.
-    switch(input)
+    switch(input[10])
     {
         case 'SKILL':
             //panggil fungsi untuk menggunakan atau membuang skill
         case 'MAP':
+            commandMAP();
             //panggil prosedur untuk mencetak MAP di layar dan menunjukkan posisi setiap player
         case 'BUFF':
             //panggil prosedur untuk menampilkan daftar buff yang sedang dimiliki pemain
@@ -206,7 +210,14 @@ void startTurn(User *U){
     }
 }
 
-
+/*void commandMAP(){
+    printf("%s      : ", U1.Nama);
+    outputPlayerMap(U1.P);
+    printf(" %d\n", Curr(U1));
+    printf("%s      : ", U2.Nama);
+    outputPlayerMap(U2.P);
+    printf(" %d\n", Curr(U2));
+}*/
 void startRonde(int n, User *U1, User *U2){
     int ronde;//not yet complete
     boolean endGame = false;
@@ -220,7 +231,6 @@ boolean isWExist(User U1, User U2) {
     return (Curr(U1) == U1.P.Length || Curr(U2) == U2.P.Length);
 }
 void permainanBerlangsung(int n, User U1, User U2){
-    //ini harusnya di loop, 
     char lanjut;
     printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik 'Y' untuk 'Ya,' dan 'N' untuk 'Tidak': ");scanf("%c", lanjut);
     if (lanjut == 'N') {
@@ -293,7 +303,7 @@ int main(){
     Logo();
     printf("\n");
     delay(250);
-    User U1, U2;
+    //User U1, U2;
     int inputmenu;
     MainMenu(&inputmenu);
     awalPermainan(inputmenu, U1, U2);
