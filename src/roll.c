@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-int roll(User P, Tele T){
+int roll(User P, Tele T, Player U){
     int i;
     int dice1;
     srand ( time(NULL) );
@@ -57,14 +57,12 @@ int roll(User P, Tele T){
                         else{
                             if (pilihan=='Y'){
                                 printf("%s teleport ke petak %d.\n", P.Nama, T.AfterTele[i]);}}}
-                    else{
+                    else if (Search(P.ActiveSkill, 1) == Nil){
                     printf("%s tidak memiliki imunitas teleport.\n", P.Nama);
                     printf("%s teleport ke petak %d.\n", P.Nama, T.AfterTele[i]);  
                         }
             //dapat bergerak ke satu petak (maju) / mundur
-            else{
-                // dapat gerak maju
-                if (((P.Curr+dice1=='.') && (P.Curr-dice1=='#')) || ((P.Curr+dice1=='.') && (P.Curr-dice1 < 0)) ){
+            else if (((P.Curr+dice1=='.') && (P.Curr-dice1=='#')) || ((P.Curr+dice1=='.') && (P.Curr-dice1 < 0)) ){
                     printf ("%s dapat maju.\n", P.Nama);
                     printf ("%s maju %d langkah.\n", P.Nama,dice1);
                     P.Curr = P.Curr+dice1;
@@ -111,7 +109,14 @@ int roll(User P, Tele T){
                                     printf("%s teleport ke petak %d.\n", P.Nama, T.AfterTele[i]);}}}
                         else{
                         printf("%s tidak memiliki imunitas teleport.\n", P.Nama);
-                        printf("%s teleport ke petak %d.\n", P.Nama, T.AfterTele[i];  
-                                }}}}
-    return (P.Curr);
+                        printf("%s teleport ke petak %d.\n", P.Nama, T.AfterTele[i]);  
+                                }}
+                    else if (P.Curr ==  U.Length ){
+                        printf("%s telah mencapai ujung", P.Nama);
+                        printf("Pemenang game ini adalah %s", P.Nama);
+
+                    } 
+                    
+                    }
+        return P.Curr;
 }

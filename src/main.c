@@ -11,7 +11,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+boolean endGame;
+int rondeKe;
 
 void InputAngka(int *angka)
 /* Membaca input angka dari user */
@@ -122,7 +123,7 @@ void Teleport(Tele *T){
 }*/
 
 
-void Konfigurasi(char fileconfig[]){
+void Konfigurasi(char fileconfig[], User U1, User U2){
     //Memulai permainan
     /*
     int nplayer;
@@ -134,7 +135,7 @@ void Konfigurasi(char fileconfig[]){
         Tele TP1;
         readConfig(&P,&TP); 
     }*/
-    User U1, U2;
+    
     printf("Masukkan Nama Player 1 : ");scanf("%s", (U1.Nama));
     printf("\nMasukkan Nama Player 2 : ");scanf("%s", (U2.Nama));
     Tele TP1, TP2;
@@ -158,7 +159,7 @@ void printConfig(Player *P, Tele *T){
 
     printf("Panjang peta: %d\n", (*P).Length);
     
-    outputPlayerMap((*P));
+    outputPlayerMap((*P));printf("\n");
     
     printf("MaxRoll Awal:%d\n", (*P).MaxRollAwal); //MaxRollAwal sesuai dengan file konfigurasi
 
@@ -175,16 +176,21 @@ void printConfig(Player *P, Tele *T){
     }
     printf("\n");
 }
-/*
-void startTurn(Player *P){
-    char input;
-    scanf("Masukkan command: %s",input);
 
-    switch(input)
+void startTurn(User *U){
+    commandMAP();
+    char input[10];
+    printf("Masukkan Command: ");
+    scanf(" %s", input);
+    //setiap turn memunculkan konfigurasi peta, 
+    //buff Cermin Pengganda, Senter Pembesar Hoki dan Senter Pengecil Hoki akan di-reset, 
+    //serta pemain akan mendapatkan 1 skill secara random.
+    switch(input[10])
     {
         case 'SKILL':
             //panggil fungsi untuk menggunakan atau membuang skill
         case 'MAP':
+            commandMAP();
             //panggil prosedur untuk mencetak MAP di layar dan menunjukkan posisi setiap player
         case 'BUFF':
             //panggil prosedur untuk menampilkan daftar buff yang sedang dimiliki pemain
@@ -204,27 +210,50 @@ void startTurn(Player *P){
     }
 }
 
-
-void startRonde(int n, Player *P1, Player *P2){
+/*void commandMAP(){
+    printf("%s      : ", U1.Nama);
+    outputPlayerMap(U1.P);
+    printf(" %d\n", Curr(U1));
+    printf("%s      : ", U2.Nama);
+    outputPlayerMap(U2.P);
+    printf(" %d\n", Curr(U2));
+}*/
+void startRonde(int n, User *U1, User *U2){
     int ronde;//not yet complete
     boolean endGame = false;
     while (!endGame){
-        startTurn(P1);
-        startTurn(P2);
+        startTurn(U1);
+        startTurn(U2);
     }
 }
-*/
+boolean isWExist(User U1, User U2) {
+    // Permainan akan berakhir jika sudah ada satu pemain yang mencapai petak N.
+    return (Curr(U1) == U1.P.Length || Curr(U2) == U2.P.Length);
+}
+void permainanBerlangsung(int n, User U1, User U2){
+    char lanjut;
+    printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik 'Y' untuk 'Ya,' dan 'N' untuk 'Tidak': ");scanf("%c", lanjut);
+    if (lanjut == 'N') {
+        endGame = true;
+        //COMMAND EXIT
+    }
+    else {
+    while (isWExist != true && endGame != true && lanjut != "N") {
+        printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik 'Y' untuk 'Ya,' dan 'N' untuk 'Tidak': ");scanf("%c", lanjut); 
+        if (lanjut == 'Y') {
+                startRonde(n, &U1, &U2); 
+                n++;
+        } else if (lanjut == 'N') {
+            endGame == true;
+        } else {
+            printf("\nMasukkan salah. Ulangi lagi\n");
+        }
+     }        
+  }
 
-int main(){
-    loading(3);
-    delay(250);
-    Logo();
-    printf("\n");
-    delay(250);
-
-    int inputmenu;
-    MainMenu(&inputmenu);
-    if (inputmenu == 1){
+};
+void awalPermainan(int inputmenu, User U1, User U2){
+        if (inputmenu == 1){
         printf("Selanjutnya Konfigurasi Map (meminta input nama file konfigurasi map)\n ");
 
         //Jalankan game dengan metode new game
@@ -245,39 +274,41 @@ int main(){
 
         char fileConfig[10];
         printf("Masukkan nama file konfigurasi level: "); scanf("%s",fileConfig);
-        Konfigurasi(fileConfig);
-
-        //startRonde();
+        Konfigurasi(fileConfig, U1, U2);
+        rondeKe = 1;
+        startRonde(rondeKe, &U1, &U2); //Ronde pertama
+        rondeKe++;
         
-
-
 
     } else if (inputmenu == 2){
+        endGame = true;
         printf("Keluar dari game, break all process.\n");
         
-
         //Keluar dari game.
 
         
     } else if (inputmenu == 3){
         printf("Mengakses file konfigurasi dan save yang menyimpan state sebelumnya. \nSave juga bisa menyimpan konfigurasi level, jadi tidak perlu file konfigurasi lagi.\n");
         
-        //Jalankan game dengan metode load game
-        //KonfigurasiMap(Nama File Konfigurasi level) dan file eksternal (savestate terakhir yang pernah dimainkan oleh n pemain)
-        //Memanggil prosedur Load() dan memberikan informasi bila load game berhasil atau gagal
-
-        //Start Game --> Command()  (jika load berhasil)
-        //Prosedur Start Game akan menjalankan permainan mulai dari savestate terakhir dengan menampilkan peta dan memulai turn sesuai urutan yang ada(urutan ditentukan/dirandom(?))
-
-        //Prosedur Command() akan meminta input command dari player yang sedang bermain(seperti Skill, Map, Buff, Inspect, Roll, Save, hingga player memasukkan EndTurn/Undo)
-        //Prosedur Command() akan terus berjalan hingga terdapat satu pemenang (setiap ronde berakhir akan memanggil prosedur savestate, ronde berakhir ketika semua pemain telah menyelesaikan turn atau ketika terdapat pemenang)
-        //Ketika terdapat pemain yang mencapai garis finish, memanggil prosedur Finish() yang akan menampilkan nama pemenang berdasarkan peringkat dan informasi bahwa game telah berakhir
-        //kembali ke MainMenu        
-                
                 
         char fileConfig[10];
         scanf("Masukkan nama file konfigurasi level yang telah disimpan: %s",fileConfig);
-        Konfigurasi(fileConfig);
+        Konfigurasi(fileConfig, U1, U2);
 
     }
+}
+int main(){
+    loading(3);
+    delay(250);
+    Logo();
+    printf("\n");
+    delay(250);
+    //User U1, U2;
+    int inputmenu;
+    MainMenu(&inputmenu);
+    awalPermainan(inputmenu, U1, U2);
+    permainanBerlangsung(rondeKe, U1, U2);
+
+
+
 }
