@@ -37,6 +37,13 @@ typedef struct {
 	List ActiveSkill ;
 } User;
 
+#define Curr(U) (U).Curr
+#define Nama(U) (U).Nama
+#define Map(U) (U).P.Map
+#define Length(U) (U).P.Length
+
+
+
 void SetPlayer (Player P); /* untuk menginisialisasi player dengan peta kosong */
 void outputPlayerMap(Player P); /*mengeluarkan peta player*/
 Player copyPlayer(Player Pawal);
