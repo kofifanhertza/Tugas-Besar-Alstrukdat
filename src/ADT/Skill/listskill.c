@@ -6,8 +6,7 @@
 
 int Randomizer () {
     int skill, x;
-    srand(time(NULL));
-    x = rand() % 50 ;
+    x = rand() % 50 + 1;
     printf("%d\n", x) ;
 
     if (x > 0 && x <= 10) {
@@ -42,7 +41,17 @@ int Randomizer () {
     if (skill == 0 ) {
         printf("Anda tidak mendapatkan skill\n") ;
     } else {
-        printf("Anda menemukan skill %d\n", skill) ;
+        if (skill = 1) {
+            printf ("Anda menemukan skill Pintu Ga Ke Mana Mana\n") ;
+        } else if (skill = 2) {
+            printf ("Anda menemukan skill Cermin Pengganda\n") ;
+        } else if(skill = 3) {
+            printf ("Anda menemukan skill Senter Pembesar Hoki\n") ;
+        } else if (skill = 4) {
+            printf("Anda menemukan skill Senter Pengecil Hoki\n") ;
+        } else if (skill = 5) {
+            printf("Anda menemukan skill Mesin Penukar Posisi\n") ;
+        } 
     }
             
 return skill ;
@@ -163,7 +172,7 @@ int PrintBuff (List L) {
     printf("Anda memiliki buff :\n") ;
     while (q != Nil) {   
         if (Info(q) == 1) {
-            printf("%d. Pintu Ga Ke Mana Mana\n", i) ;    
+            printf("%d. Imunitas Teleport\n", i) ;    
         } 
         else if (Info(q) == 2) {
             printf("%d. Cermin Pengganda\n", i) ;
