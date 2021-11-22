@@ -41,15 +41,15 @@ int Randomizer () {
     if (skill == 0 ) {
         printf("Anda tidak mendapatkan skill\n") ;
     } else {
-        if (skill = 1) {
+        if (skill == 1) {
             printf ("Anda menemukan skill Pintu Ga Ke Mana Mana\n") ;
-        } else if (skill = 2) {
+        } else if (skill == 2) {
             printf ("Anda menemukan skill Cermin Pengganda\n") ;
-        } else if(skill = 3) {
+        } else if(skill == 3) {
             printf ("Anda menemukan skill Senter Pembesar Hoki\n") ;
-        } else if (skill = 4) {
+        } else if (skill == 4) {
             printf("Anda menemukan skill Senter Pengecil Hoki\n") ;
-        } else if (skill = 5) {
+        } else if (skill == 5) {
             printf("Anda menemukan skill Mesin Penukar Posisi\n") ;
         } 
     }
