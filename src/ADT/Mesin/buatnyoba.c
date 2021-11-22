@@ -13,8 +13,10 @@ void Inspect(Tele T, Player P){
     while (T.BeforeTele[i] != X && i <= T.bykTele){ //Mencari lokasi teleporter dan isi peta
         i = i + 1;
         symbol = P.Map[i];
+        printf("%c",symbol);
     }
     
+
     if (symbol == '#'){
         printf("Petak %d merupakan petak terlarang.",X);
     } else { //symbol == '.'
@@ -27,7 +29,7 @@ void Inspect(Tele T, Player P){
 
 }
 
-
+/*
 void commandMAP(){
     printf("%s      : ", U1.Nama);
     outputPlayerMap(U1.P);
@@ -36,6 +38,7 @@ void commandMAP(){
     outputPlayerMap(U2.P);
     printf(" %d\n", Curr(U2));
 }
+*/
 int main(){
     int i;
     Tele T;

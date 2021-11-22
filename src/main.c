@@ -6,13 +6,16 @@
 //#include "./ADT/List/stacklist.h"
 #include "ADT/Mesin/map.h"
 #include "ADT/Mesin/mesin_kata.h"
-//#include "./Skill/listdp.h"
+#include "ADT/Skill/listskill.h"
+#include "roll.c"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 boolean endGame;
 int rondeKe;
+User U1, U2;
 
 void InputAngka(int *angka)
 /* Membaca input angka dari user */
@@ -123,7 +126,7 @@ void Teleport(Tele *T){
 }*/
 
 
-void Konfigurasi(char fileconfig[], User U1, User U2){
+void Konfigurasi(char fileconfig[], User U1, User U2, Tele TP){
     //Memulai permainan
     /*
     int nplayer;
@@ -138,20 +141,20 @@ void Konfigurasi(char fileconfig[], User U1, User U2){
     
     printf("Masukkan Nama Player 1 : ");scanf("%s", (U1.Nama));
     printf("\nMasukkan Nama Player 2 : ");scanf("%s", (U2.Nama));
-    Tele TP1, TP2;
-    readConfig(&(U1.P),&(TP1), fileconfig);
+    readConfig(&(U1.P),&(TP), fileconfig);
     printf("*****************************\n");
     printf("\n\n");
     (U1).MaxRoll = U1.P.MaxRollAwal;
     printf("Player 1 : %s\n", (U1).Nama);
-    printConfig(&(U1.P), &(TP1));
+    printConfig(&(U1.P), &(TP));
     printf("MaxRoll Player 1 saat ini: %d\n", U1.MaxRoll); //MaxRoll seorang user dapat berubah di tengah permainan
     (U2.P) = copyPlayer(U1.P);
-    TP2 = copyTele(TP1);
+    
+    //TP2 = copyTele(TP1);
     printf("\n\n");
     (U2).MaxRoll = U2.P.MaxRollAwal;
     printf("Player 2 : %s\n", (U2).Nama);
-    printConfig(&(U2.P), &(TP2));
+    printConfig(&(U2.P), &(TP));
     printf("MaxRoll Player 2 saat ini: %d\n", U2.MaxRoll);
 }
 
@@ -177,37 +180,46 @@ void printConfig(Player *P, Tele *T){
     printf("\n");
 }
 
-void startTurn(User *U){
-    commandMAP();
+void startTurn(User *U1, User *U2, Tele T){
+    printf("Giliran %s Nih...\n", (*U1).Nama);
+    //commandMAP();
     char input[10];
-    printf("Masukkan Command: ");
-    scanf(" %s", input);
+    boolean endTurn = false;
+    while (!endTurn){
+        printf("Masukkan Command: ");
+        scanf(" %s", input);
+
+        if (strcmp(input, "SKILL") == 0) {
+            //*U1 = SKILL(*U1);
+        } else if (strcmp(input, "MAP") == 0){
+            //commandMAP();
+        } else if (strcmp(input, "BUFF") == 0){
+            PrintBuff((*U1).ActiveSkill);
+            printf("\n");
+        } else if (strcmp(input, "INSPECT") == 0){
+            //Inspect();
+        } else if (strcmp(input, "ROLL") == 0){
+            (*U1).Curr = roll(*U1, T, (*U1).P);
+            printf("%d\n",(*U1).Curr);
+            printf("INI AKU NGEPRINT COK");
+        } else if (strcmp(input, "SAVE") == 0){
+            //bismillah
+        } else if (strcmp(input, "UNDO") == 0){
+            //bismillah
+        } else if (strcmp(input, "ENDTURN") == 0){
+            endTurn = true;
+            break;
+        } else if (strcmp(input, "EXIT") == 0){
+            endTurn = true;
+            endGame = true;
+            exit(0);
+        } else {
+            printf("Error! command is not correct.\n");
+        }
+    }
     //setiap turn memunculkan konfigurasi peta, 
     //buff Cermin Pengganda, Senter Pembesar Hoki dan Senter Pengecil Hoki akan di-reset, 
     //serta pemain akan mendapatkan 1 skill secara random.
-    switch(input[10])
-    {
-        case 'SKILL':
-            //panggil fungsi untuk menggunakan atau membuang skill
-        case 'MAP':
-            commandMAP();
-            //panggil prosedur untuk mencetak MAP di layar dan menunjukkan posisi setiap player
-        case 'BUFF':
-            //panggil prosedur untuk menampilkan daftar buff yang sedang dimiliki pemain
-        case 'INSPECT':
-            //menerawang petak 'x' untuk menunjukkan keberadaan teleporter
-        case 'ROLL':
-            //melakukan giliran rolling dadu untuk bergerak
-            //kalo player sampai finish, endGame = true
-        case 'SAVE':
-            //panggil fungsi untuk menggunakan atau membuang skill
-        case 'UNDO':
-            //panggil fungsi untuk menggunakan atau membuang skill
-        case 'ENDTURN':
-            //panggil fungsi untuk menggunakan atau membuang skill
-        default:
-            printf("Error! command is not correct.");
-    }
 }
 
 /*void commandMAP(){
@@ -218,19 +230,23 @@ void startTurn(User *U){
     outputPlayerMap(U2.P);
     printf(" %d\n", Curr(U2));
 }*/
-void startRonde(int n, User *U1, User *U2){
+void startRonde(int n, User *U1, User *U2, Tele T){
     int ronde;//not yet complete
     boolean endGame = false;
     while (!endGame){
-        startTurn(U1);
-        startTurn(U2);
+        printf("Teng teng... Ronde ke-%d dimulaii \n",n);
+        startTurn(U1,U2,T);
+        if (endGame){
+            break;
+        }
+        startTurn(U2,U1,T);
     }
 }
 boolean isWExist(User U1, User U2) {
     // Permainan akan berakhir jika sudah ada satu pemain yang mencapai petak N.
     return (Curr(U1) == U1.P.Length || Curr(U2) == U2.P.Length);
 }
-void permainanBerlangsung(int n, User U1, User U2){
+void permainanBerlangsung(int n, User U1, User U2, Tele T){
     char lanjut;
     printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik 'Y' untuk 'Ya,' dan 'N' untuk 'Tidak': ");scanf("%c", lanjut);
     if (lanjut == 'N') {
@@ -238,10 +254,10 @@ void permainanBerlangsung(int n, User U1, User U2){
         //COMMAND EXIT
     }
     else {
-    while (isWExist != true && endGame != true && lanjut != "N") {
+    while (isWExist(U1,U2) != true && endGame != true && lanjut != 'N') {
         printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik 'Y' untuk 'Ya,' dan 'N' untuk 'Tidak': ");scanf("%c", lanjut); 
         if (lanjut == 'Y') {
-                startRonde(n, &U1, &U2); 
+                startRonde(n, &U1, &U2, T); 
                 n++;
         } else if (lanjut == 'N') {
             endGame == true;
@@ -252,7 +268,7 @@ void permainanBerlangsung(int n, User U1, User U2){
   }
 
 };
-void awalPermainan(int inputmenu, User U1, User U2){
+void awalPermainan(int inputmenu, User U1, User U2, Tele T){
         if (inputmenu == 1){
         printf("Selanjutnya Konfigurasi Map (meminta input nama file konfigurasi map)\n ");
 
@@ -275,9 +291,9 @@ void awalPermainan(int inputmenu, User U1, User U2){
         U2.Curr = IdxMin;
         char fileConfig[10];
         printf("Masukkan nama file konfigurasi level: "); scanf("%s",fileConfig);
-        Konfigurasi(fileConfig, U1, U2);
+        Konfigurasi(fileConfig, U1, U2, T);
         rondeKe = 1;
-        startRonde(rondeKe, &U1, &U2); //Ronde pertama
+        startRonde(rondeKe, &U1, &U2, T); //Ronde pertama
         rondeKe++;
         
 
@@ -294,7 +310,7 @@ void awalPermainan(int inputmenu, User U1, User U2){
                 
         char fileConfig[10];
         scanf("Masukkan nama file konfigurasi level yang telah disimpan: %s",fileConfig);
-        Konfigurasi(fileConfig, U1, U2);
+        Konfigurasi(fileConfig, U1, U2,T);
 
     }
 }
@@ -305,10 +321,11 @@ int main(){
     printf("\n");
     delay(250);
     //User U1, U2;
+    Tele TP;
     int inputmenu;
     MainMenu(&inputmenu);
-    awalPermainan(inputmenu, U1, U2);
-    permainanBerlangsung(rondeKe, U1, U2);
+    awalPermainan(inputmenu, U1, U2, TP);
+    permainanBerlangsung(rondeKe, U1, U2, TP);
 
 
 

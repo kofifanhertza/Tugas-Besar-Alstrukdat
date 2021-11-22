@@ -19,7 +19,7 @@ int main () {
 
         else if (Input == 2) {
 
-        U = SKILL(U) ;
+        U = SKILL(U);
 
         } else if (Input == 3) {
             int nSkill = NbElmt(U.SkillList) ;

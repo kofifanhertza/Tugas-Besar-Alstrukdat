@@ -8,7 +8,7 @@
 
 #define IdxMax 100
 #define IdxMin 1
-extern User U1, U2; //di-extern supaya bisa diakses di semua file yang include map.h
+
 
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;
@@ -37,6 +37,9 @@ typedef struct {
 	List ActiveSkill ;
 } User;
 
+extern User U1, U2; //di-extern supaya bisa diakses di semua file yang include map.h
+
+
 #define Curr(U) (U).Curr
 #define Nama(U) (U).Nama
 #define Map(U) (U).P.Map
@@ -51,6 +54,7 @@ Tele copyTele(Tele Tawal);
 void printConfig(Player *P, Tele *T);
 void commandMAP();
 void Inspect(Tele T, Player P);
+int roll(User P, Tele T, Player U);
 /*
 char CheckPetak (Player P, IdxType i); // mengecheck kondisi suatu petak dalam peta
 int GetCurrPlace (Player P); //mengeluarkan indeks lokasi Player berada

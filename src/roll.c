@@ -1,10 +1,11 @@
-#include "map.h"
-#include "mesin_kata.h"
+#include "ADT/Mesin/map.h"
+#include "ADT/Mesin/mesin_kata.h"
 #include "ADT/Skill/listlinier.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 int roll(User P, Tele T, Player U){
     int i;
     int dice1;
