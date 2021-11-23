@@ -6,7 +6,8 @@
 
 int Randomizer () {
     int skill, x;
-    x = rand() % 50 + 1;
+    x = rand() % 100 + 1;
+    x = rand() % 100 + 1;
     printf("%d\n", x) ;
 
     if (x > 0 && x <= 10) {

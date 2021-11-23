@@ -14,6 +14,7 @@ int main () {
 
     while (Input != 0) {
         if (Input == 1) {
+            srand ( time(NULL) );
             U.SkillList = SkillRandomizer(U) ;
         } 
 
