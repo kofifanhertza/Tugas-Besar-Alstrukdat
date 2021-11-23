@@ -4,7 +4,7 @@
 #include "map.h"
 
 
-void Inspect(Tele T, Player P){
+/*void Inspect(Tele T, Player P){
     int X, i;
     char symbol;
     printf("Masukkan petak : "); scanf("%d",&X);
@@ -28,7 +28,7 @@ void Inspect(Tele T, Player P){
     }
 
 }
-
+*/
 /*
 void commandMAP(){
     printf("%s      : ", U1.Nama);
@@ -66,5 +66,5 @@ int main(){
     }
     printf("\n");
     */
-    Inspect(T,User1);
+    //Inspect(T,User1);
 }
