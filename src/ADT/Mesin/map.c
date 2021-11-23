@@ -22,12 +22,13 @@ int GetCurrPlace (User U) {
 }
 
 
-void ChangeCurrPlace(User U, IdxType idxAfter) {
+User ChangeCurrPlace(User U, IdxType idxAfter) {
     int temp;
     temp = U.Curr;
     U.Curr = idxAfter;
     U.P.Map[temp] = '.';
     U.P.Map[idxAfter] = '*';
+    return U;
 }
 
 Player copyPlayer(Player Pawal) {
