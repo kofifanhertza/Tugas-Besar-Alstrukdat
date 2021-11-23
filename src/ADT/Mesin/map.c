@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include "map.h"
 
-void SetPlayer (Player P){
-    (P).Length = 0;
-}
 
+void SetUser(User *U){
+    (*U).P.Length = 0;
+    (*U).Curr = IdxMin;
+}
 void outputPlayerMap(Player P) {
     // untuk membaca map
     int i;
@@ -51,3 +52,28 @@ Tele copyTele(Tele Tawal){
     }
     return (T);
 }
+/*
+void Inspect(Tele *T, Player P){
+    int X, i;
+    char symbol;
+    printf("Masukkan petak : "); scanf("%d",&X);
+
+    i = 1;
+    while ((*T).BeforeTele[i] != X && i <= (*T).bykTele){ //Mencari lokasi teleporter dan isi peta
+        i = i + 1;
+        //symbol = P.Map[i];
+        //printf("%c",symbol);
+    }
+    
+
+    if (P.Map[X] == '#'){
+        printf("Petak %d merupakan petak terlarang.\n",X);
+    } else { //symbol == '.'
+        if ((i < P.Length && (*T).AfterTele[i] != 0)){
+            printf("Petak %d memiliki teleporter menuju %d\n",X,(*T).AfterTele[i]);
+        } else if (i>P.Length || (*T).AfterTele[i] == 0) { //i > U.P.Length  
+            printf("Petak %d merupakan petak kosong.\n",X);
+        }
+    } 
+
+}*/

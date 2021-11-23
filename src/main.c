@@ -15,7 +15,7 @@
 #include <string.h>
 boolean endGame;
 int rondeKe;
-User U1, U2;
+//User U1, U2;
 
 void InputAngka(int *angka)
 /* Membaca input angka dari user */
@@ -98,14 +98,15 @@ void MainMenu(int *inputmenu){
     }
 } 
 
-void readConfig(Player *P, Tele *T, char fileconfig[]){
+void readConfig(User *U, Tele *T, char fileconfig[]){
     int i;
-    SetPlayer(*P);
+    SetUser(U);
 
     STARTKATA(fileconfig);
-    *P = readPlayer(*P);
+    (*U).P = readPlayer((*U).P);
     
     *T = readTele(*T);
+    *T = copyTele(*T);
 }
 
 /*
@@ -126,7 +127,7 @@ void Teleport(Tele *T){
 }*/
 
 
-void Konfigurasi(char fileconfig[], User U1, User U2, Tele TP){
+void Konfigurasi(char fileconfig[], User *U1, User *U2, Tele TP){
     //Memulai permainan
     /*
     int nplayer;
@@ -139,23 +140,23 @@ void Konfigurasi(char fileconfig[], User U1, User U2, Tele TP){
         readConfig(&P,&TP); 
     }*/
     
-    printf("Masukkan Nama Player 1 : ");scanf("%s", (U1.Nama));
-    printf("\nMasukkan Nama Player 2 : ");scanf("%s", (U2.Nama));
-    readConfig(&(U1.P),&(TP), fileconfig);
+    printf("Masukkan Nama Player 1 : ");scanf("%s", ((*U1).Nama));
+    printf("\nMasukkan Nama Player 2 : ");scanf("%s", ((*U2).Nama));
+    readConfig(&(*U1),&(TP), fileconfig);
     printf("*****************************\n");
     printf("\n\n");
-    (U1).MaxRoll = U1.P.MaxRollAwal;
-    printf("Player 1 : %s\n", (U1).Nama);
-    printConfig(&(U1.P), &(TP));
-    printf("MaxRoll Player 1 saat ini: %d\n", U1.MaxRoll); //MaxRoll seorang user dapat berubah di tengah permainan
-    (U2.P) = copyPlayer(U1.P);
+    (*U1).MaxRoll = (*U1).P.MaxRollAwal;
+    printf("Player 1 : %s\n", (*U1).Nama);
+    printConfig(&((*U1).P), &(TP));
+    printf("MaxRoll Player 1 saat ini: %d\n", (*U1).MaxRoll); //MaxRoll seorang user dapat berubah di tengah permainan
+    ((*U2).P) = copyPlayer((*U1).P);
     
-    //TP2 = copyTele(TP1);
+    //TPdup = copyTele(TP1);
     printf("\n\n");
-    (U2).MaxRoll = U2.P.MaxRollAwal;
-    printf("Player 2 : %s\n", (U2).Nama);
-    printConfig(&(U2.P), &(TP));
-    printf("MaxRoll Player 2 saat ini: %d\n", U2.MaxRoll);
+    (*U2).MaxRoll = (*U2).P.MaxRollAwal;
+    printf("Player 2 : %s\n", (*U2).Nama);
+    printConfig(&((*U2).P), &(TP));
+    printf("MaxRoll Player 2 saat ini: %d\n", (*U2).MaxRoll);
 }
 
 void printConfig(Player *P, Tele *T){
@@ -193,12 +194,12 @@ void startTurn(User *U1, User *U2, Tele T){
         if (strcmp(input, "SKILL") == 0) {
             *U1 = SKILL(*U1);
         } else if (strcmp(input, "MAP") == 0){
-            //commandMAP();
+            commandMAP(U1, U2);
         } else if (strcmp(input, "BUFF") == 0){
             PrintBuff((*U1).ActiveSkill);
             printf("\n");
         } else if (strcmp(input, "INSPECT") == 0){
-            //Inspect();
+            //Inspect(&T, (*U1).P);
         } else if (strcmp(input, "ROLL") == 0){
             (*U1).Curr = roll(*U1, T, (*U1).P);
             printf("%d\n",(*U1).Curr);
@@ -223,14 +224,14 @@ void startTurn(User *U1, User *U2, Tele T){
     //serta pemain akan mendapatkan 1 skill secara random.
 }
 
-/*void commandMAP(){
-    printf("%s      : ", U1.Nama);
-    outputPlayerMap(U1.P);
-    printf(" %d\n", Curr(U1));
-    printf("%s      : ", U2.Nama);
-    outputPlayerMap(U2.P);
-    printf(" %d\n", Curr(U2));
-}*/
+void commandMAP(User *U1, User *U2){
+    printf("%s      : ", (*U1).Nama);
+    outputPlayerMap((*U1).P);
+    printf(" %d\n", Curr(*U1));
+    printf("%s      : ", (*U2).Nama);
+    outputPlayerMap((*U2).P);
+    printf(" %d\n", Curr(*U2));
+}
 void startRonde(int n, User *U1, User *U2, Tele T){
     int ronde;//not yet complete
     boolean endGame = false;
@@ -292,7 +293,7 @@ void awalPermainan(int inputmenu, User U1, User U2, Tele T){
         U2.Curr = IdxMin;
         char fileConfig[10];
         printf("Masukkan nama file konfigurasi level: "); scanf("%s",fileConfig);
-        Konfigurasi(fileConfig, U1, U2, T);
+        Konfigurasi(fileConfig, &U1, &U2, T);
         rondeKe = 1;
         startRonde(rondeKe, &U1, &U2, T); //Ronde pertama
         rondeKe++;
@@ -311,7 +312,7 @@ void awalPermainan(int inputmenu, User U1, User U2, Tele T){
                 
         char fileConfig[10];
         scanf("Masukkan nama file konfigurasi level yang telah disimpan: %s",fileConfig);
-        Konfigurasi(fileConfig, U1, U2,T);
+        Konfigurasi(fileConfig, &U1, &U2,T);
 
     }
 }
@@ -321,7 +322,7 @@ int main(){
     Logo();
     printf("\n");
     delay(250);
-    //User U1, U2;
+    User U1, U2;
     Tele TP;
     int inputmenu;
     MainMenu(&inputmenu);
