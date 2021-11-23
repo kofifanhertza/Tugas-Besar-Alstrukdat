@@ -85,3 +85,19 @@ void commandMAP(User *U1, User *U2){
     outputPlayerMap((*U2).P);
     printf(" %d\n", Curr(*U2));
 }
+//////////////////////////////////////////////////////////
+int search (Tele T,User P){
+    int i=0;
+    while (T.BeforeTele[i] != P.Curr){
+        i = i + 1;}
+    if (T.BeforeTele[i] == P.Curr){
+        return i;}
+    else {
+        return -1;}}
+
+int teleport (Tele T, User P){
+    int a = search(T, P);
+    if (a!=-1){
+        P.Curr = T.AfterTele[a];}
+    return P.Curr;}
+
