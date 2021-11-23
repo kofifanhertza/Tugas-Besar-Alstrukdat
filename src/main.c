@@ -18,6 +18,33 @@ int rondeKe;
 User U1, U2;
 //User U1, U2;
 
+void Inspectt(Tele T, Player P){
+    int X, i;
+    char symbol;
+    printf("Masukkan petak : "); scanf("%d",&X);
+
+    i = 1;
+ 
+    while (T.BeforeTele[i] != X && i <= T.bykTele){ //Mencari lokasi teleporter dan isi peta
+    
+        i = i + 1;
+    }
+    
+    
+    symbol = P.Map[X];
+ 
+    if (symbol == '#'){
+        printf("Petak %d merupakan petak terlarang.\n",X);
+    } else { //symbol == '.'
+        if (i <= T.bykTele){
+            printf("Petak %d memiliki teleporter menuju %d\n",X,T.AfterTele[i]);
+        } else { //i > U.P.Length  
+            printf("Petak %d merupakan petak kosong.\n",X);
+        }
+    }
+
+}
+
 void InputAngka(int *angka)
 /* Membaca input angka dari user */
 /* Nanti ini dimasukkin ADT Mesin Karakter aja*/
@@ -127,7 +154,7 @@ void Teleport(Tele *T){
 }*/
 
 
-void Konfigurasi(char fileconfig[], User *U1, User *U2, Tele TP){
+void Konfigurasi(char fileconfig[], User *U1, User *U2, Tele *TP){
     //Memulai permainan
     /*
     int nplayer;
@@ -142,12 +169,12 @@ void Konfigurasi(char fileconfig[], User *U1, User *U2, Tele TP){
     
     printf("Masukkan Nama Player 1 : ");scanf("%s", ((*U1).Nama));
     printf("\nMasukkan Nama Player 2 : ");scanf("%s", ((*U2).Nama));
-    readConfig(&(*U1),&(TP), fileconfig);
+    readConfig(&(*U1),&(*TP), fileconfig);
     printf("*****************************\n");
     printf("\n\n");
     (*U1).MaxRoll = (*U1).P.MaxRollAwal;
     printf("Player 1 : %s\n", (*U1).Nama);
-    printConfig(&((*U1).P), &(TP));
+    printConfig(&((*U1).P), &(*TP));
     printf("MaxRoll Player 1 saat ini: %d\n", (*U1).MaxRoll); //MaxRoll seorang user dapat berubah di tengah permainan
     ((*U2).P) = copyPlayer((*U1).P);
     
@@ -155,7 +182,7 @@ void Konfigurasi(char fileconfig[], User *U1, User *U2, Tele TP){
     printf("\n\n");
     (*U2).MaxRoll = (*U2).P.MaxRollAwal;
     printf("Player 2 : %s\n", (*U2).Nama);
-    printConfig(&((*U2).P), &(TP));
+    printConfig(&((*U2).P), &(*TP));
     printf("MaxRoll Player 2 saat ini: %d\n", (*U2).MaxRoll);
 }
 
@@ -178,7 +205,9 @@ void printConfig(Player *P, Tele *T){
     for(int i=1;i<=(*T).bykTele;i++) {   
         printf("%d ", (*T).AfterTele[i]);
     }
+    
     printf("\n");
+    
 }
 
 void startTurn(User *U1, User *U2, Tele T){
@@ -188,6 +217,7 @@ void startTurn(User *U1, User *U2, Tele T){
     char input[10];
     boolean endTurn = false;
     while (!endTurn){
+        
         printf("Masukkan Command: ");
         scanf(" %s", input);
 
@@ -199,7 +229,7 @@ void startTurn(User *U1, User *U2, Tele T){
             PrintBuff((*U1).ActiveSkill);
             printf("\n");
         } else if (strcmp(input, "INSPECT") == 0){
-            Inspect(T, (*U1).P);
+            Inspectt(T, (*U1).P) ;
         } else if (strcmp(input, "ROLL") == 0){
             (*U1).Curr = roll(*U1, T, (*U1).P);
             printf("%d\n",(*U1).Curr);
@@ -264,6 +294,7 @@ void permainanBerlangsung(int n, User U1, User U2, Tele T){
 
 };
 void awalPermainan(int inputmenu, User U1, User U2, Tele T){
+    
         if (inputmenu == 1){
         printf("Selanjutnya Konfigurasi Map (meminta input nama file konfigurasi map)\n ");
 
@@ -286,7 +317,7 @@ void awalPermainan(int inputmenu, User U1, User U2, Tele T){
         U2.Curr = IdxMin;
         char fileConfig[10];
         printf("Masukkan nama file konfigurasi level: "); scanf("%s",fileConfig);
-        Konfigurasi(fileConfig, &U1, &U2, T);
+        Konfigurasi(fileConfig, &U1, &U2, &T);
         U1.P.Map[1] = '*';
         U2.P.Map[1] = '*';
         rondeKe = 1;
@@ -307,16 +338,16 @@ void awalPermainan(int inputmenu, User U1, User U2, Tele T){
                 
         char fileConfig[10];
         scanf("Masukkan nama file konfigurasi level yang telah disimpan: %s",fileConfig);
-        Konfigurasi(fileConfig, &U1, &U2,T);
+        Konfigurasi(fileConfig, &U1, &U2,&T);
 
     }
 }
 int main(){
-    loading(3);
-    delay(250);
-    Logo();
-    printf("\n");
-    delay(250);
+    // loading(3);
+    // delay(250);
+    // Logo();
+    // printf("\n");
+    // delay(250);
     Tele TP;
     int inputmenu;
     MainMenu(&inputmenu);
