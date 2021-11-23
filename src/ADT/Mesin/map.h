@@ -55,7 +55,7 @@ void printConfig(Player *P, Tele *T);
 void commandMAP(User *U1, User *U2);
 void Inspect(Tele T, Player P);
 int roll(User P, Tele T, Player U);
-void roll2(User U, Tele T, Player P);
+void roll2(User *U, Tele T, Player P);
 User ChangeCurrPlace(User U, IdxType idxAfter);
 /*
 char CheckPetak (Player P, IdxType i); // mengecheck kondisi suatu petak dalam peta

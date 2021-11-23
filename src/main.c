@@ -7,7 +7,7 @@
 #include "ADT/Mesin/map.h"
 #include "ADT/Mesin/mesin_kata.h"
 #include "ADT/Skill/listskill.h"
-#include "roll.c"
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -231,7 +231,7 @@ void startTurn(User *U1, User *U2, Tele T){
         } else if (strcmp(input, "INSPECT") == 0){
             Inspectt(T, (*U1).P) ;
         } else if (strcmp(input, "ROLL") == 0){
-            (*U1).Curr = roll(*U1, T, (*U1).P);
+            roll2(&(*U1), T, (*U1).P);
             printf("%d\n",(*U1).Curr);
             printf("INI AKU NGEPRINT COK");
         } else if (strcmp(input, "SAVE") == 0){
