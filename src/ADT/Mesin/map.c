@@ -14,24 +14,22 @@ void outputPlayerMap(Player P) {
         printf("%c", P.Map[i]);
     }
 }
-/*
-char CheckPetak (Player P, IdxType i){
-    return P.Map[i];
+
+
+
+int GetCurrPlace (User U) {
+    return U.Curr;
 }
 
-int GetCurrPlace (Player P) {
-    return P.Curr;
-}
 
-
-void ChangeCurrPlace(Player P, IdxType idxAfter) {
+void ChangeCurrPlace(User U, IdxType idxAfter) {
     int temp;
-    temp = P.Curr;
-    P.Curr = idxAfter;
-    P.Map[temp] = ".";
-    P.Map[idxAfter] = "*";
+    temp = U.Curr;
+    U.Curr = idxAfter;
+    U.P.Map[temp] = '.';
+    U.P.Map[idxAfter] = '*';
 }
-*/
+
 Player copyPlayer(Player Pawal) {
     Player Pfix;
     int i;

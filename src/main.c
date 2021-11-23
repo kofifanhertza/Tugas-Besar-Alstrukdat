@@ -287,6 +287,8 @@ void awalPermainan(int inputmenu, User U1, User U2, Tele T){
         char fileConfig[10];
         printf("Masukkan nama file konfigurasi level: "); scanf("%s",fileConfig);
         Konfigurasi(fileConfig, &U1, &U2, T);
+        U1.P.Map[1] = '*';
+        U2.P.Map[1] = '*';
         rondeKe = 1;
         startRonde(rondeKe, &U1, &U2, T); //Ronde pertama
         rondeKe++;
