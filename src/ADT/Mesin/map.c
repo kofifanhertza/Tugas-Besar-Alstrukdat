@@ -52,28 +52,37 @@ Tele copyTele(Tele Tawal){
     }
     return (T);
 }
-/*
-void Inspect(Tele *T, Player P){
+
+void Inspect(Tele T, Player P){
     int X, i;
     char symbol;
     printf("Masukkan petak : "); scanf("%d",&X);
 
     i = 1;
-    while ((*T).BeforeTele[i] != X && i <= (*T).bykTele){ //Mencari lokasi teleporter dan isi peta
+    while (T.BeforeTele[i] != X && i <= T.bykTele){ //Mencari lokasi teleporter dan isi peta
         i = i + 1;
-        //symbol = P.Map[i];
-        //printf("%c",symbol);
     }
     
+    
+    symbol = P.Map[X];
 
-    if (P.Map[X] == '#'){
+    if (symbol == '#'){
         printf("Petak %d merupakan petak terlarang.\n",X);
     } else { //symbol == '.'
-        if ((i < P.Length && (*T).AfterTele[i] != 0)){
-            printf("Petak %d memiliki teleporter menuju %d\n",X,(*T).AfterTele[i]);
-        } else if (i>P.Length || (*T).AfterTele[i] == 0) { //i > U.P.Length  
+        if (i <= T.bykTele){
+            printf("Petak %d memiliki teleporter menuju %d\n",X,T.AfterTele[i]);
+        } else { //i > U.P.Length  
             printf("Petak %d merupakan petak kosong.\n",X);
         }
-    } 
+    }
 
-}*/
+}
+
+void commandMAP(User *U1, User *U2){
+    printf("%s      : ", (*U1).Nama);
+    outputPlayerMap((*U1).P);
+    printf(" %d\n", Curr(*U1));
+    printf("%s      : ", (*U2).Nama);
+    outputPlayerMap((*U2).P);
+    printf(" %d\n", Curr(*U2));
+}

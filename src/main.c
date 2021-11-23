@@ -15,6 +15,7 @@
 #include <string.h>
 boolean endGame;
 int rondeKe;
+User U1, U2;
 //User U1, U2;
 
 void InputAngka(int *angka)
@@ -106,7 +107,6 @@ void readConfig(User *U, Tele *T, char fileconfig[]){
     (*U).P = readPlayer((*U).P);
     
     *T = readTele(*T);
-    *T = copyTele(*T);
 }
 
 /*
@@ -184,7 +184,7 @@ void printConfig(Player *P, Tele *T){
 void startTurn(User *U1, User *U2, Tele T){
     printf("Giliran %s Nih...\n", (*U1).Nama);
     (*U1).SkillList = SkillRandomizer(*U1) ;
-    //commandMAP();
+    commandMAP(U1, U2);
     char input[10];
     boolean endTurn = false;
     while (!endTurn){
@@ -199,7 +199,7 @@ void startTurn(User *U1, User *U2, Tele T){
             PrintBuff((*U1).ActiveSkill);
             printf("\n");
         } else if (strcmp(input, "INSPECT") == 0){
-            //Inspect(&T, (*U1).P);
+            Inspect(T, (*U1).P);
         } else if (strcmp(input, "ROLL") == 0){
             (*U1).Curr = roll(*U1, T, (*U1).P);
             printf("%d\n",(*U1).Curr);
@@ -224,14 +224,7 @@ void startTurn(User *U1, User *U2, Tele T){
     //serta pemain akan mendapatkan 1 skill secara random.
 }
 
-void commandMAP(User *U1, User *U2){
-    printf("%s      : ", (*U1).Nama);
-    outputPlayerMap((*U1).P);
-    printf(" %d\n", Curr(*U1));
-    printf("%s      : ", (*U2).Nama);
-    outputPlayerMap((*U2).P);
-    printf(" %d\n", Curr(*U2));
-}
+
 void startRonde(int n, User *U1, User *U2, Tele T){
     int ronde;//not yet complete
     boolean endGame = false;
@@ -322,7 +315,6 @@ int main(){
     Logo();
     printf("\n");
     delay(250);
-    User U1, U2;
     Tele TP;
     int inputmenu;
     MainMenu(&inputmenu);

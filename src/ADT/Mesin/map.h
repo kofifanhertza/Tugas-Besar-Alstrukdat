@@ -37,7 +37,7 @@ typedef struct {
 	List ActiveSkill ;
 } User;
 
-//extern User U1, U2; //di-extern supaya bisa diakses di semua file yang include map.h
+extern User U1, U2; //di-extern supaya bisa diakses di semua file yang include map.h
 
 
 #define Curr(U) (U).Curr
@@ -52,8 +52,8 @@ void outputPlayerMap(Player P); /*mengeluarkan peta player*/
 Player copyPlayer(Player Pawal);
 Tele copyTele(Tele Tawal);
 void printConfig(Player *P, Tele *T);
-void commandMAP();
-void Inspect(Tele *T, Player P);
+void commandMAP(User *U1, User *U2);
+void Inspect(Tele T, Player P);
 int roll(User P, Tele T, Player U);
 /*
 char CheckPetak (Player P, IdxType i); // mengecheck kondisi suatu petak dalam peta
