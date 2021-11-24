@@ -99,9 +99,9 @@ void roll2(User *U, Tele T, Player P){
                             (*U).Curr = (*U).Curr+dice1;
                             printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr); 
                             i = search(T, *U);
-                            if ((*U).Curr != T.BeforeTele[i]){
+                            if (i==-1]){
                                 printf("%s tidak menemukan teleporter\n", (*U).Nama);}
-                            else if ((*U).Curr == T.BeforeTele[i]){
+                            else if (i!=-1){
                                 printf("%s menemukan teleporter\n", (*U).Nama);
                                 if (Search((*U).ActiveSkill, 1) != Nil){
                                     printf("%s memiliki imunitas teleport.\n", (*U).Nama);
