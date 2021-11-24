@@ -224,6 +224,7 @@ void printConfig(Player *P, Tele *T){
 
 void startTurn(User *U1, User *U2, Tele T){
     printf("Giliran %s Nih...\n", (*U1).Nama);
+    (*U1).ActiveSkill = EmptyBuff(*U1) ;
     (*U1).SkillList = SkillRandomizer(*U1) ;
     commandMAP(U1, U2);
     char input[10];
@@ -234,11 +235,11 @@ void startTurn(User *U1, User *U2, Tele T){
         scanf(" %s", input);
 
         if (strcmp(input, "SKILL") == 0) {
-            *U1 = SKILL(*U1);
+            *U1 = SKILL((*U1), &(*U2));
         } else if (strcmp(input, "MAP") == 0){
             commandMAP(U1, U2);
         } else if (strcmp(input, "BUFF") == 0){
-            PrintBuff((*U1).ActiveSkill);
+            PrintBuff((*U1).ActiveSkill, (*U1));
             printf("\n");
         } else if (strcmp(input, "INSPECT") == 0){
             Inspectt(T, (*U1).P) ;
