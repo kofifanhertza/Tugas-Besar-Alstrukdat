@@ -29,7 +29,7 @@ void roll2(User *U, Tele T, Player P){
                     if ((*U).Curr != T.BeforeTele[i]){
                         printf("%s tidak menemukan teleporter\n", (*U).Nama);}
                     else if ((*U).Curr == T.BeforeTele[i]){
-                        printf("%s menemukan teleporter", (*U).Nama);
+                        printf("%s menemukan teleporter\n", (*U).Nama);
                         if (Search((*U).ActiveSkill, 1) != Nil){
                             printf("%s memiliki imunitas teleport.\n", (*U).Nama);
                             printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
@@ -102,7 +102,7 @@ void roll2(User *U, Tele T, Player P){
                             if ((*U).Curr != T.BeforeTele[i]){
                                 printf("%s tidak menemukan teleporter\n", (*U).Nama);}
                             else if ((*U).Curr == T.BeforeTele[i]){
-                                printf("%s menemukan teleporter", (*U).Nama);
+                                printf("%s menemukan teleporter\n", (*U).Nama);
                                 if (Search((*U).ActiveSkill, 1) != Nil){
                                     printf("%s memiliki imunitas teleport.\n", (*U).Nama);
                                     printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
@@ -132,7 +132,7 @@ void roll2(User *U, Tele T, Player P){
                         if ((*U).Curr != T.BeforeTele[i]){
                             printf("%s tidak menemukan teleporter\n", (*U).Nama);}
                         else if ((*U).Curr == T.BeforeTele[i]){
-                            printf("%s menemukan teleporter", (*U).Nama);
+                            printf("%s menemukan teleporter\n", (*U).Nama);
                             if (Search((*U).ActiveSkill, 1) != Nil){
                                 printf("%s memiliki imunitas teleport.\n", (*U).Nama);
                                 printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
@@ -156,9 +156,9 @@ void roll2(User *U, Tele T, Player P){
 
     
          else if ((*U).Curr >= (*U).P.Length){
-                        printf("%s berada di petak %d",(*U).Nama,(*U).P.Length);
-                        printf("%s telah mencapai ujung",(*U).Nama);
-                        printf("Pemenang game ini adalah %s",(*U).Nama);
+                        printf("%s berada di petak %d\n",(*U).Nama,(*U).P.Length);
+                        printf("%s telah mencapai ujung\n",(*U).Nama);
+                        printf("Pemenang game ini adalah %s\n",(*U).Nama);
 }}
             
 }
