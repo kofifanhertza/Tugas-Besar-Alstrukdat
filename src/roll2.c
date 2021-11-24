@@ -47,110 +47,119 @@ void roll2(User *U, Tele T, Player P){
                                 printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
                                 // ChangeCurrPlace((*U), T.AfterTele[i]) ; 
                                 (*U).Curr = T.AfterTele[i] ; 
-                            }}
+                            }}}
                  else if (P.Map[(*U).Curr+dice1] =='#'){
                     printf ("%s tidak dapat bergerak.\n", (*U).Nama);
                 }
-            
-        } else  {
-            if ((P.Map[(*U).Curr+dice1] =='#') && (P.Map[(*U).Curr-dice1]=='#')){
-            printf ("%s tidak dapat bergerak.\n", (*U).Nama); }
-         else {
-            //dapat gereak ke dua petak
-            if ((P.Map[(*U).Curr+dice1]=='.') && (P.Map[(*U).Curr-dice1]=='.')){
-                printf ("%s dapat maju dan mundur.\n", (*U).Nama);
-                printf ("Ke mana %s mau bergerak : \n", (*U).Nama);
-                printf ("1. %d\n", (*U).Curr-dice1);
-                printf ("2. %d\n", (*U).Curr+dice1);
-                int opsi;
-                printf("Masukkan pilihan :\n");
-                scanf ("%d", &opsi);
-                if (opsi==1){
-                    printf ("%s mundur %d langkah.\n", (*U).Nama,dice1);
-                    (*U).Curr = (*U).Curr-dice1;}
-                else if (opsi ==2){
-                    printf ("%s maju %d langkah.\n", (*U).Nama,dice1);
-                    (*U).Curr = (*U).Curr+dice1;}
-                printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);}
-                i = search(T, *U);
-                if ((*U).Curr != T.BeforeTele[i]){
-                    printf("%s tidak menemukan teleporter.\n", (*U).Nama);}
-                // ketemu teleport
-                else if ((*U).Curr == T.BeforeTele[i]){
-                    printf("%s menemukan teleporter.\n", (*U).Nama);}
-                    if (Search((*U).ActiveSkill, 1) != Nil){
-                        printf("%s memiliki imunitas teleport.\n", (*U).Nama);
-                        printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
-                        char pilihan;
-                        scanf ("%c", &pilihan);
-                        if (pilihan=='N'){
-                            printf("%s tidak teleport.\n", (*U).Nama);
-                            printf("Buff imunitas teleport hilang.\n");}
-                        else{
-                            if (pilihan=='Y'){
+            }
+            else {
+                if ((P.Map[(*U).Curr+dice1] =='#') && (P.Map[(*U).Curr-dice1]=='#')){
+                    printf ("%s tidak dapat bergerak.\n", (*U).Nama); }
+                
+                else if ((P.Map[(*U).Curr+dice1]=='.') && (P.Map[(*U).Curr-dice1]=='.')){
+                        printf ("%s dapat maju dan mundur.\n", (*U).Nama);
+                        printf ("Ke mana %s mau bergerak : \n", (*U).Nama);
+                        printf ("1. %d\n", (*U).Curr-dice1);
+                        printf ("2. %d\n", (*U).Curr+dice1);
+                        int opsi;
+                        printf("Masukkan pilihan :\n");
+                        scanf ("%d", &opsi);
+                        if (opsi==1){
+                            printf ("%s mundur %d langkah.\n", (*U).Nama,dice1);
+                            (*U).Curr = (*U).Curr-dice1;}
+                        else if (opsi ==2){
+                            printf ("%s maju %d langkah.\n", (*U).Nama,dice1);
+                            (*U).Curr = (*U).Curr+dice1;}
+                        printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
+                        i = search(T, *U);
+                        if ((*U).Curr != T.BeforeTele[i]){
+                            printf("%s tidak menemukan teleporter\n", (*U).Nama);}
+                        else if ((*U).Curr == T.BeforeTele[i]){
+                            printf("%s menemukan teleporter\n", (*U).Nama);
+                            if (Search((*U).ActiveSkill, 1) != Nil){
+                                printf("%s memiliki imunitas teleport.\n", (*U).Nama);
+                                printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
+                                char pilihan;
+                                scanf ("%c", &pilihan);
+                                if (pilihan=='N'){
+                                    printf("%s tidak teleport.\n", (*U).Nama);
+                                    printf("Buff imunitas teleport hilang.\n");}
+                                else if (pilihan=='Y'){
+                                        printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
+                                        (*U).Curr = T.AfterTele[i] ; }}
+                            else if (Search((*U).ActiveSkill, 1) == Nil){
+                                printf("%s tidak memiliki imunitas teleport.\n", (*U).Nama);
                                 printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
-                                (*U).Curr = T.AfterTele[i] ; }}}
-                    else if (Search((*U).ActiveSkill, 1) == Nil){
-                    printf("%s tidak memiliki imunitas teleport.\n", (*U).Nama);
-                    printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);  
-                    (*U).Curr = T.AfterTele[i] ; 
-                        }
-          else if ((P.Map[(*U).Curr+dice1]=='.') && (P.Map[(*U).Curr-dice1]=='#')) {
-                    printf ("%s dapat maju.\n", (*U).Nama);
-                    printf ("%s maju %d langkah.\n", (*U).Nama,dice1);
-                    (*U).Curr = (*U).Curr+dice1;
-                    printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
-                    i = search(T, *U); 
-                    if ((*U).Curr != T.BeforeTele[i]){
-                        printf("%s tidak menemukan teleporter", (*U).Nama);}
-                    else if ((*U).Curr == T.BeforeTele[i]){
-                        printf("%s menemukan teleporter", (*U).Nama);}
-                        if (Search((*U).ActiveSkill, 1) != Nil){
-                            printf("%s memiliki imunitas teleport.\n", (*U).Nama);
-                            printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
-                            char pilihan;
-                            scanf ("%c", &pilihan);
-                            if (pilihan=='N'){
-                                printf("%s tidak teleport.\n", (*U).Nama);
-                                printf("Buff imunitas teleport hilang.\n");}
-                            else{
-                                if (pilihan=='Y'){
-                                    printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
-                                    (*U).Curr = T.AfterTele[i] ; }}}
-                        else if (Search((*U).ActiveSkill, 1) == Nil){
-                        printf("%s tidak memiliki imunitas teleport.\n", (*U).Nama);
-                        printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]); 
-                        (*U).Curr = T.AfterTele[i] ; 
-                            }}
-                //dapat bergerak ke satu petak (mundur)  
+                                // ChangeCurrPlace((*U), T.AfterTele[i]) ; 
+                                (*U).Curr = T.AfterTele[i] ; 
+                            }}}
+                    else if ((P.Map[(*U).Curr+dice1]=='.') && (P.Map[(*U).Curr-dice1]=='#')) {
+                            printf ("%s dapat maju.\n", (*U).Nama);
+                            printf ("%s maju %d langkah.\n", (*U).Nama,dice1);
+                            (*U).Curr = (*U).Curr+dice1;
+                            printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr); 
+                            i = search(T, *U);
+                            if ((*U).Curr != T.BeforeTele[i]){
+                                printf("%s tidak menemukan teleporter\n", (*U).Nama);}
+                            else if ((*U).Curr == T.BeforeTele[i]){
+                                printf("%s menemukan teleporter", (*U).Nama);
+                                if (Search((*U).ActiveSkill, 1) != Nil){
+                                    printf("%s memiliki imunitas teleport.\n", (*U).Nama);
+                                    printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
+                                    char pilihan;
+                                    scanf ("%c", &pilihan);
+                                    if (pilihan=='N'){
+                                        printf("%s tidak teleport.\n", (*U).Nama);
+                                        printf("Buff imunitas teleport hilang.\n");}
+                                    else{
+                                        if (pilihan=='Y'){
+                                            printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
+                                            (*U).Curr = T.AfterTele[i] ; }}}
+                                else if (Search((*U).ActiveSkill, 1) == Nil){
+                                        printf("%s tidak memiliki imunitas teleport.\n", (*U).Nama);
+                                        printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
+                                        // ChangeCurrPlace((*U), T.AfterTele[i]) ; 
+                                        (*U).Curr = T.AfterTele[i] ; 
+                            }}}
+                        //dapat bergerak ke satu petak (mundur)  
 
-                else if ((P.Map[(*U).Curr+dice1]=='#') && (P.Map[(*U).Curr-dice1]=='.')){
-                    printf ("%s dapat mundur\n", (*U).Nama);
-                    printf ("%s mundur %d langkah\n",(*U).Nama,dice1);
-                    (*U).Curr = (*U).Curr-dice1;
-                    printf ("%s berada di petak %d\n", (*U).Nama,(*U).Curr);
-                    if (P.Map[(*U).Curr] != T.BeforeTele[i]){
-                        printf("%s tidak menemukan teleporter", (*U).Nama);}
-                    else if (P.Map[(*U).Curr] == T.BeforeTele[i]){
-                        printf("%s menemukan teleporter", (*U).Nama);}
-                        if (Search((*U).ActiveSkill, 1) != Nil){
-                            printf("%s memiliki imunitas teleport.\n", (*U).Nama);
-                            printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
-                            char pilihan;
-                            scanf ("%c", &pilihan);
-                            if (pilihan=='N'){
-                                printf("%s tidak teleport.\n", (*U).Nama);
-                                printf("Buff imunitas teleport hilang.\n");}
-                            else{
-                                if (pilihan=='Y'){
+                    else if ((P.Map[(*U).Curr+dice1]=='#') && (P.Map[(*U).Curr-dice1]=='.')){
+                        printf ("%s dapat mundur\n", (*U).Nama);
+                        printf ("%s mundur %d langkah\n",(*U).Nama,dice1);
+                        (*U).Curr = (*U).Curr-dice1;
+                        printf ("%s berada di petak %d\n", (*U).Nama,(*U).Curr);
+                        i = search(T, *U);
+                        if ((*U).Curr != T.BeforeTele[i]){
+                            printf("%s tidak menemukan teleporter\n", (*U).Nama);}
+                        else if ((*U).Curr == T.BeforeTele[i]){
+                            printf("%s menemukan teleporter", (*U).Nama);
+                            if (Search((*U).ActiveSkill, 1) != Nil){
+                                printf("%s memiliki imunitas teleport.\n", (*U).Nama);
+                                printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
+                                char pilihan;
+                                scanf ("%c", &pilihan);
+                                if (pilihan=='N'){
+                                    printf("%s tidak teleport.\n", (*U).Nama);
+                                    printf("Buff imunitas teleport hilang.\n");}
+                                else{
+                                    if (pilihan=='Y'){
+                                        printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
+                                        (*U).Curr = T.AfterTele[i] ; }}}
+                            else if (Search((*U).ActiveSkill, 1) == Nil){
+                                    printf("%s tidak memiliki imunitas teleport.\n", (*U).Nama);
                                     printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
-                                    (*U).Curr = T.AfterTele[i] ; }}}
-                        else{
-                        printf("%s tidak memiliki imunitas teleport.\n", (*U).Nama);
-                        printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
-                        (*U).Curr = T.AfterTele[i] ;   
-                                }}
-    }
-         
-}
+                                    // ChangeCurrPlace((*U), T.AfterTele[i]) ; 
+                                    (*U).Curr = T.AfterTele[i] ; 
+                            }}}
+                    
+            
+
+    
+         else if ((*U).Curr >= (*U).P.Length){
+                        printf("%s berada di petak %d",(*U).Nama,(*U).P.Length);
+                        printf("%s telah mencapai ujung",(*U).Nama);
+                        printf("Pemenang game ini adalah %s",(*U).Nama);
 }}
+            
+}
+ 
