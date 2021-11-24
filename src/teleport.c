@@ -10,11 +10,11 @@ int searchTele (Tele T,User P){
     if (T.BeforeTele[i] == P.Curr){
         return i;}
     else {
-        return -1;}}
+        return Nil;}}
 
 int teleport (Tele T, User P){
     int a = searchTele(T, P);
-    if (a!=-1){
+    if (a!=Nil){
         P.Curr = T.AfterTele[a];}
     return P.Curr;}
 
