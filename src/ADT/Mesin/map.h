@@ -42,8 +42,9 @@ extern User U1, U2; //di-extern supaya bisa diakses di semua file yang include m
 
 #define Curr(U) (U).Curr
 #define Nama(U) (U).Nama
-#define Map(U) (U).P.Map
+// #define Map(U) (U).P.Map
 #define Length(U) (U).P.Length
+#define Map(P) (P).Map
 
 
 
@@ -54,7 +55,6 @@ Tele copyTele(Tele Tawal);
 void printConfig(Player *P, Tele *T);
 void commandMAP(User *U1, User *U2);
 void Inspect(Tele T, Player P);
-int roll(User P, Tele T, Player U);
 void roll2(User *U, Tele T, Player P);
 Player UpdateCurrPos(User U);
 /*
@@ -62,8 +62,8 @@ char CheckPetak (Player P, IdxType i); // mengecheck kondisi suatu petak dalam p
 int GetCurrPlace (Player P); //mengeluarkan indeks lokasi Player berada
 void ChangeCurrPlace(Player P, IdxType idxAfter); //memindahkan posisi player
 */
-int search (Tele T,User P);
-int teleport (Tele T, User P);
+int search (Tele T,User *U);
+
 
 
 #endif

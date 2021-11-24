@@ -11,7 +11,7 @@ void outputPlayerMap(Player P) {
     // untuk membaca map
     int i;
     for(i=IdxMin;i<=P.Length;i++) {
-        printf("%c", P.Map[i]);
+        printf("%c", Map(P)[i] );
     }
 }
 
@@ -87,18 +87,14 @@ void commandMAP(User *U1, User *U2){
     printf(" %d\n", Curr(*U2));
 }
 //////////////////////////////////////////////////////////
-int search (Tele T,User P){
+int search (Tele T,User *U){
     int i=0;
-    while (T.BeforeTele[i] != P.Curr){
+    while (T.BeforeTele[i] != (*U).Curr){
         i = i + 1;}
-    if (T.BeforeTele[i] == P.Curr){
+    if (T.BeforeTele[i] == (*U).Curr && T.AfterTele[i] > 0 && T.AfterTele[i] <= (*U).P.Length){
         return i;}
-    else {
+    else if (T.AfterTele[i] <= 0 || T.AfterTele[i] > (*U).P.Length ){
         return -1;}}
 
-int teleport (Tele T, User P){
-    int a = search(T, P);
-    if (a!=-1){
-        P.Curr = T.AfterTele[a];}
-    return P.Curr;}
+
 

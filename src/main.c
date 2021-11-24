@@ -251,7 +251,6 @@ void startTurn(User *U1, User *U2, Tele T){
             printf("%d\n",(*U1).Curr);
             (*U1).P = UpdateCurrPos(*U1);
             commandMAP(U1, U2);
-            printf("INI AKU NGEPRINT COK");
         } else if (strcmp(input, "SAVE") == 0){
             //bismillah
         } else if (strcmp(input, "UNDO") == 0){
@@ -276,33 +275,30 @@ void startTurn(User *U1, User *U2, Tele T){
 void startRonde(int n, User *U1, User *U2, Tele T){
     int ronde;//not yet complete
     boolean endGame = false;
-    while (!endGame){
-        printf("Teng teng... Ronde ke-%d dimulaii \n",n);
-        startTurn(U1,U2,T);
-        if (endGame){
-            break;
-        }
-        startTurn(U2,U1,T);
-    }
+   
+    printf("Teng teng... Ronde ke-%d dimulaii \n",n);
+    startTurn(U1,U2,T);
+    startTurn(U2,U1,T);
+    
 }
 boolean isWExist(User U1, User U2) {
     // Permainan akan berakhir jika sudah ada satu pemain yang mencapai petak N.
     return (Curr(U1) >= U1.P.Length || Curr(U2) >= U2.P.Length);
 }
 void permainanBerlangsung(int n, User U1, User U2, Tele T){
-    char lanjut;
-    printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik 'Y' untuk 'Ya,' dan 'N' untuk 'Tidak': ");scanf("%c", lanjut);
-    if (lanjut == 'N') {
+    int lanjut;
+    printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik 'Y' untuk 'Ya,' dan 'N' untuk 'Tidak': ");scanf("%d", &lanjut);
+    if (lanjut == 0) {
         endGame = true;
-        //COMMAND EXIT
+        exit(0) ;
     }
     else {
-    while (isWExist(U1,U2) != true && endGame != true && lanjut != 'N') {
-        printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik 'Y' untuk 'Ya,' dan 'N' untuk 'Tidak': ");scanf("%c", lanjut); 
-        if (lanjut == 'Y') {
+    while (!isWExist(U1,U2) && !endGame  && lanjut != 0) {
+        printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik 'Y' untuk 'Ya,' dan 'N' untuk 'Tidak': ");scanf("%d", &lanjut); 
+        if (lanjut == 1) {
                 startRonde(n, &U1, &U2, T); 
                 n++;
-        } else if (lanjut == 'N') {
+        } else if (lanjut == 0) {
             endGame == true;
         } else {
             printf("\nMasukkan salah. Ulangi lagi\n");
