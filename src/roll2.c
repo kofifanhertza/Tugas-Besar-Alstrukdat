@@ -34,7 +34,7 @@ void roll2(User *U, Tele T, Player P){
                             printf("%s memiliki imunitas teleport.\n", (*U).Nama);
                             printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
                             char pilihan;
-                            scanf ("%c", &pilihan);
+                            scanf ("%c", pilihan);
                             if (pilihan=='N'){
                                 printf("%s tidak teleport.\n", (*U).Nama);
                                 printf("Buff imunitas teleport hilang.\n");}
@@ -80,7 +80,7 @@ void roll2(User *U, Tele T, Player P){
                                 printf("%s memiliki imunitas teleport.\n", (*U).Nama);
                                 printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
                                 char pilihan;
-                                scanf ("%c", &pilihan);
+                                scanf ("%c", pilihan);
                                 if (pilihan=='N'){
                                     printf("%s tidak teleport.\n", (*U).Nama);
                                     printf("Buff imunitas teleport hilang.\n");}
@@ -99,7 +99,7 @@ void roll2(User *U, Tele T, Player P){
                             (*U).Curr = (*U).Curr+dice1;
                             printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr); 
                             i = search(T, *U);
-                            if (i==-1]){
+                            if (i==-1){
                                 printf("%s tidak menemukan teleporter\n", (*U).Nama);}
                             else if (i!=-1){
                                 printf("%s menemukan teleporter\n", (*U).Nama);
@@ -107,7 +107,7 @@ void roll2(User *U, Tele T, Player P){
                                     printf("%s memiliki imunitas teleport.\n", (*U).Nama);
                                     printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
                                     char pilihan;
-                                    scanf ("%c", &pilihan);
+                                    scanf ("%c", pilihan);
                                     if (pilihan=='N'){
                                         printf("%s tidak teleport.\n", (*U).Nama);
                                         printf("Buff imunitas teleport hilang.\n");}
@@ -137,7 +137,7 @@ void roll2(User *U, Tele T, Player P){
                                 printf("%s memiliki imunitas teleport.\n", (*U).Nama);
                                 printf("Apakah %s ingin teleport (Y/N) ?\n", (*U).Nama);
                                 char pilihan;
-                                scanf ("%c", &pilihan);
+                                scanf ("%c", pilihan);
                                 if (pilihan=='N'){
                                     printf("%s tidak teleport.\n", (*U).Nama);
                                     printf("Buff imunitas teleport hilang.\n");}

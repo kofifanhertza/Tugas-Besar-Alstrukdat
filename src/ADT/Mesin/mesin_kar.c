@@ -10,8 +10,8 @@ boolean EndKata;
 static FILE * pita;
 static int retval;
 
-void START() {
-    pita = fopen("config.txt", "r");
+void START(char fileconfig[]) {
+    pita = fopen(fileconfig, "r");
     EOP = false;
     ADV();
 }
