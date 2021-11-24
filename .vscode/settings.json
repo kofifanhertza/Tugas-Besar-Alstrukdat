@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "listlinier.h": "c",
-        "listskill.h": "c"
-    }
+        "listskill.h": "c",
+        "mesin_konf.h": "c",
+        "user.h": "c",
+        "map.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
