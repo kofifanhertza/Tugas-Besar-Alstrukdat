@@ -4,11 +4,11 @@
 #include"time.h"
 
 
-int Randomizer () {
+int Randomizer (User U) {
     int skill, x;
-    x = rand() % 100 + 1;
-    x = rand() % 100 + 1;
-    printf("%d\n", x) ;
+    srand(time(NULL)) ;
+    x = rand() % 50 + 1;
+    x = rand() % 50 + 1;
 
     if (x > 0 && x <= 10) {
         skill = 1 ; /* Pintu Ga Ke Mana Mana */ 
@@ -40,18 +40,18 @@ int Randomizer () {
     }
 
     if (skill == 0 ) {
-        printf("Anda tidak mendapatkan skill\n") ;
+        printf("%s tidak mendapatkan skill\n", U.Nama) ;
     } else {
         if (skill == 1) {
-            printf ("Anda menemukan skill Pintu Ga Ke Mana Mana\n") ;
+            printf ("%s menemukan skill Pintu Ga Ke Mana Mana\n", U.Nama) ;
         } else if (skill == 2) {
-            printf ("Anda menemukan skill Cermin Pengganda\n") ;
+            printf ("%s menemukan skill Cermin Pengganda\n", U.Nama) ;
         } else if(skill == 3) {
-            printf ("Anda menemukan skill Senter Pembesar Hoki\n") ;
+            printf ("%s menemukan skill Senter Pembesar Hoki\n", U.Nama) ;
         } else if (skill == 4) {
-            printf("Anda menemukan skill Senter Pengecil Hoki\n") ;
+            printf("%s menemukan skill Senter Pengecil Hoki\n", U.Nama) ;
         } else if (skill == 5) {
-            printf("Anda menemukan skill Mesin Penukar Posisi\n") ;
+            printf("%s menemukan skill Mesin Penukar Posisi\n", U.Nama) ;
         } 
     }
             
@@ -59,7 +59,7 @@ return skill ;
 }
 
 
-int UseIdxSkill (List *L,  int idx) {
+int UseIdxSkill (List *L,  int idx, User U) {
     int skill, i = 1 ;
     address addrSkill = First(*L) ;
 
@@ -70,26 +70,26 @@ int UseIdxSkill (List *L,  int idx) {
     skill = Info(addrSkill) ;
 
     if (skill == 1) {
-        printf("Skill Pintu Ga Ke Mana Mana berhasil digunakan!\n") ;
+        printf("%s berhasil digunakan Skill Pintu Ga Ke Mana Mana !\n", U.Nama) ;
     }
     else if (skill == 2) {
         
     }
     else if (skill == 3) {
-        printf("Skill Senter Pembesar Hoki berhasil digunakan!\n") ;
+        printf("%s berhasil digunakan Skill Senter Pembesar Hoki !\n", U.Nama) ;
     }
     else if (skill == 4) {
-        printf("Skill Senter Pengecil Hoki berhasil digunakan!\n") ;
+        printf("%s berhasil digunakan Skill Senter Pengecil Hoki !\n", U.Nama) ;
     }
     else if (skill == 5) {
-        printf("Skill Mesin Penukar Posisi berhasil digunakan!\n") ;
+        
     }
 
     return skill ;
     
 }
 
-int DelIdxSkill (List *L,  int idx) {
+int DelIdxSkill (List *L,  int idx, User U) {
     int skill, i = 1 ;
     address addrSkill = First(*L) ;
 
@@ -100,20 +100,20 @@ int DelIdxSkill (List *L,  int idx) {
     skill = Info(addrSkill) ;
 
     if (skill == 1) {
-        printf("Skill Pintu Ga Ke Mana Mana berhasil dihapus!\n") ;
+        printf("%s berhasil membuang Skill Pintu Ga Ke Mana Mana !\n", U.Nama) ;
     }
     else if (skill == 2) {
-        printf("Skill Cermin Pengganda berhasil dihapus!\n") ;
+        printf("%s berhasil membuang Skill Cermin Pengganda !\n", U.Nama) ;
 
     }
     else if (skill == 3) {
-        printf("Skill Senter Pembesar Hoki berhasil dihapus!\n") ;
+        printf("%s berhasil membuang Skill Senter Pembesar Hoki !\n", U.Nama) ;
     }
     else if (skill == 4) {
-        printf("Skill Senter Pengecil Hoki berhasil dihapus!\n") ;
+        printf("%s berhasil membuang Skill Senter Pengecil Hoki !\n", U.Nama) ;
     }
     else if (skill == 5) {
-        printf("Skill Mesin Penukar Posisi berhasil dihapus!\n") ;
+        printf("%s berhasil membuang Skill Mesin Penukar Posisi !\n", U.Nama) ;
     }
 
     return skill ;
@@ -163,14 +163,14 @@ int PrintSkill (List L) {
         
 }
 
-int PrintBuff (List L) {
+int PrintBuff (List L, User U) {
     if (IsEmpty(L)) {
-        printf("Anda tidak memiliki buff") ;
+        printf("%s tidak memiliki buff", U.Nama) ;
         return 0 ;
     }
     int i = 1 ;
     address q = First(L) ;
-    printf("Anda memiliki buff :\n") ;
+    printf("%s memiliki buff :\n", U.Nama) ;
     while (q != Nil) {   
         if (Info(q) == 1) {
             printf("%d. Imunitas Teleport\n", i) ;    
@@ -196,11 +196,11 @@ int PrintBuff (List L) {
 int CommandSkill (User U) {
     int x, UsedSkill = 0 ;
     if (IsEmpty(U.SkillList)) {
-        printf("Anda tidak memiliki skill\n") ;
+        printf("%s tidak memiliki skill\n", U.Nama) ;
         return 0 ;
     }
     
-    printf("Kamu memiliki Skill :\n") ;
+    printf("%s memiliki Skill :\n", U.Nama) ;
     PrintSkill(U.SkillList) ;
     
     printf("\nTekan 0 untuk keluar\n\n") ;
@@ -212,7 +212,7 @@ int CommandSkill (User U) {
 
 List UseSkill (User U, int x) {
     int UsedSkill ;
-    UsedSkill = UseIdxSkill(&U.SkillList, x) ;
+    UsedSkill = UseIdxSkill(&U.SkillList, x, U) ;
     InsVLast(&U.ActiveSkill, UsedSkill) ;   
     return U.ActiveSkill ;
 
@@ -227,34 +227,32 @@ List DelSkill (User U, int x) {
 } 
 
 List SkillRandomizer (User U) {
-    int skill,random  ;
+    int skill  ;
     if (NbElmt(U.SkillList) < 10) {
-        skill = Randomizer(random) ;
+        skill = Randomizer(U) ;
     }
     
 
     if (skill != 0) {
         if (NbElmt(U.SkillList) >= 10) {
-            skill = Randomizer(random) ;
+            skill = Randomizer(U) ;
             if (skill != 0) {
                 printf("Inventory skill anda sudah penuh!\n") ;
-                printf("Apakah anda ingin membuang skill? [1/0]\n") ;
-                printf("Tekan 0 apabila tidak ingin membuang skill\n") ;
-
+                printf("Apakah anda ingin membuang skill? [Y/N]\n") ;
                 char option ;
-                scanf("%d", &option) ;
-                if (option == 1) {
+                scanf("%c", option) ;
+                if (option == 'Y') {
                     
                     PrintSkill(U.SkillList) ;
                     printf("Masukkan Skill yang akan dihapus : ") ;
                     int deleted ;
                     scanf("%d", &deleted) ;
-                    DelIdxSkill (&U.SkillList, deleted) ;
+                    DelIdxSkill (&U.SkillList, deleted, U) ;
                     U.SkillList = DelSkill(U, deleted) ;
                     InsVLast(&U.SkillList, skill) ; 
                     return U.SkillList ;
                 }
-                else if (option == 0) {
+                else if (option == 'N') {
                     return U.SkillList ;
                 }
             }
@@ -268,7 +266,15 @@ List SkillRandomizer (User U) {
     return U.SkillList ;   
 }
 
-User SKILL (User U) {
+List EmptyBuff (User U) {
+    address deleted ;
+    while (!IsEmpty(U.ActiveSkill)) {
+        DelFirst(&U.ActiveSkill, &deleted) ;
+    }
+    return U.ActiveSkill ;
+}
+
+User SKILL (User U, User *U2) {
 int inputCommand = CommandSkill(U) ;
            if (inputCommand != 0) {
                 if (inputCommand > 0) {
@@ -284,7 +290,7 @@ int inputCommand = CommandSkill(U) ;
                                 printf("Cermin Pengganda Gagal Digunakan\n") ;
                                 use = false ;
                             } else {
-                                printf("Skill Cermin Pengganda berhasil digunakan!\n") ;
+                                printf("%s berhasil digunakan Skill Cermin Pengganda !\n", U.Nama) ;
                                 U.SkillList = SkillRandomizer(U) ;
                                 U.SkillList = SkillRandomizer(U) ;
                                 use = true ;
@@ -300,6 +306,15 @@ int inputCommand = CommandSkill(U) ;
                                 printf("Gagal menggunakan skill, Skill Pembesar dan pengecil tidak bisa digunakan bersamaan!\n") ;
                                 use = false ;
                             } 
+                        } else if (IdxSkill(&U.SkillList, inputCommand) == 5) {
+                            int tempCurr ; 
+                            tempCurr = U.Curr ;
+                            U.Curr = (*U2).Curr ;
+                            (*U2).Curr = tempCurr ;
+                            printf("%s berhasil digunakan Skill Mesin Penukar Posisi !\n", U.Nama) ;
+                            printf("Posisi %s dan %s berhasil ditukar !\n", U.Nama, (*U2).Nama) ;
+                            use = true ;
+
                         }
 
                         if (use == true) {
@@ -312,7 +327,7 @@ int inputCommand = CommandSkill(U) ;
                     
                } else if (inputCommand < 0) {
                     inputCommand = inputCommand * -1 ;
-                    DelIdxSkill (&U.SkillList, inputCommand) ;
+                    DelIdxSkill (&U.SkillList, inputCommand, U) ;
                     U.SkillList = DelSkill(U, inputCommand) ;
                }
            }
