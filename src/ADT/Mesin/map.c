@@ -21,14 +21,15 @@ int GetCurrPlace (User U) {
     return U.Curr;
 }
 
-
-User ChangeCurrPlace(User U, IdxType idxAfter) {
-    int temp;
-    temp = U.Curr;
-    U.Curr = idxAfter;
-    U.P.Map[temp] = '.';
-    U.P.Map[idxAfter] = '*';
-    return U;
+Player UpdateCurrPos(User U) {
+    int i;
+    for(i=IdxMin;i<=(U).P.Length;i++){
+        if ((U).P.Map[i] == '*') {
+            (U).P.Map[i] = '.';
+        }
+    }
+    (U).P.Map[(U).Curr] = '*';
+    return U.P;
 }
 
 Player copyPlayer(Player Pawal) {

@@ -249,6 +249,8 @@ void startTurn(User *U1, User *U2, Tele T){
         } else if (strcmp(input, "ROLL") == 0){
             roll2(&(*U1), T, (*U1).P);
             printf("%d\n",(*U1).Curr);
+            (*U1).P = UpdateCurrPos(*U1);
+            commandMAP(U1, U2);
             printf("INI AKU NGEPRINT COK");
         } else if (strcmp(input, "SAVE") == 0){
             //bismillah
@@ -285,7 +287,7 @@ void startRonde(int n, User *U1, User *U2, Tele T){
 }
 boolean isWExist(User U1, User U2) {
     // Permainan akan berakhir jika sudah ada satu pemain yang mencapai petak N.
-    return (Curr(U1) == U1.P.Length || Curr(U2) == U2.P.Length);
+    return (Curr(U1) >= U1.P.Length || Curr(U2) >= U2.P.Length);
 }
 void permainanBerlangsung(int n, User U1, User U2, Tele T){
     char lanjut;
