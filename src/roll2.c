@@ -25,7 +25,7 @@ void roll2(User *U, Tele T, Player P){
                     printf ("%s maju %d langkah.\n", (*U).Nama,dice1);
                     (*U).Curr = (*U).Curr+dice1;
                     printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
-                    i = searchTele(T.BeforeTele, *U);
+                    i = searchTele(T, *U);
                     if ((*U).Curr != T.BeforeTele[i]){
                         printf("%s tidak menemukan teleporter\n", (*U).Nama);}
                     else if ((*U).Curr == T.BeforeTele[i]){
@@ -71,7 +71,7 @@ void roll2(User *U, Tele T, Player P){
                             printf ("%s maju %d langkah.\n", (*U).Nama,dice1);
                             (*U).Curr = (*U).Curr+dice1;}
                         printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
-                        i = searchTele(T.BeforeTele, *U);
+                        i = searchTele(T, *U);
                         if ((*U).Curr != T.BeforeTele[i]){
                             printf("%s tidak menemukan teleporter\n", (*U).Nama);}
                         else if ((*U).Curr == T.BeforeTele[i]){
@@ -98,7 +98,7 @@ void roll2(User *U, Tele T, Player P){
                             printf ("%s maju %d langkah.\n", (*U).Nama,dice1);
                             (*U).Curr = (*U).Curr+dice1;
                             printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr); 
-                            i = searchTele(T.BeforeTele, *U);
+                            i = searchTele(T, *U);
                             if ((*U).Curr != T.BeforeTele[i]){
                                 printf("%s tidak menemukan teleporter\n", (*U).Nama);}
                             else if ((*U).Curr == T.BeforeTele[i]){
@@ -128,7 +128,7 @@ void roll2(User *U, Tele T, Player P){
                         printf ("%s mundur %d langkah\n",(*U).Nama,dice1);
                         (*U).Curr = (*U).Curr-dice1;
                         printf ("%s berada di petak %d\n", (*U).Nama,(*U).Curr);
-                        i = searchTele(T.BeforeTele, *U);
+                        i = searchTele(T, *U);
                         if ((*U).Curr != T.BeforeTele[i]){
                             printf("%s tidak menemukan teleporter\n", (*U).Nama);}
                         else if ((*U).Curr == T.BeforeTele[i]){
