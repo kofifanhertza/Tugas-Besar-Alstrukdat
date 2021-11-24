@@ -92,7 +92,6 @@ void loading(int n){
     printf("]\n");
 
 }
-  
 
 void Logo(){
     puts("");
@@ -121,10 +120,6 @@ void Logo(){
 }
 
 void MainMenu(int *inputmenu){
-    printf("MAIN MENU:\n");
-    printf("     1. NEW GAME\n");
-    printf("     2. EXIT\n");
-    printf("     3. LOAD GAME\n");
     printf("Masukkan command :\n>");
     printf("\x1b[1m"); //bold
     InputAngka(inputmenu);
