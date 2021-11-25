@@ -149,7 +149,7 @@ void startTurn(User *U1, User *U2, Tele *T){
         scanf(" %s", input);
 
         if (strcmp(input, "SKILL") == 0) {
-            *U1 = SKILL((*U1), &(*U2));
+            *U1 = SKILL((*U1), &(*U2),(*U1).P, *T);
         } else if (strcmp(input, "MAP") == 0){
             commandMAP(U1, U2);
         } else if (strcmp(input, "BUFF") == 0){
