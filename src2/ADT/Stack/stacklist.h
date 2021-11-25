@@ -22,31 +22,31 @@ typedef struct {
 } Stack;*/
 
 typedef struct {
-  User P1; /* tabel penyimpan elemen */
-  User P2;
+  User Player[2]; /* tabel penyimpan elemen */
+  int rondeKe;
   /* alamat TOP: elemen puncak */
-} Round;
-
-typedef Round infotypeR;
+} roundInfo;
 
 typedef struct tElmtStack * addressR;
 typedef struct tElmtStack { 
-  infotypeR Info;
+  roundInfo Info;
   addressR Next;
-} ElmtStack; 
+} ElmtRound; 
 
 typedef struct {
   addressR TOP;
-} RoundStack;
-extern RoundStack Game;
+} Round;
+
 /* Selektor */
+#define CurrRonde(S) (S).TOP->Info //Element roundInfo
 #define TopR(S) (S).TOP
 #define InfoTopR(S) (S).TOP->Info 
 #define NextR(P) (P)->Next
 #define InfoR(P) (P)->Info
 
+
 /* Prototype manajemen memori */
-void AlokasiR (addressR *P, infotypeR X);
+void AlokasiR (addressR *P, roundInfo X);
 /* I.S. Sembarang */
 /* F.S. Alamat P dialokasi, jika berhasil maka Info(P)=X dan 
         Next(P)=Nil */
@@ -56,25 +56,25 @@ void DealokasiR (addressR P);
 /* F.S. Alamat P didealokasi, dikembalikan ke sistem */ 
 
 /* ********* PROTOTYPE REPRESENTASI LOJIK STACK ***************/
-boolean IsRSEmpty (RoundStack S);
+boolean IsRSEmpty (Round S);
 /* Mengirim true jika Stack kosong: TOP(S) = Nil */
-void CreateEmptyRS (RoundStack * S);
+void CreateEmptyRS (Round * S);
 /* I.S. sembarang */ 
 /* F.S. Membuat sebuah stack S yang kosong */
-void PushR(RoundStack * S, infotypeR *X);
+void PushR(Round * S, roundInfo X);
 /* Menambahkan X sebagai elemen Stack S */
 /* I.S. S mungkin kosong, X terdefinisi */
 /* F.S. X menjadi TOP yang baru jika alokasi X berhasil, */
 /*      jika tidak, S tetap */
 /* Pada dasarnya adalah operasi Insert First pada list linier */
-void PopR(RoundStack * S, infotypeR * X);
+void PopR(Round * S, roundInfo * X);
 /* Menghapus X dari Stack S. */
 /* I.S. S tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, */
 /*      elemen TOP yang lama didealokasi */
 /* Pada dasarnya adalah operasi Delete First pada list linier */
 
-void CreateEmptyRound (Round *R);
+//void CreateEmptyRound (Round *R);
 /* I.S. sembarang; */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
 /* jadi indeksnya antara 1.. MaxEl+1 karena 0 tidak dipakai */
@@ -97,6 +97,6 @@ User AddU (User *U, User *U1);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
-void saveRound(User *U1, User *U2, Round *R, RoundStack *Game);
+//void saveRound(User *U1, User *U2, Round *R, Round *Game);
 
 #endif

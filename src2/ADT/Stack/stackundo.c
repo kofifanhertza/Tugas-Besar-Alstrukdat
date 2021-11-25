@@ -6,7 +6,7 @@
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
-
+/*
 void CreateEmptyRound (Round *R) {
     (*R).P1.Curr = 0;
     (*R).P2.Curr = 0;
@@ -19,14 +19,17 @@ User AddU (User *U, User *U1) {
     strcpy((*U).Nama, (*U1).Nama);
     return (*U);
 }
-
+*/
 /* ************ Menghapus sebuah elemen Stack ************ */
 /*void RemoveU (Stack * S, User P2) {
     (*P2) = (*S).T[(*S).TOP-1];
     (*S).TOP--;
-}*/
+}
 void saveRound(User *U1, User *U2, Round *R, RoundStack *Game) {
+    printf("ini adalah metode save:\n");
+
     (*R).P1 = *U1 ;
     (*R).P2 = *U2 ;
     PushR(Game, R) ;
 }
+*/

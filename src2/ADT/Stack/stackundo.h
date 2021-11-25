@@ -38,7 +38,7 @@
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
 
-void CreateEmptyRound (Round *R);
+//void CreateEmptyRound (Rounds *R);
 /* I.S. sembarang; */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
 /* jadi indeksnya antara 1.. MaxEl+1 karena 0 tidak dipakai */
@@ -51,7 +51,7 @@ void CreateEmptyRound (Round *R);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-User AddU (User *U, User *U1);
+//User AddU (User *U, User *U1);
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
@@ -61,6 +61,6 @@ User AddU (User *U, User *U1);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
-void saveRound(User *P1, User *P2, Round *R, RoundStack *Game);
+//void saveRound(User *P1, User *P2, Round *R, RoundStack *Game);
 
 #endif
