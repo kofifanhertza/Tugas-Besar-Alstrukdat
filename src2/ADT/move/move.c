@@ -204,7 +204,11 @@ void roll2(User *U, Tele T, Player P){
                             }}
                             else if (((*U).Curr) > (*U).P.Length){
                                 (*U).Curr = (*U).P.Length - (((*U).Curr+dice1)%(*U).P.Length);
-                                printf("%s pindah ke petak %d",(*U).Nama,(*U).Curr); 
+                                if (P.Map[(*U).Curr]=='.'){
+                                    printf("%s pindah ke petak %d",(*U).Nama,(*U).Curr);}
+                                else{
+                                    printf("%s tidak dapat bergerak",(*U).Nama );
+                                }
                             }
                             else if ((*U).Curr == (*U).P.Length){
                                 printf("%s berada di petak %d\n",(*U).Nama,(*U).P.Length);

@@ -45,6 +45,7 @@ typedef struct
    int AfterTele [IdxMax-IdxMin+1];
    int bykTele;
 } Tele;
+extern Tele TP;
 #define Curr(U) (U).Curr
 #define Nama(U) (U).Nama
 // #define Map(U) (U).P.Map

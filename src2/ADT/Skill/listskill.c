@@ -7,8 +7,8 @@
 int Randomizer (User U) {
     int skill, x;
     srand(time(NULL)) ;
-    x = rand() % 50 + 1;
-    x = rand() % 50 + 1;
+    x = rand() % 100 + 1;
+    x = rand() % 100 + 1;
 
     if (x > 0 && x <= 10) {
         skill = 1 ; /* Pintu Ga Ke Mana Mana */ 
@@ -313,7 +313,9 @@ int inputCommand = CommandSkill(U) ;
                             tempCurr = U.Curr ;
                             U.Curr = (*U2).Curr ;
                             (*U2).Curr = tempCurr ;
-                            printf("%s berhasil digunakan Skill Mesin Penukar Posisi !\n", Nama(U)) ;
+                            printf("%s berhasil menggunakan Skill Mesin Penukar Posisi !\n", Nama(U)) ;
+                            (U).P = UpdateCurrPos(U);
+                            (*U2).P = UpdateCurrPos(*U2);
                             printf("Posisi %s dan %s berhasil ditukar !\n", Nama(U), Nama(*U2)) ;
                             use = true ;
 
