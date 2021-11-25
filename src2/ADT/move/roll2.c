@@ -14,8 +14,7 @@ void roll2(User *U, Tele T, Player P){
         dice1 = (rand()%((*U).MaxRoll/2)) + 1;
     }
     else{ 
-    dice1 = 3 ;}
-
+        dice1 = ((rand()%((*U).MaxRoll)) + 1) ;}
     printf ("%s mendapatkan angka %d.\n", (*U).Nama,dice1); 
         if (((*U).Curr - dice1) <= 0) {
             if (P.Map[(*U).Curr+dice1] =='.') {
