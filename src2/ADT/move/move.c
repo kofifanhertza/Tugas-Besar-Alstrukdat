@@ -203,10 +203,6 @@ void roll2(User *U, Tele T, Player P){
                                             printf("Pemenang game ini adalah %s\n",(*U).Nama);} 
                             }}
                             else if (((*U).Curr) > (*U).P.Length){
-                                (*U).Curr = (*U).P.Length - (((*U).Curr+dice1)%(*U).P.Length);
-                                if (P.Map[(*U).Curr]=='.'){
-                                    printf("%s pindah ke petak %d",(*U).Nama,(*U).Curr);}
-                                else{
                                     printf("%s tidak dapat bergerak",(*U).Nama );
                                 }
                             }
