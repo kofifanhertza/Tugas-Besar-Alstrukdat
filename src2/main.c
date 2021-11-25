@@ -137,19 +137,24 @@ void Teleport(Tele *T){
 
 void startTurn(User *U1, User *U2, Tele *T){
     int count=1;
-    printf("Giliran %s Nih...\n", (*U1).Nama);
+    printf("\nGiliran %s Nih...\n", (*U1).Nama);
     (*U1).ActiveSkill = EmptyBuff(*U1) ;
     (*U1).SkillList = SkillRandomizer(*U1) ;
     commandMAP(U1, U2);
     char input[10];
     boolean endTurn = false;
+    boolean roll = false ;
     while (!endTurn){
         
         printf("Masukkan Command: ");
         scanf(" %s", input);
 
         if (strcmp(input, "SKILL") == 0) {
+            if (!roll) {
             *U1 = SKILL((*U1), &(*U2),(*U1).P, *T);
+            } else {
+                printf("%s tidak bisa menggunakan skill karena sudah bergerak!\n", Nama(*U1)) ;
+            }
         } else if (strcmp(input, "MAP") == 0){
             commandMAP(U1, U2);
         } else if (strcmp(input, "BUFF") == 0){
@@ -163,7 +168,8 @@ void startTurn(User *U1, User *U2, Tele *T){
             printf("%d\n",(*U1).Curr);
             (*U1).P = UpdateCurrPos(*U1);
             count += 1;
-            commandMAP(U1, U2);                
+            commandMAP(U1, U2);
+            roll = true ;                
             } else {
                 printf("Tidak boleh roll lagi! \n");
             }
@@ -192,7 +198,7 @@ void startTurn(User *U1, User *U2, Tele *T){
 void startRonde(int n, User *U1, User *U2, Tele *T){
     boolean endGame = false;
    
-    printf("Teng teng... Ronde ke-%d dimulaii \n",n);
+    printf("\nTeng teng... Ronde ke-%d dimulaii \n",n);
     startTurn(U1,U2,T);
     startTurn(U2,U1,T);
     
@@ -200,8 +206,6 @@ void startRonde(int n, User *U1, User *U2, Tele *T){
 
 boolean isWExist(User *U1, User *U2) {
     // Permainan akan berakhir jika sudah ada satu pemain yang mencapai petak N.
-    printf("%d %d\n",Curr(*U1),Curr(*U2));
-    printf("%d %d\n",(*U1).P.Length,(*U2).P.Length);
     return (Curr(*U1) == (*U1).P.Length || Curr(*U2) == (*U2).P.Length);
 }
 
@@ -216,8 +220,6 @@ void permainanBerlangsung(int n, User *U1, User *U2, Tele *T){
         endGame = true;
         exit(0) ;}
     else if (lanjut == 1) {
-            printf("Curr: %d  %d\n", (*U1).Curr, (*U2).Curr);
-            //PrintSkill()
             startRonde(n, U1, U2, T);
     }
 }
@@ -279,7 +281,6 @@ int main(){
     MainMenu(&inputmenu);
     awalPermainan(inputmenu, &U1, &U2, &TP);
     while (isWExist(&U1, &U2) != true && endGame != true) {
-        printf("Curr: %d  %d\n", (U1).Curr, (U2).Curr);
         rondeKe++;
         permainanBerlangsung(rondeKe, &U1, &U2, &TP);
     }

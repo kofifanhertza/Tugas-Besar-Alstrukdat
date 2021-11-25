@@ -84,7 +84,9 @@ void BalingBaling(User *U, Tele T, Player P){
                         printf("%s menemukan teleporter\n", (*U).Nama);
                         if (Search((*U).SkillList, 1) != Nil){
                             printf("%s memiliki Pintu Ga Ke Mana Mana.\n", (*U).Nama);
-                            printf("Apakah %s ingin menggunakan Skill Pintu Ga Ke Mana Mana (Y/N) ?\n", (*U).Nama);
+                            printf("Apakah %s ingin menggunakan Skill Pintu Ga Ke Mana Mana ?\n", (*U).Nama);
+                            printf("1. Ya") ;
+                            printf("2. Tidak") ;
                             int pilihan;
                             scanf ("%d", &pilihan);
                             if (pilihan==1){
@@ -93,7 +95,7 @@ void BalingBaling(User *U, Tele T, Player P){
                                 printf("Skill Pintu Ga Ke Mana Mana berhasil digunakan !\n") ;}
                                 
                             else{
-                                if (pilihan==0){
+                                if (pilihan==2){
                                     printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
                                     (*U).Curr = T.AfterTele[i] ;
                                     if ((*U).Curr == (*U).P.Length){
@@ -133,7 +135,9 @@ void MesinWaktu(User *U, Tele T, Player P){
                         printf("%s menemukan teleporter\n", (*U).Nama);
                         if (Search((*U).SkillList, 1) != Nil){
                             printf("%s memiliki Pintu Ga Ke Mana Mana.\n", (*U).Nama);
-                            printf("Apakah %s ingin menggunakan Skill Pintu Ga Ke Mana Mana (Y/N) ?\n", (*U).Nama);
+                            printf("Apakah %s ingin menggunakan Skill Pintu Ga Ke Mana Mana ?\n", (*U).Nama);
+                            printf("1. Ya") ;
+                            printf("2. Tidak") ;
                             int pilihan;
                             scanf ("%d", &pilihan);
                             if (pilihan==1){
@@ -142,7 +146,7 @@ void MesinWaktu(User *U, Tele T, Player P){
                                 printf("Skill Pintu Ga Ke Mana Mana berhasil digunakan !\n") ;}
                                 
                             else{
-                                if (pilihan==0){
+                                if (pilihan==2){
                                     printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
                                     (*U).Curr = T.AfterTele[i] ;
                                     if ((*U).Curr == (*U).P.Length){
@@ -373,7 +377,7 @@ List SkillRandomizer (User U) {
                     InsVLast(&SkillList(U), skill) ; 
                     return SkillList(U) ;
                 }
-                else if (option == 0) {
+                else if (option == 2) {
                     return SkillList(U) ;
                 }
             }
