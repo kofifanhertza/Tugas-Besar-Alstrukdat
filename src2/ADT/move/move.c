@@ -91,12 +91,24 @@ boolean bisamundur(User *U, int dice){
 }
 */
 
-void cekPemenang(User U){
+void cekPemenang(User U, User U2){
     if (Curr(U) == Length(U)){
-        printf("%s berada di petak %d\n", Nama(U),Length(U));
         printf("%s telah mencapai ujung\n", Nama(U));
+        printf("Posisi akhir :\n")
+        printf("%s berada di petak %d\n", Nama(U),Length(U));
+        printf("%s berada di petak %d\n", Nama(U2),Length(U2));
         printf("Pemenang game ini adalah %s\n", Nama(U));
+        exit(0);
+    } else {
+        printf("%s telah mencapai ujung\n", Nama(U));
+        printf("Posisi akhir :\n")
+        printf("%s berada di petak %d\n", Nama(U2),Length(U2));
+        printf("%s berada di petak %d\n", Nama(U),Length(U));
+        printf("Pemenang game ini adalah %s\n", Nama(U2));
+        exit(0);
     }
+    
+
 }
 
 void checkTele(User *U, Tele T, int i){
@@ -127,7 +139,7 @@ void checkTele(User *U, Tele T, int i){
     }
 }
 
-void roll2(User *U, Tele T, Player P){  
+void roll2(User *U, User *U2 Tele T, Player P){  
     int dice1, i;   
     srand ( time(NULL) );
     if (Search((*U).ActiveSkill, 3) != Nil){ 
@@ -161,7 +173,7 @@ void roll2(User *U, Tele T, Player P){
             checkTele(&(*U),T,search(T, &(*U)));
             //jika menemukan teleport, akan berpindah tempat kecuali memiliki imunitas  
 
-            cekPemenang(*U);
+            cekPemenang(*U, *U2);
         }   
     } else {
         //ketika current position > dice (dapat maju dan dapat mundur)
@@ -205,7 +217,7 @@ void roll2(User *U, Tele T, Player P){
             checkTele(&(*U),T,search(T, &(*U)));
             //jika menemukan teleport, akan berpindah tempat kecuali memiliki imunitas
             
-            cekPemenang(*U);
+            cekPemenang(*U, *U2);
 
         } else if ((P.Map[(*U).Curr+dice1]=='.') && (P.Map[(*U).Curr-dice1]=='#')) {
 
@@ -227,7 +239,7 @@ void roll2(User *U, Tele T, Player P){
             checkTele(&(*U),T,search(T, &(*U)));
             //jika menemukan teleport, akan berpindah tempat kecuali memiliki imunitas
            
-            cekPemenang(*U);
+            cekPemenang(*U, *U2);
             
         } else if ((P.Map[(*U).Curr+dice1]=='#') && (P.Map[(*U).Curr-dice1]=='.')){
             
@@ -243,7 +255,7 @@ void roll2(User *U, Tele T, Player P){
             checkTele(&(*U),T,search(T, &(*U)));
             //jika menemukan teleport, akan berpindah tempat kecuali memiliki imunitas
            
-            cekPemenang(*U);
+            cekPemenang(*U, *U2);
         }
     }
 }
