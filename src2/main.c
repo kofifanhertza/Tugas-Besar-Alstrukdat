@@ -8,6 +8,8 @@
 #include <time.h>
 #include <string.h>
 
+RoundStack Game;
+
 boolean endGame=false;
 int rondeKe;
 User U1, U2;
@@ -177,8 +179,11 @@ void startTurn(User *U1, User *U2, Tele *T){
         } else if (strcmp(input, "SAVE") == 0){
             //bismillah
         } else if (strcmp(input, "UNDO") == 0){
-            //bismillah
-        } else if (strcmp(input, "ENDTURN") == 0){
+            PopR(&Game, R);
+            printf("Check State: \n");
+            //commandMAP(&((*R).P1), &((*R).P2));
+            printf("U1: %d\n", (*R).P1.Curr);
+            printf("U2: %d\n", (*R).P2.Curr); else if (strcmp(input, "ENDTURN") == 0){
             endTurn = true;
             break;
         } else if (strcmp(input, "EXIT") == 0){
@@ -209,7 +214,7 @@ boolean isWExist(User *U1, User *U2) {
     return (Curr(*U1) == (*U1).P.Length || Curr(*U2) == (*U2).P.Length);
 }
 
-void permainanBerlangsung(int n, User *U1, User *U2, Tele *T){
+void permainanBerlangsung(int n, User *U1, User *U2, Tele *T, Round *R){
     int lanjut;
     printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik '1' untuk 'Ya,' dan '0' untuk 'Tidak': ");scanf("%d", &lanjut);
     while ((lanjut != 1) && (lanjut != 0)) {
@@ -220,9 +225,12 @@ void permainanBerlangsung(int n, User *U1, User *U2, Tele *T){
         endGame = true;
         exit(0) ;}
     else if (lanjut == 1) {
-            startRonde(n, U1, U2, T);
+            printf("Curr: %d  %d\n", (*U1).Curr, (*U2).Curr);
+            //PrintSkill()
+            startRonde(n, U1, U2, T, R);
     }
 }
+
 void awalPermainan(int inputmenu, User *U1, User *U2, Tele *T){
     
         if (inputmenu == 1){
@@ -281,8 +289,13 @@ int main(){
     MainMenu(&inputmenu);
     awalPermainan(inputmenu, &U1, &U2, &TP);
     while (isWExist(&U1, &U2) != true && endGame != true) {
+        //printf("Curr: %d  %d\n", (U1).Curr, (U2).Curr);
+        Round R;
+        CreateEmptyRound(&R);
+        R = saveRound(&U1, &U2, &R/*.Player *P3*/);
+        PushR(&Game, &R);
         rondeKe++;
-        permainanBerlangsung(rondeKe, &U1, &U2, &TP);
+        permainanBerlangsung(rondeKe, &U1, &U2, &TP, &R);
     }
     printf("Permainan berakhir\n");
     
