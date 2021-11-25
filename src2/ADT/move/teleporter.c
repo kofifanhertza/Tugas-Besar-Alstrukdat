@@ -5,9 +5,9 @@
 
 
 int search (Tele T,User P);
-int teleport (Tele T, User P);
-Tele copyTele(Tele Tawal);
 void Inspectt(Tele T, Player P);
+Tele copyTele(Tele Tawal);
+
 
 int search (Tele T,User *U){
     int i=0;
@@ -17,22 +17,6 @@ int search (Tele T,User *U){
         return i;}
     else if (T.AfterTele[i] <= 0 || T.AfterTele[i] > (*U).P.Length ){
         return -1;}}
-/*
-int searchTele (Tele T,User P){
-    int i=0;
-    while (T.BeforeTele[i] != P.Curr){
-        i = i + 1;}
-    if (T.BeforeTele[i] == P.Curr){
-        return i;}
-    else {
-        return Nil;}}
-    */
-
-int teleport (Tele T, User P){
-    int a = searchTele(T, P);
-    if (a!=Nil){
-        P.Curr = T.AfterTele[a];}
-    return P.Curr;}
 
 /*Inpect Teleport*/
 void Inspectt(Tele T, Player P){
