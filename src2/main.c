@@ -299,8 +299,8 @@ int main(){
     while (isWExist(&U1, &U2) != true && endGame != true) {
         //printf("Curr: %d  %d\n", (U1).Curr, (U2).Curr);
         Round R;
-        CreateEmptyRound(&R);
-        saveRound(&U1, &U2, &R,&Game);
+        // CreateEmptyRound(&R);
+        // saveRound(&U1, &U2, &R,&Game);
         rondeKe++;
         permainanBerlangsung(rondeKe, &U1, &U2, &TP, &R);
     }
