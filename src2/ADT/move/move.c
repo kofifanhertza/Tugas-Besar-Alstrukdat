@@ -121,7 +121,7 @@ void roll2(User *U, Tele T, Player P){
     }  else {
         if ((P.Map[(*U).Curr+dice1] =='#') && (P.Map[(*U).Curr-dice1]=='#')){
             printf ("%s tidak dapat bergerak.\n", (*U).Nama); 
-        } else if ((P.Map[(*U).Curr+dice1]=='.') && (P.Map[(*U).Curr-dice1]=='.')){
+        } else if ((P.Map[(*U).Curr+dice1]=='.') && (P.Map[(*U).Curr-dice1]=='.') && (((*U).Curr+dice1)<=(*U).P.Length) ){
             printf ("%s dapat maju dan mundur.\n", (*U).Nama);
             printf ("Ke mana %s mau bergerak : \n", (*U).Nama);
             printf ("1. %d\n", (*U).Curr-dice1);
@@ -218,19 +218,13 @@ void roll2(User *U, Tele T, Player P){
                     } 
                 }
             } else if (((*U).Curr) > (*U).P.Length){
-                printf("kondisinya begini");
-                (*U).Curr = (*U).P.Length - (((*U).Curr+dice1)%(*U).P.Length);
-                if (P.Map[(*U).Curr]=='.'){
-                    printf("%s pindah ke petak %d",(*U).Nama,(*U).Curr);
-                } else{
-                    printf("%s tidak dapat bergerak",(*U).Nama );
-                }
+                 printf("%s tidak dapat bergerak",(*U).Nama );
             } else if ((*U).Curr == (*U).P.Length){
                 printf("%s berada di petak %d\n",(*U).Nama,(*U).P.Length);
                 printf("%s telah mencapai ujung\n",(*U).Nama);
                 printf("Pemenang game ini adalah %s\n",(*U).Nama);
             } 
-        } else if ((P.Map[(*U).Curr+dice1]=='#') && (P.Map[(*U).Curr-dice1]=='.')){//dapat bergerak ke satu petak (mundur) 
+        } else if (((P.Map[(*U).Curr+dice1]=='#') && (P.Map[(*U).Curr-dice1]=='.'))|| ((P.Map[(*U).Curr-dice1]=='.') && (*U.Curr+dice1 > (*U).P.Length))) {//dapat bergerak ke satu petak (mundur) 
             printf ("%s dapat mundur\n", (*U).Nama);
             printf ("%s mundur %d langkah\n",(*U).Nama,dice1);
             (*U).Curr = (*U).Curr-dice1;
