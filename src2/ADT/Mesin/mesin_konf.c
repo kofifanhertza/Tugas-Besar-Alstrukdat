@@ -110,20 +110,18 @@ void Konfigurasi(char fileconfig[], User *U1, User *U2, Tele *TP){
     printf("Masukkan Nama Player 1 : ");scanf("%s", ((*U1).Nama));
     printf("\nMasukkan Nama Player 2 : ");scanf("%s", ((*U2).Nama));
     readConfig(&(*U1),&(*TP), fileconfig);
-    printf("*****************************\n");
-    printf("\n\n");
+    printf("\n*****************************\n\n");
     (*U1).MaxRoll = (*U1).P.MaxRollAwal;
     printf("Player 1 : %s\n", (*U1).Nama);
-    printConfig(&((*U1).P), &(*TP));
-    printf("MaxRoll Player 1 saat ini: %d\n", (*U1).MaxRoll); //MaxRoll seorang user dapat berubah di tengah permainan
+    // printConfig(&((*U1).P), &(*TP));
+    // printf("MaxRoll Player 1 saat ini: %d\n", (*U1).MaxRoll); //MaxRoll seorang user dapat berubah di tengah permainan
     ((*U2).P) = copyPlayer((*U1).P);
     
     //TPdup = copyTele(TP1);
-    printf("\n\n");
     (*U2).MaxRoll = (*U2).P.MaxRollAwal;
     printf("Player 2 : %s\n", (*U2).Nama);
-    printConfig(&((*U2).P), &(*TP));
-    printf("MaxRoll Player 2 saat ini: %d\n", (*U2).MaxRoll);
+    // printConfig(&((*U2).P), &(*TP));
+    // printf("MaxRoll Player 2 saat ini: %d\n", (*U2).MaxRoll);
 }
 
 void printConfig(Player *P, Tele *T){

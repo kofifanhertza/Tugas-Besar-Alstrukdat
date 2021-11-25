@@ -106,7 +106,7 @@ void MainMenu(int *inputmenu){
     printf("\x1b[0m");
     while (*inputmenu!=1 && *inputmenu!=2 && *inputmenu!=3){
         printf("Input tidak terdefinisi, silahkan masukan angka menu\n");
-        printf("Masukkan command :\n>");
+        printf("Masukkan command :\n> ");
         printf("\x1b[1m"); //bold
         InputAngka(inputmenu);
         printf("\x1b[0m");
@@ -226,7 +226,7 @@ void permainanBerlangsung(int n, User *U1, User *U2, Tele *T){
 void awalPermainan(int inputmenu, User *U1, User *U2, Tele *T){
     
         if (inputmenu == 1){
-        printf("Selanjutnya Konfigurasi Map (meminta input nama file konfigurasi map)\n ");
+        printf("Selanjutnya Konfigurasi Map (meminta input nama file konfigurasi map)\n");
 
         //Jalankan game dengan metode new game
         //Meminta input nama file konfigurasi level
