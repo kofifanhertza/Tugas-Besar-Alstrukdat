@@ -2,6 +2,7 @@
 #include "ADT/PlayerMap/map.h"
 #include "ADT/Mesin/mesin_konf.h"
 #include "ADT/Skill/listskill.h"
+#include "ADT/Stack/stacklist.h"
 #include "ADT/move/move.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -137,7 +138,7 @@ void Teleport(Tele *T){
 
 
 
-void startTurn(User *U1, User *U2, Tele *T){
+void startTurn(User *U1, User *U2, Tele *T, Round *R){
     int count=1;
     printf("\nGiliran %s Nih...\n", (*U1).Nama);
     (*U1).ActiveSkill = EmptyBuff(*U1) ;
@@ -180,10 +181,15 @@ void startTurn(User *U1, User *U2, Tele *T){
             //bismillah
         } else if (strcmp(input, "UNDO") == 0){
             PopR(&Game, R);
+            *U1 = (*R).P1 ;
+            *U2 = (*R).P2 ;
             printf("Check State: \n");
             //commandMAP(&((*R).P1), &((*R).P2));
             printf("U1: %d\n", (*R).P1.Curr);
-            printf("U2: %d\n", (*R).P2.Curr); else if (strcmp(input, "ENDTURN") == 0){
+            printf("U2: %d\n", (*R).P2.Curr); 
+            endTurn = true;
+            break;
+        } else if (strcmp(input, "ENDTURN") == 0){
             endTurn = true;
             break;
         } else if (strcmp(input, "EXIT") == 0){
@@ -200,12 +206,12 @@ void startTurn(User *U1, User *U2, Tele *T){
 }
 
 
-void startRonde(int n, User *U1, User *U2, Tele *T){
+void startRonde(int n, User *U1, User *U2, Tele *T, Round *R){
     boolean endGame = false;
    
     printf("\nTeng teng... Ronde ke-%d dimulaii \n",n);
-    startTurn(U1,U2,T);
-    startTurn(U2,U1,T);
+    startTurn(U1,U2,T,R);
+    startTurn(U2,U1,T,R);
     
 }
 
@@ -258,8 +264,10 @@ void awalPermainan(int inputmenu, User *U1, User *U2, Tele *T){
         Konfigurasi(fileConfig, U1, U2, T);
         (*U1).P.Map[1] = '*';
         (*U2).P.Map[1] = '*';
+        CreateEmptyRS(&Game);
         rondeKe = 1;
-        startRonde(rondeKe, U1, U2, T); //Ronde pertama
+        Round R;
+        startRonde(rondeKe, U1, U2, T, &R); //Ronde pertama
         
 
     } else if (inputmenu == 2){
@@ -292,8 +300,7 @@ int main(){
         //printf("Curr: %d  %d\n", (U1).Curr, (U2).Curr);
         Round R;
         CreateEmptyRound(&R);
-        R = saveRound(&U1, &U2, &R/*.Player *P3*/);
-        PushR(&Game, &R);
+        saveRound(&U1, &U2, &R,&Game);
         rondeKe++;
         permainanBerlangsung(rondeKe, &U1, &U2, &TP, &R);
     }

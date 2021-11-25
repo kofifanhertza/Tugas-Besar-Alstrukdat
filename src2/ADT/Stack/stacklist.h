@@ -4,25 +4,36 @@
 
 #include "boolean.h"
 #include <stdlib.h>
-#include "stackundo.h"
+#include "../PlayerMap/map.h"
+#include <string.h>
 /* Konstanta */
-//#define Nil NULL
+#define Nil NULL
 
 /* Deklarasi infotype */
-typedef Round infotypeR;
+
 
 /* Stack dengan representasi berkait dengan pointer */
-typedef struct tElmtStack * addressR;
-typedef struct tElmtStack { 
-  infotypeR Info;
-  addressR Next; 
-} ElmtStack; 
+
 
 /* Type stack dengan ciri TOP : */
 /*
 typedef struct { 
   address TOP;  /* alamat TOP: elemen puncak
 } Stack;*/
+
+typedef struct {
+  User P1; /* tabel penyimpan elemen */
+  User P2;
+  /* alamat TOP: elemen puncak */
+} Round;
+
+typedef Round infotypeR;
+
+typedef struct tElmtStack * addressR;
+typedef struct tElmtStack { 
+  infotypeR Info;
+  addressR Next; 
+} ElmtStack; 
 
 typedef struct {
   addressR TOP;
@@ -62,4 +73,30 @@ void PopR(RoundStack * S, infotypeR * X);
 /* F.S. X adalah nilai elemen TOP yang lama, */
 /*      elemen TOP yang lama didealokasi */
 /* Pada dasarnya adalah operasi Delete First pada list linier */
+
+void CreateEmptyRound (Round *R);
+/* I.S. sembarang; */
+/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
+/* jadi indeksnya antara 1.. MaxEl+1 karena 0 tidak dipakai */
+/* Ciri stack kosong : TOP bernilai Nil */
+
+/* ************ Predikat Untuk test keadaan KOLEKSI ************ */
+//boolean IsEmpty (Round R);
+/* Mengirim true jika Stack kosong: lihat definisi di atas */
+//boolean IsFull (Stack S);
+/* Mengirim true jika tabel penampung nilai elemen stack penuh */
+
+/* ************ Menambahkan sebuah elemen ke Stack ************ */
+User AddU (User *U, User *U1);
+/* Menambahkan X sebagai elemen Stack S. */
+/* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
+/* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
+
+/* ************ Menghapus sebuah elemen Stack ************ */
+//void PopU (Stack * S, User P2);
+/* Menghapus X dari Stack S. */
+/* I.S. S  tidak mungkin kosong */
+/* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+void saveRound(User *U1, User *U2, Round *R, RoundStack *Game);
+
 #endif

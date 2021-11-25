@@ -6,6 +6,7 @@
 #define stackt_H
 
 #include "boolean.h"
+#include "stacklist.h"
 #include "../PlayerMap/map.h"
 
 #define Nil NULL
@@ -21,11 +22,7 @@
   //address TOP; /* alamat TOP: elemen puncak */
 //} Stack;
 
-typedef struct {
-  User P1; /* tabel penyimpan elemen */
-  User P2;
-  /* alamat TOP: elemen puncak */
-} Round;
+
 
 
 /* Definisi stack S kosong : S.TOP = Nil */
@@ -64,6 +61,6 @@ User AddU (User *U, User *U1);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
-Round saveRound(User *P1, User *P2, Round *R/*.Player *P3*/);
+void saveRound(User *P1, User *P2, Round *R, RoundStack *Game);
 
 #endif

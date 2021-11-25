@@ -25,9 +25,8 @@ User AddU (User *U, User *U1) {
     (*P2) = (*S).T[(*S).TOP-1];
     (*S).TOP--;
 }*/
-Round saveRound(User *P1, User *P2, Round *R) {
-    (*R).P1 = AddU(&U1, P1);
-    (*R).P2 = AddU(&U2, P2);
-    /*Push(&P3, P3);*/
-    return (*R);
+void saveRound(User *P1, User *P2, Round *R, RoundStack *Game) {
+    (*R).P1 = *U1 ;
+    (*R).P2 = *U2 ;
+    PushR(Game, R) ;
 }
