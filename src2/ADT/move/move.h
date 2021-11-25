@@ -1,4 +1,4 @@
-#include "ADT/PlayerMap/map.h"
+#include "../PlayerMap/map.h"
 /*#ifndef ARRAY_H 
 #define ARRAY_H
 
@@ -19,11 +19,10 @@ typedef struct
    int bykTele;
 } Tele;*/
 
-int search (Tele T,User P);
+int search (Tele T,User *U);
 // menampilkan idx dari U.Curr pada Tele
 void Inspectt(Tele T, Player P);
 //melakukan command inspect
 Tele copyTele(Tele Tawal);
 void roll2(User *U, Tele T, Player P);
 //melakukan command roll
-#endif

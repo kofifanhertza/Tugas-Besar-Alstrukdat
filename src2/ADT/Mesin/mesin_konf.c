@@ -1,6 +1,5 @@
 # include "mesin_konf.h"
 # include "../PlayerMap/map.h"
-# include "../User/user.h"
 # include <stdio.h>
 
 static FILE * pita;
@@ -11,7 +10,15 @@ void IgnoreBlank() {
         ADV();
     } 
 }
+void readConfig(User *U, Tele *T, char fileconfig[]){
+    int i;
+    SetUser(U);
 
+    STARTKATA(fileconfig);
+    (*U).P = readPlayer((*U).P);
+    
+    *T = readTele(*T);
+}
 
 Player readPlayer(Player P){
     int i,k=0;
@@ -87,40 +94,6 @@ int intConverter(Kata W){
 }
 
 
-void printConfig(Player *P, Tele *T){
-
-    printf("Panjang peta: %d\n", (*P).Length);
-    
-    outputPlayerMap((*P));printf("\n");
-    
-    printf("MaxRoll Awal:%d\n", (*P).MaxRollAwal); //MaxRollAwal sesuai dengan file konfigurasi
-
-    printf("Byk tele:%d\n", (*T).bykTele);
-    
-    printf("Before: ");
-    for(int i=1;i<=(*T).bykTele;i++) {   
-        printf("%d ", (*T).BeforeTele[i]);}
-    printf("\n");
-    
-    printf("After: ");
-    for(int i=1;i<=(*T).bykTele;i++) {   
-        printf("%d ", (*T).AfterTele[i]);
-    }
-    
-    printf("\n");
-    
-}
-
-void readConfig(User *U, Tele *T, char fileconfig[]){
-    int i;
-    SetUser(U);
-
-    STARTKATA(fileconfig);
-    (*U).P = readPlayer((*U).P);
-    
-    *T = readTele(*T);
-}
-
 void Konfigurasi(char fileconfig[], User *U1, User *U2, Tele *TP){
     //Memulai permainan
     /*
@@ -151,4 +124,28 @@ void Konfigurasi(char fileconfig[], User *U1, User *U2, Tele *TP){
     printf("Player 2 : %s\n", (*U2).Nama);
     printConfig(&((*U2).P), &(*TP));
     printf("MaxRoll Player 2 saat ini: %d\n", (*U2).MaxRoll);
+}
+
+void printConfig(Player *P, Tele *T){
+
+    printf("Panjang peta: %d\n", (*P).Length);
+    
+    outputPlayerMap((*P));printf("\n");
+    
+    printf("MaxRoll Awal:%d\n", (*P).MaxRollAwal); //MaxRollAwal sesuai dengan file konfigurasi
+
+    printf("Byk tele:%d\n", (*T).bykTele);
+    
+    printf("Before: ");
+    for(int i=1;i<=(*T).bykTele;i++) {   
+        printf("%d ", (*T).BeforeTele[i]);}
+    printf("\n");
+    
+    printf("After: ");
+    for(int i=1;i<=(*T).bykTele;i++) {   
+        printf("%d ", (*T).AfterTele[i]);
+    }
+    
+    printf("\n");
+    
 }

@@ -49,5 +49,10 @@ int intConverter(Kata W);
 Player readPlayer(Player P);
 /* Membaca informasi Player yang diinputkan melalui file Konfigurasi */
 /* Membaca informasi Teleporter yang diinputkan melalui file konfigurasi */
+void printConfig(Player *P, Tele *T);
+void Konfigurasi(char fileconfig[], User *U1, User *U2, Tele *TP);
+Tele readTele(Tele T);
+void readConfig(User *U, Tele *T, char fileconfig[]);
+
 
 #endif
