@@ -50,6 +50,8 @@ typedef struct
 // #define Map(U) (U).P.Map
 #define Length(U) (U).P.Length
 #define Map(P) (P).Map
+#define SkillList(U) (U).SkillList
+#define ActiveSkill(U) (U).ActiveSkill
 
 
 
