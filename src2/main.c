@@ -167,7 +167,7 @@ void startTurn(User *U1, User *U2, Tele *T, Round *R){
             Inspectt(*T, (*U1).P) ;
         } else if (strcmp(input, "ROLL") == 0){
             if (count < 2) {
-            roll2(&(*U1), *T, (*U1).P);
+            roll2(&(*U1), &(*U2), *T, (*U1).P);
             printf("%d\n",(*U1).Curr);
             (*U1).P = UpdateCurrPos(*U1);
             count += 1;

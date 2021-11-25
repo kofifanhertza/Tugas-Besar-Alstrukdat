@@ -94,14 +94,14 @@ boolean bisamundur(User *U, int dice){
 void cekPemenang(User U, User U2){
     if (Curr(U) == Length(U)){
         printf("%s telah mencapai ujung\n", Nama(U));
-        printf("Posisi akhir :\n")
+        printf("Posisi akhir :\n");
         printf("%s berada di petak %d\n", Nama(U),Length(U));
         printf("%s berada di petak %d\n", Nama(U2),Length(U2));
         printf("Pemenang game ini adalah %s\n", Nama(U));
         exit(0);
     } else {
         printf("%s telah mencapai ujung\n", Nama(U));
-        printf("Posisi akhir :\n")
+        printf("Posisi akhir :\n");
         printf("%s berada di petak %d\n", Nama(U2),Length(U2));
         printf("%s berada di petak %d\n", Nama(U),Length(U));
         printf("Pemenang game ini adalah %s\n", Nama(U2));
@@ -139,7 +139,7 @@ void checkTele(User *U, Tele T, int i){
     }
 }
 
-void roll2(User *U, User *U2 Tele T, Player P){  
+void roll2(User *U, User *U2, Tele T, Player P){  
     int dice1, i;   
     srand ( time(NULL) );
     if (Search((*U).ActiveSkill, 3) != Nil){ 

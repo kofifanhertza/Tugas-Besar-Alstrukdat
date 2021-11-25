@@ -24,5 +24,5 @@ int search (Tele T,User *U);
 void Inspectt(Tele T, Player P);
 //melakukan command inspect
 Tele copyTele(Tele Tawal);
-void roll2(User *U, Tele T, Player P);
+void roll2(User *U, User *U2, Tele T, Player P);
 //melakukan command roll
