@@ -32,7 +32,7 @@ typedef Round infotypeR;
 typedef struct tElmtStack * addressR;
 typedef struct tElmtStack { 
   infotypeR Info;
-  addressR Next; 
+  addressR Next;
 } ElmtStack; 
 
 typedef struct {

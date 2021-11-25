@@ -95,20 +95,22 @@ void cekPemenang(User U, User U2){
     if (Curr(U) == Length(U)){
         printf("%s telah mencapai ujung\n", Nama(U));
         printf("Posisi akhir :\n");
-        printf("%s berada di petak %d\n", Nama(U),Length(U));
-        printf("%s berada di petak %d\n", Nama(U2),Length(U2));
+        printf("%s berada di petak %d\n", Nama(U),Curr(U));
+        printf("%s berada di petak %d\n", Nama(U2),Curr(U2));
         printf("Pemenang game ini adalah %s\n", Nama(U));
+        //for loop ketika pemain lebih dari 1
+        printf("Peringkat kedua adalah %s\n", Nama(U2));
         exit(0);
-    } else {
+    } else if (Curr(U2) == Length(U2)){
         printf("%s telah mencapai ujung\n", Nama(U));
         printf("Posisi akhir :\n");
-        printf("%s berada di petak %d\n", Nama(U2),Length(U2));
-        printf("%s berada di petak %d\n", Nama(U),Length(U));
+        printf("%s berada di petak %d\n", Nama(U2),Curr(U2));
+        printf("%s berada di petak %d\n", Nama(U),Curr(U));
         printf("Pemenang game ini adalah %s\n", Nama(U2));
+        //for loop ketika pemain lebih dari 1
+        printf("Peringkat kedua adalah %s\n", Nama(U));
         exit(0);
     }
-    
-
 }
 
 void checkTele(User *U, Tele T, int i){
@@ -178,25 +180,26 @@ void roll2(User *U, User *U2, Tele T, Player P){
     } else {
         //ketika current position > dice (dapat maju dan dapat mundur)
 
-        if ((P.Map[(*U).Curr+dice1] =='#') && (P.Map[(*U).Curr-dice1]=='#')){
-            
-            //kasus pertama ketika tujuan depan belakang adalah petak terlarang
-            printf ("%s tidak dapat bergerak.\n", (*U).Nama); 
+        //Ketika Current position + dice > finish maka kondisional gagal
+        //Solusi : 
 
-        } else if ((P.Map[(*U).Curr+dice1]=='.') && (P.Map[(*U).Curr-dice1]=='.')){
+        if (Curr(*U) + dice1 <= Length(*U)){
+            if ((P.Map[(*U).Curr+dice1] =='#') && (P.Map[(*U).Curr-dice1]=='#')){
+                
+                //kasus pertama ketika tujuan depan belakang adalah petak terlarang
+                printf ("%s tidak dapat bergerak.\n", (*U).Nama); 
 
-            //kasus kedua ketika tujuan depan belakang adalah petak kosong
-            int opsi;
-            //pilih tujuan
+            } else if ((P.Map[(*U).Curr+dice1]=='.') && (P.Map[(*U).Curr-dice1]=='.')){
 
-            
-            if (Curr(*U) + dice1 <= Length(*U)){
-                //kasus ketika tujuan tidak melebihi garis finish
+                //kasus kedua ketika tujuan depan belakang adalah petak kosong
+                int opsi;
+                //pilih tujuan
+
                 printf ("%s dapat maju dan mundur.\n", (*U).Nama);
                 printf ("Ke mana %s mau bergerak : \n", (*U).Nama);
                 printf ("1. %d\n", (*U).Curr-dice1);
                 printf ("2. %d\n", (*U).Curr+dice1);
-            
+                
                 printf("Masukkan pilihan :\n");scanf ("%d", &opsi);
 
                 if (opsi==1){
@@ -206,56 +209,74 @@ void roll2(User *U, User *U2, Tele T, Player P){
                     printf ("%s maju %d langkah.\n", (*U).Nama,dice1);
                     majuin(&(*U),dice1);
                 }
-            } else {
-                //kasus ketika tujuan =melebihi garis finish (hanya bisa mundur)
-            }
-            
-            //informasi update position
-            printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
+                
+                
+                //informasi update position
+                printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
 
-            //Player telah bergerak ke petak tujuan, periksa teleport
-            checkTele(&(*U),T,search(T, &(*U)));
-            //jika menemukan teleport, akan berpindah tempat kecuali memiliki imunitas
-            
-            cekPemenang(*U, *U2);
+                //Player telah bergerak ke petak tujuan, periksa teleport
+                checkTele(&(*U),T,search(T, &(*U)));
+                //jika menemukan teleport, akan berpindah tempat kecuali memiliki imunitas
+                
+                cekPemenang(*U, *U2);
 
-        } else if ((P.Map[(*U).Curr+dice1]=='.') && (P.Map[(*U).Curr-dice1]=='#')) {
+            } else if ((P.Map[(*U).Curr+dice1]=='.') && (P.Map[(*U).Curr-dice1]=='#')) {
 
-            //kasus ketiga ketika tujuan depan adalah petak kosong dan  belakang adalah petak terlarang
-
-            if (Curr(*U) + dice1 > Length(*U)){
-                //kasus ketika tujuan melebihi garis finish
-                printf ("%s tidak dapat bergerak.\n", (*U).Nama); 
-            } else {
+                //kasus ketiga ketika tujuan depan adalah petak kosong dan belakang adalah petak terlarang
                 printf ("%s dapat maju.\n", (*U).Nama);
                 printf ("%s maju %d langkah.\n", (*U).Nama,dice1);
                 majuin(&(*U),dice1);
+            
+                //informasi update position
+                printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
+
+                //Player telah bergerak ke petak tujuan, periksa teleport
+                checkTele(&(*U),T,search(T, &(*U)));
+                //jika menemukan teleport, akan berpindah tempat kecuali memiliki imunitas
+            
+                cekPemenang(*U, *U2);
+                
+            } else if ((P.Map[(*U).Curr+dice1]=='#') && (P.Map[(*U).Curr-dice1]=='.')){
+                
+                //kasus keempat ketika tujuan depan adalah petak terlarang dan belakang adalah petak kosong
+                //tidak perlu kasus ketika mundur melibihi garis start karena di awal sudah diperiksa 
+                printf ("%s dapat mundur\n", (*U).Nama);
+                printf ("%s mundur %d langkah\n",(*U).Nama,dice1);
+                mundurin(&(*U),dice1);
+                //informasi update position
+                printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
+
+                //Player telah bergerak ke petak tujuan, periksa teleport
+                checkTele(&(*U),T,search(T, &(*U)));
+                //jika menemukan teleport, akan berpindah tempat kecuali memiliki imunitas
+            
+                cekPemenang(*U, *U2);
             }
-           
-            //informasi update position
-            printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
+        } else {
+            //Ketika tujuan melebihi garis finish
 
-            //Player telah bergerak ke petak tujuan, periksa teleport
-            checkTele(&(*U),T,search(T, &(*U)));
-            //jika menemukan teleport, akan berpindah tempat kecuali memiliki imunitas
-           
-            cekPemenang(*U, *U2);
-            
-        } else if ((P.Map[(*U).Curr+dice1]=='#') && (P.Map[(*U).Curr-dice1]=='.')){
-            
-            //kasus keempat ketika tujuan depan adalah petak terlarang dan belakang adalah petak kosong
-            //tidak perlu kasus ketika mundur melibihi garis start karena di awal sudah diperiksa 
-            printf ("%s dapat mundur\n", (*U).Nama);
-            printf ("%s mundur %d langkah\n",(*U).Nama,dice1);
-            mundurin(&(*U),dice1);
-            //informasi update position
-            printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
+            if (P.Map[(*U).Curr-dice1]=='#'){
 
-            //Player telah bergerak ke petak tujuan, periksa teleport
-            checkTele(&(*U),T,search(T, &(*U)));
-            //jika menemukan teleport, akan berpindah tempat kecuali memiliki imunitas
-           
-            cekPemenang(*U, *U2);
+                //Kasus ketika tujuan belakang adalah petak terlarang
+                printf ("%s tidak dapat bergerak.\n", (*U).Nama);
+                
+            } else {
+
+                //Kasus ketika tujuan belakang adalah petak kosong
+
+                printf ("%s dapat mundur\n", (*U).Nama);
+                printf ("%s mundur %d langkah\n",(*U).Nama,dice1);
+                mundurin(&(*U),dice1);
+
+                //informasi update position
+                printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
+
+                //Player telah bergerak ke petak tujuan, periksa teleport
+                checkTele(&(*U),T,search(T, &(*U)));
+                //jika menemukan teleport, akan berpindah tempat kecuali memiliki imunitas
+            
+                cekPemenang(*U, *U2);
+            }
         }
     }
 }

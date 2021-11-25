@@ -5,7 +5,7 @@ NIM : 18220054
 Program : Queue
 Tanggal : 29/09/2021
 Deskripsi : Pre-Praktikum */
-void CreateEmpty (Stack *S) {
+void CreateEmptyS (Stack *S) {
     (*S).TOP = Nil;
 }
 /* I.S. sembarang; */
@@ -13,17 +13,17 @@ void CreateEmpty (Stack *S) {
 /* jadi indeksnya antara 1.. MaxEl+1 karena 0 tidak dipakai */
 /* Ciri stack kosong : TOP bernilai Nil */
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsEmpty (Stack S) {
+boolean IsEmptyS (Stack S) {
     return ((S).TOP == Nil);
 }
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
-boolean IsFull (Stack S) {
+boolean IsFullS (Stack S) {
     return ((S).TOP == MaxEl);
 }
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push (Stack * S, infotype X) {
+void PushS (Stack * S, infotype X) {
     (*S).TOP += 1;
     (*S).T[(*S).TOP] = X;
 
@@ -33,7 +33,7 @@ void Push (Stack * S, infotype X) {
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop (Stack * S, infotype* X) {
+void PopS (Stack * S, infotype* X) {
     *X = (*S).T[(*S).TOP];
     (*S).TOP = (*S).TOP - 1;
 }
