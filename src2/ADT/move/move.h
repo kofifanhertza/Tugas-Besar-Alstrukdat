@@ -20,8 +20,11 @@ typedef struct
 } Tele;*/
 
 int search (Tele T,User P);
+// menampilkan idx dari U.Curr pada Tele
 int teleport (Tele T, User P);
 void Inspectt(Tele T, Player P);
+//melakukan command inspect
 Tele copyTele(Tele Tawal);
 void roll2(User *U, Tele T, Player P);
+//melakukan command roll
 #endif
