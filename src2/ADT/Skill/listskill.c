@@ -7,8 +7,8 @@
 int Randomizer (User U) {
     int skill, x;
     srand(time(NULL)) ;
-    x = 47;
-    //x = rand() % 100 + 1;
+    x = rand() % 100 + 1;
+    x = rand() % 100 + 1;
 
     if (x > 0 && x <= 10) {
         skill = 1 ; /* Pintu Ga Ke Mana Mana */ 
