@@ -145,6 +145,7 @@ void startTurn(User *U1, User *U2, Tele *T, Round *Game){
     char input[10];
     boolean endTurn = false;
     boolean roll = false ;
+    boolean undo = false;
     while (!endTurn){
         
         printf("Masukkan Command: ");
@@ -181,21 +182,26 @@ void startTurn(User *U1, User *U2, Tele *T, Round *Game){
         } else if (strcmp(input, "UNDO") == 0){
             roundInfo save;
             PopR(Game, &save);
-            if (Nama(*U1) == (save).Player[0].Nama){
-                *U1 = (save).Player[0];
-                *U2 = (save).Player[1];
+            if (save.rondeKe > 1){
+                if (Nama(*U1) == (save).Player[0].Nama){
+                    *U1 = (save).Player[0];
+                    *U2 = (save).Player[1];
+                } else {
+                    *U1 = (save).Player[1];
+                    *U2 = (save).Player[0];
+                }
+                endTurn = true;
+                undo = true;
+                rondeKe -= 1;
+                break;
             } else {
-                *U1 = (save).Player[1];
-                *U2 = (save).Player[0];
+                printf("Woi gabisa UNDO Lagi");
             }
+            
             printf("Check State: \n");
             //commandMAP(&((*R).P1), &((*R).P2));
             printf("U1: %d\n", Curr(save.Player[0]));
-            printf("U2: %d\n", Curr(save.Player[1])); 
-            endTurn = true;
-            boolean undo = true;
-            rondeKe -= 1;
-            break;
+            printf("U2: %d\n", Curr(save.Player[1]));
         } else if (strcmp(input, "ENDTURN") == 0){
             if (roll == false) {
                 printf("Belum roll, tidak boleh endturn!\n");
