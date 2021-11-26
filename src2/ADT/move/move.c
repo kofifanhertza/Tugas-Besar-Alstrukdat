@@ -93,22 +93,46 @@ boolean bisamundur(User *U, int dice){
 
 void cekPemenang(User U, User U2){
     if (Curr(U) == Length(U)){
-        printf("%s telah mencapai ujung\n", Nama(U));
+        printf("%s telah mencapai ujung! Permainan selesai.\n", Nama(U));
         printf("Posisi akhir :\n");
         printf("%s berada di petak %d\n", Nama(U),Curr(U));
         printf("%s berada di petak %d\n", Nama(U2),Curr(U2));
-        printf("Pemenang game ini adalah %s\n", Nama(U));
+        printf("   *********************************************   \n");
+        printf("                .-=========-.       \n");
+        printf("                \'-=======-'/       \n");
+        printf("                _|   .=.   |_       \n");
+        printf("                ((|  {{1}}  |))     \n");
+        printf("                \\|   /|\\   |/     \n");
+        printf("                \\__ '`' __/        \n");
+        printf("                    _`) (`_         \n");
+        printf("                  _/_______\\_      \n");
+        printf("                 /___________\\     \n");
+        printf("   *********************************************   \n");
+        printf("        Pemenang game ini adalah %s\n", Nama(U));
+        printf("        Peringkat kedua adalah %s\n", Nama(U2));
+        printf("   *********************************************   \n");
         //for loop ketika pemain lebih dari 1
-        printf("Peringkat kedua adalah %s\n", Nama(U2));
         exit(0);
     } else if (Curr(U2) == Length(U2)){
-        printf("%s telah mencapai ujung\n", Nama(U));
+        printf("%s telah mencapai ujung! Permainan selesai. \n", Nama(U));
         printf("Posisi akhir :\n");
         printf("%s berada di petak %d\n", Nama(U2),Curr(U2));
         printf("%s berada di petak %d\n", Nama(U),Curr(U));
-        printf("Pemenang game ini adalah %s\n", Nama(U2));
+        printf("   *********************************************   \n");
+        printf("                .-=========-.       \n");
+        printf("                \'-=======-'/       \n");
+        printf("                _|   .=.   |_       \n");
+        printf("                ((|  {{1}}  |))     \n");
+        printf("                \\|   /|\\   |/     \n");
+        printf("                \\__ '`' __/        \n");
+        printf("                    _`) (`_         \n");
+        printf("                  _/_______\\_      \n");
+        printf("                 /___________\\     \n");
+        printf("   *********************************************   \n");
+        printf("        Pemenang game ini adalah %s\n", Nama(U2));
+        printf("        Peringkat kedua adalah %s\n", Nama(U));
+        printf("   *********************************************   \n");
         //for loop ketika pemain lebih dari 1
-        printf("Peringkat kedua adalah %s\n", Nama(U));
         exit(0);
     }
 }
