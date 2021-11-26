@@ -191,8 +191,13 @@ void startTurn(User *U1, User *U2, Tele *T, Round *Game){
             rondeKe -= 1;
             break;
         } else if (strcmp(input, "ENDTURN") == 0){
-            endTurn = true;
-            break;
+            if (roll == false) {
+                printf("Belum roll, tidak boleh endturn!\n");
+            }
+            else {
+                endTurn = true;
+                break;
+            }
         } else if (strcmp(input, "EXIT") == 0){
             endTurn = true;
             endGame = true;
