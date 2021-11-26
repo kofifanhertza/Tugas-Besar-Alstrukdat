@@ -1,5 +1,6 @@
-#include"stdlib.h"
-#include"stdio.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
 #include"listskill.h"
 #include"time.h"
 
@@ -85,10 +86,10 @@ void BalingBaling(User *U, Tele T, Player P){
                         if (Search((*U).SkillList, 1) != Nil){
                             printf("%s memiliki Pintu Ga Ke Mana Mana.\n", (*U).Nama);
                             printf("Apakah %s ingin menggunakan Skill Pintu Ga Ke Mana Mana ?\n", (*U).Nama);
-                            printf("1. Ya") ;
-                            printf("2. Tidak") ;
+                            printf("1. Ya\n") ;
+                            printf("2. Tidak\n") ;
                             int pilihan;
-                            scanf ("%d", &pilihan);
+                            printf("Pilihan : ") ;scanf ("%d", &pilihan);
                             if (pilihan==1){
                                 printf("%s tidak teleport.\n", (*U).Nama);
                                 DelP(&SkillList(*U), 1) ;
@@ -118,7 +119,6 @@ void BalingBaling(User *U, Tele T, Player P){
                 }
         }
 
-
 void MesinWaktu(User *U, Tele T, Player P){  
     int dice1, i;   
     srand ( time(NULL) );
@@ -136,9 +136,9 @@ void MesinWaktu(User *U, Tele T, Player P){
                         if (Search((*U).SkillList, 1) != Nil){
                             printf("%s memiliki Pintu Ga Ke Mana Mana.\n", (*U).Nama);
                             printf("Apakah %s ingin menggunakan Skill Pintu Ga Ke Mana Mana ?\n", (*U).Nama);
-                            printf("1. Ya") ;
-                            printf("2. Tidak") ;
-                            int pilihan;
+                            printf("1. Ya\n") ;
+                            printf("2. Tidak\n") ;
+                            printf("Pilihan : ") ;int pilihan;
                             scanf ("%d", &pilihan);
                             if (pilihan==1){
                                 printf("%s tidak teleport.\n", (*U).Nama);
@@ -232,6 +232,12 @@ int DelIdxSkill (List *L,  int idx, User U) {
     else if (skill == 5) {
         printf("%s berhasil membuang Skill Mesin Penukar Posisi !\n", Nama(U)) ;
     }
+    else if (skill == 6) {
+        printf("%s berhasil membuang Skill Baling Baling Jambu !\n", Nama(U)) ;
+    }
+    else if (skill == 5) {
+        printf("%s berhasil membuang Skill Mesin Waktu !\n", Nama(U)) ;
+    }
 
     return skill ;
     
@@ -251,9 +257,9 @@ int IdxSkill (List *L,  int idx) {
     
 }
 
-int PrintSkill (List L) {
+void PrintSkill (List L) {
     if (IsEmpty(L)) {
-        return 0;
+        return ;
     }
     int i = 1 ;
     address q = First(L) ;
@@ -282,14 +288,14 @@ int PrintSkill (List L) {
         q = Next(q) ;
         i = i + 1 ;
         }
-    return 0 ;
+    return  ;
         
 }
 
-int PrintBuff (List L, User U) {
+void PrintBuff (List L, User U) {
     if (IsEmpty(L)) {
         printf("%s tidak memiliki buff", Nama(U)) ;
-        return 0 ;
+        return  ;
     }
     int i = 1 ;
     address q = First(L) ;
@@ -313,20 +319,74 @@ int PrintBuff (List L, User U) {
         q = Next(q) ;
         i = i + 1 ;
         }
-        return 0 ;
+        return  ;
+}
+
+void PrintDesc () {
+    int i ;
+    printf("Pilih skill yang ingin diketahui deskripsinya\n") ;
+    printf("1. Pintu Ga Ke Mana Mana\n") ;
+    printf("2. Cermin Pengganda\n") ;
+    printf("3. Senter Pengecil Hoki\n") ;
+    printf("4. Senter Pembesar Hoki\n") ;
+    printf("5. Mesin Penukar Posisi\n") ;
+    printf("6. Baling Baling Jambu\n") ;
+    printf("7. Mesin Waktu\n") ;
+    printf("Pilihan : ") ; 
+    scanf("%d", &i) ;
+
+    if (i == 1) {
+        printf("\nPINTU GA KE MANA MANA\n") ;
+        printf("Chance  : 10%%\n") ;
+        printf("Desc    : Gunakan skill ini untuk mendapatkan imunitas teleporter!\n\n") ;
+    
+    } else if (i == 2){
+        printf("\nCERMIN PENGGANDA\n") ;
+        printf("Chance  : 6%%\n") ;
+        printf("Desc    : Gunakan skill ini untuk mendapatkan 2 skill secara random!\n\n") ;
+    
+    } else if (i == 3){
+        printf("\nSENTER PENGECIL HOKI\n") ;
+        printf("Chance  : 15%%\n") ;
+        printf("Desc    : Gunakan skill ini untuk memperkecil keluaran dadu!\n\n") ;
+    
+    } else if (i == 4){
+        printf("\nSENTER PEMBESAR HOKI\n") ;
+        printf("Chance  : 15%%\n") ;
+        printf("Desc    : Gunakan skill ini untuk memperbesar keluaran dadu!\n\n") ;
+            
+    } else if (i == 5){
+        printf("\nMESIN PENUKAR POSISI\n") ;
+        printf("Chance  : 4%%\n") ;
+        printf("Desc    : Gunakan skill ini untuk menukar posisi dengan pemain lain!\n\n") ;
+            
+    } else if (i == 6){
+        printf("\nBALING BALING JAMBU\n") ;
+        printf("Chance  : 10%%\n") ;
+        printf("Desc    : Gunakan skill ini untuk membuat pemain maju sebanyak keluaran dadu!\n\n") ;
+            
+    } else if (i == 7){
+        printf("\nMESIN WAKTU\n") ;
+        printf("Chance  : 10%%\n") ;
+        printf("Desc    : Gunakan skill ini untuk membuat pemain mundur sebanyak keluaran dadu!\n\n") ;
+            
+    } else {
+        printf("\nERROR! Pilihan tidak valid !\n\n") ;
+    }
 }
 
 int CommandSkill (User U) {
     int x, UsedSkill = 0 ;
     if (IsEmpty(SkillList(U))) {
-        printf("%s tidak memiliki skill\n", Nama(U)) ;
+        printf("\n%s tidak memiliki skill\n", Nama(U)) ;
         return 0 ;
     }
     
-    printf("%s memiliki Skill :\n", Nama(U)) ;
+    printf("\n%s memiliki Skill :\n", Nama(U)) ;
     PrintSkill(SkillList(U)) ;
     
-    printf("\nTekan 0 untuk keluar\n\n") ;
+    printf("\nMasukkan angka 0 apabila ingin keluar\n") ;
+    printf("Masukkan angka negatif apabila ingin membuang skill\n\n") ;
     printf("Masukkan Skill : ") ;
     scanf("%d", &x) ;
 
@@ -417,6 +477,7 @@ int inputCommand = CommandSkill(U) ;
                             } else {
                                 printf("%s berhasil digunakan Skill Cermin Pengganda !\n", U.Nama) ;
                                 SkillList(U) = SkillRandomizer(U) ;
+                                srand(time(NULL)) ;
                                 SkillList(U) = SkillRandomizer(U) ;
                                 use = true ;
                             }

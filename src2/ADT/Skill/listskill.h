@@ -17,10 +17,11 @@ int IdxSkill (List *L,  int idx) ;
 
 int DelIdxSkill (List *L,  int idx, User U) ;
 
-int PrintSkill(List L) ;
+void PrintSkill(List L) ;
 /* Menampilkan skill yang ada di List*/
+void PrintDesc () ;
 
-int PrintBuff (List L, User U) ;
+void PrintBuff (List L, User U) ;
 
 int CommandSkill (User U) ;
 

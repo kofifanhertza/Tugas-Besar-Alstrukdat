@@ -146,13 +146,15 @@ void checkTele(User *U, Tele T, int i){
         if (Search((*U).ActiveSkill, 1) != Nil){
             int pilihan;
             printf("%s memiliki imunitas teleport.\n",  Nama(*U));
-            printf("Apakah %s ingin teleport (Y/N) ?\n",  Nama(*U));
-            scanf ("%d", &pilihan);
-            if (pilihan==1){
+            printf("Apakah %s ingin teleport?\n",  Nama(*U));
+            printf("Masukan angka 1 untuk teleport\n") ;
+            printf("Masukan angka 0 tidak teleport\n") ;
+            printf("Pilihan : ");scanf ("%d", &pilihan);
+            if (pilihan==0){
                 printf("%s tidak teleport.\n",  Nama(*U));
                 printf("Buff imunitas teleport hilang.\n");
             } else {
-                if (pilihan==0){
+                if (pilihan==1){
                     printf("%s teleport ke petak %d.\n",  Nama(*U), T.AfterTele[i]);
                     teleporting(&(*U),T,i);
                 }

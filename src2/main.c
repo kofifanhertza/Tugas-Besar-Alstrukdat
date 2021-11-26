@@ -96,7 +96,7 @@ void Logo(){
     printf("     ****                               ==MAIN MENU==                              ****   \n");
     printf("     ****                                1. New Game                               ****   \n");
     printf("     ****                                2. Exit                                   ****   \n");
-    printf("     ****                                3. Load Game                              ****   \n");
+    // printf("     ****                                3. Load Game                              ****   \n");
     printf("     **********************************************************************************   \n");
 }
 
@@ -158,6 +158,8 @@ void startTurn(User *U1, User *U2, Tele *T, Round *Game){
             }
         } else if (strcmp(input, "MAP") == 0){
             commandMAP(U1, U2);
+        } else if (strcmp(input, "DESC") == 0) {
+            PrintDesc() ;
         } else if (strcmp(input, "BUFF") == 0){
             PrintBuff((*U1).ActiveSkill, (*U1));
             printf("\n");
@@ -166,7 +168,6 @@ void startTurn(User *U1, User *U2, Tele *T, Round *Game){
         } else if (strcmp(input, "ROLL") == 0){
             if (count < 2) {
             roll2(&(*U1), &(*U2), *T, (*U1).P);
-            printf("%d\n",(*U1).Curr);
             (*U1).P = UpdateCurrPos(*U1);
             count += 1;
             commandMAP(U1, U2);
@@ -199,6 +200,7 @@ void startTurn(User *U1, User *U2, Tele *T, Round *Game){
                 break;
             }
         } else if (strcmp(input, "EXIT") == 0){
+            printf("Keluar dari game\n") ;
             endTurn = true;
             endGame = true;
             exit(0);
@@ -284,7 +286,7 @@ void awalPermainan(int inputmenu, User *U1, User *U2, Tele *T, Round *Game){
 
     } else if (inputmenu == 2){
         endGame = true;
-        printf("Keluar dari game, break all process.\n");
+        printf("Berhasil keluar dari game.\n");
         
         //Keluar dari game.
 
@@ -310,13 +312,11 @@ void saveRound(User *U1, User *U2, Round *Game, int n) {
 }
 
 int main(){
-    /*
     loading(3);
     delay(250);
     Logo();
     printf("\n");
     delay(250);
-    */
     int inputmenu;
     MainMenu(&inputmenu);
 
