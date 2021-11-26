@@ -10,9 +10,11 @@
 #include <string.h>
 
 boolean endGame=false;
+boolean undo;
 int rondeKe;
 User U1, U2;
 Tele TP;
+Round Base;
 //User U1, U2;
 
 
@@ -145,7 +147,7 @@ void startTurn(User *U1, User *U2, Tele *T, Round *Game){
     char input[10];
     boolean endTurn = false;
     boolean roll = false ;
-    boolean undo = false;
+    undo = false;
     while (!endTurn){
         
         printf("Masukkan Command: ");
@@ -181,27 +183,42 @@ void startTurn(User *U1, User *U2, Tele *T, Round *Game){
             //bismillah
         } else if (strcmp(input, "UNDO") == 0){
             roundInfo save;
-            PopR(Game, &save);
-            if (save.rondeKe > 1){
-                if (Nama(*U1) == (save).Player[0].Nama){
-                    *U1 = (save).Player[0];
-                    *U2 = (save).Player[1];
+            if (IsRSEmpty(*Game)){
+                if (Nama(*U1) == Base.TOP->Info.Player[0].Nama){
+                    *U1 = Base.TOP->Info.Player[0];
+                    *U2 = Base.TOP->Info.Player[1];
                 } else {
-                    *U1 = (save).Player[1];
-                    *U2 = (save).Player[0];
+                    *U1 = Base.TOP->Info.Player[1];
+                    *U2 = Base.TOP->Info.Player[0];
                 }
+                *U1 = Base.TOP->Info.Player[0];
                 endTurn = true;
                 undo = true;
                 rondeKe -= 1;
-                break;
+                break; 
             } else {
-                printf("Woi gabisa UNDO Lagi");
+                if (rondeKe > 1){
+                    PopR(Game, &save);
+                    if (Nama(*U1) == (save).Player[0].Nama){
+                        *U1 = (save).Player[0];
+                        *U2 = (save).Player[1];
+                    } else {
+                        *U1 = (save).Player[1];
+                        *U2 = (save).Player[0];
+                    }
+                    endTurn = true;
+                    undo = true;
+                    rondeKe -= 1;
+                    break;
+                } else {
+                    printf("Woi gabisa UNDO Lagi.\n");
+                }
             }
-            
+    
             printf("Check State: \n");
             //commandMAP(&((*R).P1), &((*R).P2));
-            printf("U1: %d\n", Curr(save.Player[0]));
-            printf("U2: %d\n", Curr(save.Player[1]));
+            printf("U1: %d\n", Curr(*U1));
+            printf("U2: %d\n", Curr(*U2)); 
         } else if (strcmp(input, "ENDTURN") == 0){
             if (roll == false) {
                 printf("Belum roll, tidak boleh endturn!\n");
@@ -225,13 +242,16 @@ void startTurn(User *U1, User *U2, Tele *T, Round *Game){
 }
 
 
-void startRonde(int n, User *U1, User *U2, Tele *T, Round *Game){
+void startRonde(User *U1, User *U2, Tele *T, Round *Game){
     boolean endGame = false;
-    boolean undo = false;
+    undo = false;
    
-    printf("\nTeng teng... Ronde ke-%d dimulaii \n",n);
+    printf("\nTeng teng... Ronde ke-%d dimulaii \n",rondeKe);
     startTurn(U1,U2,T, Game);
-    if (!undo) startTurn(U2,U1,T, Game);
+    if (!undo) {
+        printf("cari masalah");
+        startTurn(U2,U1,T, Game);
+    }
     
 }
 
@@ -240,7 +260,7 @@ boolean isWExist(User *U1, User *U2) {
     return (Curr(*U1) == (*U1).P.Length || Curr(*U2) == (*U2).P.Length);
 }
 
-void permainanBerlangsung(int n, User *U1, User *U2, Tele *T, Round *Game){
+void permainanBerlangsung(User *U1, User *U2, Tele *T, Round *Game){
     int lanjut;
     printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik '1' untuk 'Ya,' dan '0' untuk 'Tidak': ");scanf("%d", &lanjut);
     while ((lanjut != 1) && (lanjut != 0)) {
@@ -253,7 +273,7 @@ void permainanBerlangsung(int n, User *U1, User *U2, Tele *T, Round *Game){
     else if (lanjut == 1) {
             printf("Curr: %d  %d\n", (*U1).Curr, (*U2).Curr);
             //PrintSkill()
-            startRonde(n, U1, U2, T, Game);
+            startRonde(U1, U2, T, Game);
     }
 }
 
@@ -286,9 +306,16 @@ void awalPermainan(int inputmenu, User *U1, User *U2, Tele *T, Round *Game){
         (*U2).P.Map[1] = '*';
         rondeKe = 1;
         CreateEmptyRS(Game);
+
+        roundInfo RBase;
+        RBase.Player[0] = *U1;
+        RBase.Player[1] = *U2;
+        RBase.rondeN = rondeKe;
+        PushR(&Base, RBase);
+
         roundInfo R;
-        R.rondeKe = rondeKe;
-        startRonde(rondeKe, U1, U2, T, Game); //Ronde pertama
+        R.rondeN = rondeKe;
+        startRonde(U1, U2, T, Game); //Ronde pertama
         R.Player[0] = *U1;
         R.Player[1] = *U2;
         PushR(Game,R);
@@ -313,21 +340,21 @@ void awalPermainan(int inputmenu, User *U1, User *U2, Tele *T, Round *Game){
     }
 }
 
-void saveRound(User *U1, User *U2, Round *Game, int n) {
+void saveRound(User *U1, User *U2, Round *Game) {
     printf("ini adalah metode save:\n");
     roundInfo R;
     R.Player[0] = *U1 ;
     R.Player[1] = *U2 ;
-    R.rondeKe = n;
+    R.rondeN = rondeKe;
     PushR(Game, R);
 }
 
 int main(){
-    loading(3);
-    delay(250);
-    Logo();
-    printf("\n");
-    delay(250);
+    //loading(3);
+    //delay(250);
+    //Logo();
+    //printf("\n");
+    //delay(250);
     int inputmenu;
     MainMenu(&inputmenu);
 
@@ -339,12 +366,12 @@ int main(){
         //CreateEmptyRound(&R);
         
         rondeKe++;
-        permainanBerlangsung(rondeKe, &U1, &U2, &TP, &Game);
+        permainanBerlangsung(&U1, &U2, &TP, &Game);
         //saveRound(&U1, &U2,&Game,rondeKe);
         roundInfo R;
         R.Player[0] = U1;
         R.Player[1] = U2;
-        R.rondeKe = rondeKe;
+        R.rondeN = rondeKe;
         PushR(&Game, R);
 
 

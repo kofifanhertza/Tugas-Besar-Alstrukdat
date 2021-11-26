@@ -23,7 +23,7 @@ typedef struct {
 
 typedef struct {
   User Player[2]; /* tabel penyimpan elemen */
-  int rondeKe;
+  int rondeN;
   /* alamat TOP: elemen puncak */
 } roundInfo;
 
@@ -43,6 +43,11 @@ typedef struct {
 #define InfoTopR(S) (S).TOP->Info 
 #define NextR(P) (P)->Next
 #define InfoR(P) (P)->Info
+
+extern Round Base;
+extern int rondeKe;
+extern boolean undo;
+
 
 
 /* Prototype manajemen memori */
