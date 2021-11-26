@@ -181,8 +181,13 @@ void startTurn(User *U1, User *U2, Tele *T, Round *Game){
         } else if (strcmp(input, "UNDO") == 0){
             roundInfo save;
             PopR(Game, &save);
-            *U1 = (save).Player[0];
-            *U2 = (save).Player[1];
+            if (Nama(*U1) == (save).Player[0].Nama){
+                *U1 = (save).Player[0];
+                *U2 = (save).Player[1];
+            } else {
+                *U1 = (save).Player[1];
+                *U2 = (save).Player[0];
+            }
             printf("Check State: \n");
             //commandMAP(&((*R).P1), &((*R).P2));
             printf("U1: %d\n", Curr(save.Player[0]));
