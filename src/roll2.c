@@ -158,8 +158,20 @@ void roll2(User *U, Tele T, Player P){
     
          else if ((*U).Curr == (*U).P.Length){
                         printf("%s berada di petak %d\n",(*U).Nama,(*U).P.Length);
-                        printf("%s telah mencapai ujung\n",(*U).Nama);
+                        printf("%s telah mencapai ujung! Permainan selesai.\n",(*U).Nama);
+                        printf("   *********************************************   \n");
+                        printf("                .-=========-.       \n");
+                        printf("                \'-=======-'/       \n");
+                        printf("                _|   .=.   |_       \n");
+                        printf("                ((|  {{1}}  |))     \n");
+                        printf("                \\|   /|\\   |/     \n");
+                        printf("                \\__ '`' __/        \n");
+                        printf("                    _`) (`_         \n");
+                        printf("                  _/_______\\_      \n");
+                        printf("                 /___________\\     \n");
+                        printf("   *********************************************   \n");
                         printf("Pemenang game ini adalah %s\n",(*U).Nama);
+                        printf("   *********************************************   \n");
 }}
             
 }
