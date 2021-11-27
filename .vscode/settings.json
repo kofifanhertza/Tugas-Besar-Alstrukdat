@@ -5,7 +5,8 @@
         "mesin_konf.h": "c",
         "user.h": "c",
         "map.h": "c",
-        "move.h": "c"
+        "move.h": "c",
+        "cmath": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

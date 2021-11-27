@@ -2,7 +2,7 @@
 // Setiap kali permainan, kondisi state setiap pemain harus dimasukkan ke Stack State
 // Command UNDO dijalankan
 // ceritanya lagi main
-#include "../ADT/Mesin/map.h"
+#include "../PlayerMap/map.h"
 #include "stackundo.h"
 #include "stacklist.h"
 /*

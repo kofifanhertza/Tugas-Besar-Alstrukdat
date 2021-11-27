@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>    
+#include <math.h>
 
 
 int search (Tele T,User *U){
@@ -170,10 +171,12 @@ void checkTele(User *U, Tele T, int i){
 void roll2(User *U, User *U2, Tele T, Player P){  
     int dice1, i;   
     srand ( time(NULL) );
+    int fl;
+    fl = floor(((*U).MaxRoll/2));
     if (Search((*U).ActiveSkill, 3) != Nil){ 
-        dice1 = (rand()%((*U).MaxRoll-((*U).MaxRoll/2)+1)) + ((*U).MaxRoll/2);
+        dice1 = (rand()%((*U).MaxRoll-fl+1) + fl);
     } else if (Search((*U).ActiveSkill, 4) != Nil){
-        dice1 = (rand()%((*U).MaxRoll/2)) + 1;
+        dice1 = (rand()%(fl)) + 1;
     } else{ 
         dice1 =  (rand()%((*U).MaxRoll)) + 1 ; 
     }

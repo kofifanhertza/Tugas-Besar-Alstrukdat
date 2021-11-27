@@ -1,48 +1,16 @@
-
-//#include "./ADT/List/boolean.h"
-//#include "./ADT/List/listdp.h"
-//#include "./ADT/List/listlinier.h"
-//#include "./ADT/List/queuelist.h"
-//#include "./ADT/List/stacklist.h"
-#include "ADT/Mesin/map.h"
-#include "ADT/Mesin/mesin_kata.h"
+#include "ADT/PlayerMap/map.h"
+#include "ADT/Mesin/mesin_konf.h"
 #include "ADT/Skill/listskill.h"
-
+#include "ADT/Stack/stacklist.h"
+#include "ADT/move/move.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-boolean endGame;
+boolean endGame=false;
 int rondeKe;
 User U1, U2;
-//User U1, U2;
-
-void Inspectt(Tele T, Player P){
-    int X, i;
-    char symbol;
-    printf("Masukkan petak : "); scanf("%d",&X);
-
-    i = 1;
- 
-    while (T.BeforeTele[i] != X && i <= T.bykTele){ //Mencari lokasi teleporter dan isi peta
-    
-        i = i + 1;
-    }
-    
-    
-    symbol = P.Map[X];
- 
-    if (symbol == '#'){
-        printf("Petak %d merupakan petak terlarang.\n",X);
-    } else { //symbol == '.'
-        if (i <= T.bykTele){
-            printf("Petak %d memiliki teleporter menuju %d\n",X,T.AfterTele[i]);
-        } else { //i > U.P.Length  
-            printf("Petak %d merupakan petak kosong.\n",X);
-        }
-    }
-
-}
+Tele TP;
 
 void InputAngka(int *angka)
 /* Membaca input angka dari user */
@@ -51,16 +19,7 @@ void InputAngka(int *angka)
     scanf("%d", angka);
 }
 
-/*
-void clear(){
-    #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
-        system("clear");
-    #endif
 
-    #if defined(_WIN32) || defined(_WIN64)
-        system("cls");
-    #endif
-}*/
 
 void delay(int milli_seconds)
 {
@@ -90,6 +49,36 @@ void loading(int n){
     }
     printf("]\n");
 
+}
+
+void masterpiece(){
+    printf("  ");
+    for(int i = 0;i<60;i++){
+        delay(50);
+        printf("*");    
+    }
+
+    printf("\n");
+
+
+    delay(1000);
+    printf("   ********************************************************\n");
+    printf("   *                   Special Thanks To:                 *\n");
+    printf("   *                  TUHAN YANG MAHA ESA                 *\n");
+    printf("   *  Dosen Pengajar IF2111 Algoritma dan Struktur Data   *\n");
+    printf("   *             All Fabulous IF2111 Assistants           *\n");
+    printf("   *                   Visual Studio Code                 *\n");
+    printf("   *                         GitHub                       *\n");
+    printf("   *                  Internet Connection                 *\n");
+    printf("   *                                                      *\n");
+    printf("   *                       Created By :                   *\n");
+    printf("   *        Kofifan Hertza Haribowo       18220022        *\n");
+    printf("   *        Salimatussholati Az Zahra     18220054        *\n");
+    printf("   *        Tania Junardi Chua            18220067        *\n");
+    printf("   *        Hughie Raymonelika Manggala   18220100        *\n");
+    printf("   *        Thomas Stefen Mardianto       18220106        *\n");
+    printf("   *                                                      *\n");
+    printf("   ********************************************************\n");
 }
 
 void Logo(){
@@ -123,7 +112,7 @@ void Logo(){
     printf("     ****                               ==MAIN MENU==                              ****   \n");
     printf("     ****                                1. New Game                               ****   \n");
     printf("     ****                                2. Exit                                   ****   \n");
-    printf("     ****                                3. Load Game                              ****   \n");
+    // printf("     ****                                3. Load Game                              ****   \n");
     printf("     **********************************************************************************   \n");
 }
 
@@ -134,138 +123,146 @@ void MainMenu(int *inputmenu){
     printf("\x1b[0m");
     while (*inputmenu!=1 && *inputmenu!=2 && *inputmenu!=3){
         printf("Input tidak terdefinisi, silahkan masukan angka menu\n");
-        printf("Masukkan command :\n>");
+        printf("Masukkan command :\n> ");
         printf("\x1b[1m"); //bold
         InputAngka(inputmenu);
         printf("\x1b[0m");
     }
 } 
 
-void readConfig(User *U, Tele *T, char fileconfig[]){
-    int i;
-    SetUser(U);
-
-    STARTKATA(fileconfig);
-    (*U).P = readPlayer((*U).P);
-    
-    *T = readTele(*T);
-}
-
-/*
-void Teleport(Tele *T){
-    *T = readTele(*T);
-    printf("Byk tele:%d\n", (*T).bykTele);
-    
-    printf("Before: ");
-    for(int i=1;i<=(*T).bykTele;i++) {   
-        printf("%d ", (*T).BeforeTele[i]);}
-    printf("\n");
-    
-    printf("After: ");
-    for(int i=1;i<=(*T).bykTele;i++) {   
-        printf("%d ", (*T).AfterTele[i]);
-    }
-    printf("\n");
-}*/
 
 
-void Konfigurasi(char fileconfig[], User *U1, User *U2, Tele *TP){
-    //Memulai permainan
-    /*
-    int nplayer;
-    scanf("Masukkan jumlah pemain: %d", &nplayer);
 
-    for(int i = 0;i<nplayer;i++){
-        char name;scanf("Masukkan nama pemain: %s",name);
-        Player P1;
-        Tele TP1;
-        readConfig(&P,&TP); 
-    }*/
-    
-    printf("Masukkan Nama Player 1 : ");scanf("%s", ((*U1).Nama));
-    printf("\nMasukkan Nama Player 2 : ");scanf("%s", ((*U2).Nama));
-    readConfig(&(*U1),&(*TP), fileconfig);
-    printf("*****************************\n");
-    printf("\n\n");
-    (*U1).MaxRoll = (*U1).P.MaxRollAwal;
-    printf("Player 1 : %s\n", (*U1).Nama);
-    printConfig(&((*U1).P), &(*TP));
-    printf("MaxRoll Player 1 saat ini: %d\n", (*U1).MaxRoll); //MaxRoll seorang user dapat berubah di tengah permainan
-    ((*U2).P) = copyPlayer((*U1).P);
-    
-    //TPdup = copyTele(TP1);
-    printf("\n\n");
-    (*U2).MaxRoll = (*U2).P.MaxRollAwal;
-    printf("Player 2 : %s\n", (*U2).Nama);
-    printConfig(&((*U2).P), &(*TP));
-    printf("MaxRoll Player 2 saat ini: %d\n", (*U2).MaxRoll);
-}
 
-void printConfig(Player *P, Tele *T){
-
-    printf("Panjang peta: %d\n", (*P).Length);
-    
-    outputPlayerMap((*P));printf("\n");
-    
-    printf("MaxRoll Awal:%d\n", (*P).MaxRollAwal); //MaxRollAwal sesuai dengan file konfigurasi
-
-    printf("Byk tele:%d\n", (*T).bykTele);
-    
-    printf("Before: ");
-    for(int i=1;i<=(*T).bykTele;i++) {   
-        printf("%d ", (*T).BeforeTele[i]);}
-    printf("\n");
-    
-    printf("After: ");
-    for(int i=1;i<=(*T).bykTele;i++) {   
-        printf("%d ", (*T).AfterTele[i]);
-    }
-    
-    printf("\n");
-    
-}
-
-void startTurn(User *U1, User *U2, Tele T){
+void startTurn(roundInfo *R,Tele *T, Round *Game){
     int count=1;
-    printf("Giliran %s Nih...\n", (*U1).Nama);
-    (*U1).ActiveSkill = EmptyBuff(*U1) ;
-    (*U1).SkillList = SkillRandomizer(*U1) ;
-    commandMAP(U1, U2);
+    printf("\nGiliran %s Nih...\n", ((*R).Player[0]).Nama);
+
+    CopyList(&(*R).Player[0].SkillList, &(Game->TOP->Info.Player[0].SkillList)) ;
+    CopyList(&(*R).Player[1].SkillList, &(Game->TOP->Info.Player[1].SkillList)) ;
+
+    (*R).Player[0].ActiveSkill = EmptyBuff((*R).Player[0]) ;
+    (*R).Player[0].SkillList = SkillRandomizer((*R).Player[0]) ;
+    commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
     char input[10];
     boolean endTurn = false;
+    boolean roll = false ;
     while (!endTurn){
         
         printf("Masukkan Command: ");
         scanf(" %s", input);
 
         if (strcmp(input, "SKILL") == 0) {
-            *U1 = SKILL((*U1), &(*U2));
+            if (!roll) {
+                SKILL(&((*R).Player[0]), &((*R).Player[1]),((*R).Player[0]).P, *T);
+            } else {
+                printf("%s tidak bisa menggunakan skill karena sudah bergerak!\n", Nama((*R).Player[0])) ;
+            }
         } else if (strcmp(input, "MAP") == 0){
-            commandMAP(U1, U2);
+            commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
+        } else if (strcmp(input, "DESC") == 0) {
+            PrintDesc() ;
         } else if (strcmp(input, "BUFF") == 0){
-            PrintBuff((*U1).ActiveSkill, (*U1));
+            PrintBuff(((*R).Player[0]).ActiveSkill, ((*R).Player[0]));
             printf("\n");
         } else if (strcmp(input, "INSPECT") == 0){
-            Inspectt(T, (*U1).P) ;
+            Inspectt(*T, ((*R).Player[0]).P) ;
         } else if (strcmp(input, "ROLL") == 0){
             if (count < 2) {
-            roll2(&(*U1), T, (*U1).P);
-            printf("%d\n",(*U1).Curr);
-            (*U1).P = UpdateCurrPos(*U1);
+            roll2(&((*R).Player[0]), &((*R).Player[1]), *T, ((*R).Player[0]).P);
+            ((*R).Player[0]).P = UpdateCurrPos((*R).Player[0]);
             count += 1;
-            commandMAP(U1, U2);                
+            commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
+            roll = true ;                
             } else {
                 printf("Tidak boleh roll lagi! \n");
             }
 
-        } else if (strcmp(input, "SAVE") == 0){
-            //bismillah
-        } else if (strcmp(input, "UNDO") == 0){
-            //bismillah
+        }  else if (strcmp(input, "UNDO") == 0){
+            if (R->rondeKe != 1) {
+                PopR(Game, R);
+            }
+        
+            endTurn = true ;
+
         } else if (strcmp(input, "ENDTURN") == 0){
-            endTurn = true;
-            break;
+            if (roll == false) {
+                printf("Belum roll, tidak boleh endturn!\n");
+            }
+            else {
+                int count=1;
+                printf("\nGiliran %s Nih...\n", ((*R).Player[1]).Nama);
+                ((*R).Player[1]).ActiveSkill = EmptyBuff((*R).Player[1]) ;
+                ((*R).Player[1]).SkillList = SkillRandomizer((*R).Player[1]) ;
+                commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
+                char input[10];
+                boolean endTurn = false;
+                boolean roll = false ;
+                while (!endTurn){
+                    
+                    printf("Masukkan Command: ");
+                    scanf(" %s", input);
+
+                    if (strcmp(input, "SKILL") == 0) {
+                        if (!roll) {
+                            SKILL(&((*R).Player[1]), &((*R).Player[0]),((*R).Player[1]).P, *T);
+                        } else {
+                            printf("%s tidak bisa menggunakan skill karena sudah bergerak!\n", Nama((*R).Player[1])) ;
+                        }
+                    } else if (strcmp(input, "MAP") == 0){
+                        commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
+                    } else if (strcmp(input, "DESC") == 0) {
+                        PrintDesc() ;
+                    } else if (strcmp(input, "BUFF") == 0){
+                        PrintBuff(((*R).Player[1]).ActiveSkill, ((*R).Player[1]));
+                        printf("\n");
+                    } else if (strcmp(input, "INSPECT") == 0){
+                        Inspectt(*T, ((*R).Player[1]).P) ;
+                    } else if (strcmp(input, "ROLL") == 0){
+                        if (count < 2) {
+                        roll2(&((*R).Player[1]), &((*R).Player[0]), *T, ((*R).Player[1]).P);
+                        ((*R).Player[1]).P = UpdateCurrPos((*R).Player[1]);
+                        count += 1;
+                        commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
+                        roll = true ;                
+                        } else {
+                            printf("Tidak boleh roll lagi! \n");
+                        }
+
+                    } else if (strcmp(input, "UNDO") == 0){
+                        endTurn = true ;
+
+                    } else if (strcmp(input, "ENDTURN") == 0){
+                        if (roll == false) {
+                            printf("Belum roll, tidak boleh endturn!\n");
+                            endTurn = false ;
+                        }
+                        else {
+                            R->rondeKe = R->rondeKe + 1 ;
+                            PushR(Game, *R);
+                            endTurn = true;
+                            
+                        }
+                    } else if (strcmp(input, "EXIT") == 0){
+                        printf("Keluar dari game\n") ;
+                        endTurn = true;
+                        endGame = true;
+                        exit(0);
+                    } else {
+                        printf("Error! command is not correct.\n");
+                    }
+                }
+                
+            } 
+            
+            if (roll!= false){
+                endTurn = true ;
+            } else {
+                endTurn = false ;
+            }
+        
         } else if (strcmp(input, "EXIT") == 0){
+            printf("Keluar dari game\n") ;
             endTurn = true;
             endGame = true;
             exit(0);
@@ -273,79 +270,59 @@ void startTurn(User *U1, User *U2, Tele T){
             printf("Error! command is not correct.\n");
         }
     }
-    //setiap turn memunculkan konfigurasi peta, 
-    //buff Cermin Pengganda, Senter Pembesar Hoki dan Senter Pengecil Hoki akan di-reset, 
-    //serta pemain akan mendapatkan 1 skill secara random.
+
 }
 
 
-void startRonde(int n, User *U1, User *U2, Tele T){
-    int ronde;//not yet complete
+void startRonde(Tele *T, Round *Game){
     boolean endGame = false;
+    boolean undo = false;
+    
+    roundInfo R ;
+    R = Game->TOP->Info ;
+    int n = R.rondeKe ;
+
    
-    printf("Teng teng... Ronde ke-%d dimulaii \n",n);
-    startTurn(U1,U2,T);
-    startTurn(U2,U1,T);
+    printf("\nTeng teng... Ronde ke-%d dimulaii \n",n);
+    
+    startTurn(&R,T, Game);
+ 
     
 }
 
 boolean isWExist(User *U1, User *U2) {
     // Permainan akan berakhir jika sudah ada satu pemain yang mencapai petak N.
-    printf("%d %d\n",Curr(*U1),Curr(*U2));
-    printf("%d %d\n",(*U1).P.Length,(*U2).P.Length);
     return (Curr(*U1) == (*U1).P.Length || Curr(*U2) == (*U2).P.Length);
 }
 
-void permainanBerlangsung(int n, User *U1, User *U2, Tele T){
-    int lanjut;
-    printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik '1' untuk 'Ya,' dan '0' untuk 'Tidak': ");scanf("%d", &lanjut);
-    while ((lanjut != 1) && (lanjut != 0)) {
-        printf("Masukkan salah. Ulangi lagi!\n");
-        printf("Apakah Anda ingin lanjut ke ronde berikutnya? Ketik '1' untuk 'Ya,' dan '0' untuk 'Tidak': ");scanf("%d", &lanjut);
-        }
-    if (lanjut == 0) {
-        endGame = true;
-        exit(0) ;}
-    else if (lanjut == 1) {
-            startRonde(n, U1, U2, T);
-    }
-}
-void awalPermainan(int inputmenu, User *U1, User *U2, Tele T){
+
+void awalPermainan(int inputmenu, User *U1, User *U2, Tele *T, Round *Game){
     
         if (inputmenu == 1){
-        printf("Selanjutnya Konfigurasi Map (meminta input nama file konfigurasi map)\n ");
+        printf("Selanjutnya Konfigurasi Map (meminta input nama file konfigurasi map)\n");
 
-        //Jalankan game dengan metode new game
-        //Meminta input nama file konfigurasi level
-        //KonfigurasiMap(Nama File Konfigurasi level)
-
-        //Input n jumlah pemain (2-4)
-        //Input nama-nama pemain
-
-        //Start Game --> Command() 
-        //Prosedur Start Game akan menjalankan permainan mulai dari Ronde 1 turn orang ke-1...orang ke-n dengan memanggil prosedur Command() dan menampilkan peta
-
-        //Prosedur Command() akan meminta input command dari player yang sedang bermain(seperti Skill, Map, Buff, Inspect, Roll, Save, hingga player memasukkan EndTurn/Undo)
-        //Prosedur Command() akan terus berjalan hingga terdapat satu pemenang (setiap ronde berakhir akan memanggil prosedur savestate, ronde berakhir ketika semua pemain telah menyelesaikan turn atau ketika terdapat pemenang)
-        //Ketika terdapat pemain yang mencapai garis finish, memanggil prosedur Finish() yang akan menampilkan nama pemenang berdasarkan peringkat dan informasi bahwa game telah berakhir
-        //kembali ke MainMenu
 
         (*U1).Curr = IdxMin;
         (*U2).Curr = IdxMin;
         char fileConfig[10];
         printf("Masukkan nama file konfigurasi level: "); scanf("%s",fileConfig);
-        Konfigurasi(fileConfig, U1, U2, &T);
+        Konfigurasi(fileConfig, U1, U2, T);
         (*U1).P.Map[1] = '*';
         (*U2).P.Map[1] = '*';
-        rondeKe = 1;
-        startRonde(rondeKe, U1, U2, T); //Ronde pertama
+        roundInfo R;
+        R.rondeKe = 1;
+        R.Player[0] = *U1;
+        R.Player[1] = *U2;
+        PushR(Game,R);
+
+        
+
         
 
     } else if (inputmenu == 2){
         endGame = true;
-        printf("Keluar dari game, break all process.\n");
+        printf("Berhasil keluar dari game.\n");
         
-        //Keluar dari game.
 
         
     } else if (inputmenu == 3){
@@ -354,27 +331,28 @@ void awalPermainan(int inputmenu, User *U1, User *U2, Tele T){
                 
         char fileConfig[10];
         scanf("Masukkan nama file konfigurasi level yang telah disimpan: %s",fileConfig);
-        Konfigurasi(fileConfig, U1, U2,&T);
+        Konfigurasi(fileConfig, U1, U2,T);
 
     }
 }
+
+
+
 int main(){
     loading(3);
     delay(250);
     Logo();
     printf("\n");
     delay(250);
-    Tele TP;
+    masterpiece();
     int inputmenu;
     MainMenu(&inputmenu);
-    awalPermainan(inputmenu, &U1, &U2, TP);
+    rondeKe = 0;
+    Round Game;
+    CreateEmptyRS(&Game);
+    awalPermainan(inputmenu, &U1, &U2, &TP, &Game);
     while (isWExist(&U1, &U2) != true && endGame != true) {
-        rondeKe++;
-        permainanBerlangsung(rondeKe, &U1, &U2, TP);
+        startRonde(&TP, &Game);
     }
     printf("Permainan berakhir\n");
-    
-
-
-
 }
