@@ -5,13 +5,14 @@
 #include"time.h"
 
 
+
 int Randomizer (User U) {
     int skill, x, superRandom ;
     srand(time(NULL)) ;
 
-    x = rand() % 100 + 1;
-    x = rand() % 100 + 1;
-    
+    // x = rand() % 100 + 1;
+    // x = rand() % 100 + 1;
+    x = 17 ;
 
     if (x > 0 && x <= 10) {
         skill = 1 ; // Pintu Ga Ke Mana Mana 
@@ -70,7 +71,7 @@ int Randomizer (User U) {
 return skill ;
 }
 
-void BalingBaling(User *U, Tele T, Player P){  
+void BalingBaling(User *U, User *U2, Tele T, Player P){  
     int dice1, i;   
     srand ( time(NULL) );
     dice1 = ((rand()%((*U).MaxRoll)) + 1) ;
@@ -111,65 +112,60 @@ void BalingBaling(User *U, Tele T, Player P){
                                 printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
                                 // ChangeCurrPlace((*U), T.AfterTele[i]) ; 
                                 (*U).Curr = T.AfterTele[i] ;
-                                if ((*U).Curr == (*U).P.Length){
-                                    printf("%s berada di petak %d\n",(*U).Nama,(*U).P.Length);
-                                    printf("%s telah mencapai ujung\n",(*U).Nama);
-                                    printf("Pemenang game ini adalah %s\n",(*U).Nama);} 
+                                cekPemenang(*U, *U2) ;
                             }}}
                  else if (P.Map[(*U).Curr+dice1] =='#' || P.Map[(*U).Curr+dice1] > (*U).P.Length){
                     printf ("%s tidak dapat bergerak.\n", (*U).Nama);
                 }
         }
 
-void MesinWaktu(User *U, Tele T, Player P){  
+void MesinWaktu(User *U, User *U2, Tele T, Player P){  
     int dice1, i;   
     srand ( time(NULL) );
     dice1 = ((rand()%((*U).MaxRoll)) + 1) ;
     printf ("%s mendapatkan angka %d.\n", (*U).Nama,dice1); 
-            if (P.Map[(*U).Curr - dice1] =='.') {
-                    printf ("%s mundur %d langkah.\n", (*U).Nama,dice1);
-                    (*U).Curr = (*U).Curr - dice1;
-                    printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
-                    i = search(T, &(*U));
-                    if (i==-1){
-                        printf("%s tidak menemukan teleporter\n", (*U).Nama);}
-                    else if (i!=-1){
-                        printf("%s menemukan teleporter\n", (*U).Nama);
-                        if (Search((*U).SkillList, 1) != Nil){
-                            printf("%s memiliki Pintu Ga Ke Mana Mana.\n", (*U).Nama);
-                            printf("Apakah %s ingin menggunakan Skill Pintu Ga Ke Mana Mana ?\n", (*U).Nama);
-                            printf("1. Ya\n") ;
-                            printf("2. Tidak\n") ;
-                            printf("Pilihan : ") ;int pilihan;
-                            scanf ("%d", &pilihan);
-                            if (pilihan==1){
-                                printf("%s tidak teleport.\n", (*U).Nama);
-                                DelP(&SkillList(*U), 1) ;
-                                printf("Skill Pintu Ga Ke Mana Mana berhasil digunakan !\n") ;}
-                                
-                            else{
-                                if (pilihan==2){
-                                    printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
-                                    (*U).Curr = T.AfterTele[i] ;
-                                    if ((*U).Curr == (*U).P.Length){
-                                    printf("%s berada di petak %d\n",(*U).Nama,(*U).P.Length);
-                                    printf("%s telah mencapai ujung\n",(*U).Nama);
-                                    printf("Pemenang game ini adalah %s\n",(*U).Nama);} 
-                                     }}}
-                        else if (Search((*U).SkillList, 1) == Nil){
-                                printf("%s tidak memiliki Pintu Ga Ke Mana Mana.\n", (*U).Nama);
-                                printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
-                                // ChangeCurrPlace((*U), T.AfterTele[i]) ; 
-                                (*U).Curr = T.AfterTele[i] ;
-                                if ((*U).Curr == (*U).P.Length){
-                                    printf("%s berada di petak %d\n",(*U).Nama,(*U).P.Length);
-                                    printf("%s telah mencapai ujung\n",(*U).Nama);
-                                    printf("Pemenang game ini adalah %s\n",(*U).Nama);} 
-                            }}}
-                 else if (P.Map[(*U).Curr - dice1] =='#' || P.Map[(*U).Curr - dice1] < 0 ){
-                    printf ("%s tidak dapat bergerak.\n", (*U).Nama);
+    if (P.Map[(*U).Curr - dice1] =='.') {
+        printf ("%s mundur %d langkah.\n", (*U).Nama,dice1);
+        (*U).Curr = (*U).Curr - dice1;
+        printf ("%s berada di petak %d.\n", (*U).Nama,(*U).Curr);
+        i = search(T, &(*U));
+        if (i==-1){
+            printf("%s tidak menemukan teleporter\n", (*U).Nama);}
+        else if (i!=-1){
+            printf("%s menemukan teleporter\n", (*U).Nama);
+            if (Search((*U).SkillList, 1) != Nil){
+                printf("%s memiliki Pintu Ga Ke Mana Mana.\n", (*U).Nama);
+                printf("Apakah %s ingin menggunakan Skill Pintu Ga Ke Mana Mana ?\n", (*U).Nama);
+                printf("1. Ya\n") ;
+                printf("2. Tidak\n") ;
+                printf("Pilihan : ") ;int pilihan;
+                scanf ("%d", &pilihan);
+                if (pilihan==1){
+                    printf("%s tidak teleport.\n", (*U).Nama);
+                    DelP(&SkillList(*U), 1) ;
+                    printf("Skill Pintu Ga Ke Mana Mana berhasil digunakan !\n") ;
+                } else if (pilihan==2){
+                    printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
+                    (*U).Curr = T.AfterTele[i] ;
+                    if ((*U).Curr == (*U).P.Length){
+                        printf("%s berada di petak %d\n",(*U).Nama,(*U).P.Length);
+                        printf("%s telah mencapai ujung\n",(*U).Nama);
+                        printf("Pemenang game ini adalah %s\n",(*U).Nama);
+                    } 
                 }
+            } else if (Search((*U).SkillList, 1) == Nil){
+                        printf("%s tidak memiliki Pintu Ga Ke Mana Mana.\n", (*U).Nama);
+                        printf("%s teleport ke petak %d.\n", (*U).Nama, T.AfterTele[i]);
+                        (*U).Curr = T.AfterTele[i] ;
+                        cekPemenang(*U, *U2) ;
+                    }
         }
+    }
+    else if ((P.Map[(*U).Curr - dice1] =='#') || (P.Map[(*U).Curr - dice1] < 0) ){
+                printf ("%s tidak dapat bergerak.\n", (*U).Nama);
+            }
+}
+
 
 void UseIdxSkill (int idx, User *U) {
     int skill, i = 1 ;
@@ -183,15 +179,18 @@ void UseIdxSkill (int idx, User *U) {
 
     if (skill == 1) {
         printf("%s berhasil digunakan Skill Pintu Ga Ke Mana Mana !\n", Nama(*U)) ;
+        InsVLast(&ActiveSkill(*U), skill) ; 
     }
     else if (skill == 2) {
-        
+        InsVLast(&ActiveSkill(*U), skill) ;  
     }
     else if (skill == 3) {
         printf("%s berhasil digunakan Skill Senter Pembesar Hoki !\n", Nama(*U)) ;
+        InsVLast(&ActiveSkill(*U), skill) ;  
     }
     else if (skill == 4) {
         printf("%s berhasil digunakan Skill Senter Pengecil Hoki !\n", Nama(*U)) ;
+        InsVLast(&ActiveSkill(*U), skill) ;  
     }
     else if (skill == 5) {
         
@@ -203,7 +202,7 @@ void UseIdxSkill (int idx, User *U) {
         
     } 
     DelP(&SkillList(*U), skill) ;   
-    InsVLast(&ActiveSkill(*U), skill) ;   
+     
     
 }
 
@@ -314,9 +313,6 @@ void PrintBuff (List L, User U) {
         else if (Info(q) == 4) {
             printf("%d. Senter Pengecil Hoki\n", i) ; 
         }
-        else if (Info(q) == 5) {
-            printf("%d. Mesin Penukar Posisi\n", i) ;
-        }
         q = Next(q) ;
         i = i + 1 ;
         }
@@ -394,6 +390,13 @@ int CommandSkill (User U) {
     return x ;
 }
 
+void CerminPengganda (User *U) {
+    int skill1, skill2 ;
+    skill1 = Randomizer(*U) ;
+    skill2 = Randomizer(*U) ;
+    InsVLast(&(*U).SkillList, skill1) ;
+    InsVLast(&(*U).SkillList, skill2) ;    
+}
 
 List SkillRandomizer (User U) {
     int skill  ;
@@ -440,8 +443,21 @@ List SkillRandomizer (User U) {
 
 List EmptyBuff (User U) {
     address deleted ;
-    while (!IsEmpty(ActiveSkill(U))) {
-        DelFirst(&ActiveSkill(U), &deleted) ;
+    if (!IsEmpty(U.ActiveSkill)) {
+        if (Search(U.ActiveSkill, 1) == Nil) {
+            while (!IsEmpty(U.ActiveSkill))
+            {
+                DelFirst(&ActiveSkill(U), &deleted) ;
+            }
+            
+        } else {
+            while (Info(First(U.ActiveSkill)) != 1 ) {
+                DelFirst(&ActiveSkill(U), &deleted) ;
+            }
+            while (Next(First(U.ActiveSkill)) != Nil ) {
+                DelLast(&ActiveSkill(U), &deleted) ;
+            }
+        }
     }
     return ActiveSkill(U) ;
 }
@@ -464,8 +480,8 @@ void SKILL (User *U, User *U2, Player P, Tele T)  {
                         use = false ;
                     } else {
                         printf("%s berhasil digunakan Skill Cermin Pengganda !\n", (*U).Nama) ;
-                        (*U).SkillList = SkillRandomizer(*U) ;
-                        (*U).SkillList = SkillRandomizer(*U) ;
+                        CerminPengganda(U) ;
+                        use = true ;
                     }
                 }
                 if (IdxSkill(&SkillList(*U), inputCommand) == 3) {
@@ -487,18 +503,19 @@ void SKILL (User *U, User *U2, Player P, Tele T)  {
                     (*U).P = UpdateCurrPos(*U);
                     (*U2).P = UpdateCurrPos(*U2);
                     printf("Posisi %s dan %s berhasil ditukar !\n", Nama(*U), Nama(*U2)) ;
-                    use = true ;
+                    DelP(&SkillList(*U), 5) ;
+                    use = false ;
 
                 } else if  (IdxSkill(&SkillList(*U), inputCommand) == 6) {
                     printf("%s berhasil menggunakan Baling Baling Jambu !\n", Nama(*U)) ;
-                    BalingBaling(&(*U2), T, P) ;
+                    BalingBaling(&(*U2),&(*U), T, P) ;
                     (*U2).P = UpdateCurrPos(*U2);
                     DelP(&SkillList(*U), 6) ;
                     use = false ;
 
                 } else if  (IdxSkill(&SkillList(*U), inputCommand) == 7) {
                     printf("%s berhasil menggunakan Mesin Waktu !\n", Nama(*U)) ;
-                    MesinWaktu(&(*U2), T, P) ;
+                    MesinWaktu(&(*U2),&(*U), T, P) ;
                     (*U2).P = UpdateCurrPos(*U2);
                     DelP(&SkillList(*U), 7) ;
                     use = false ;

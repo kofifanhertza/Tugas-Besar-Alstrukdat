@@ -52,7 +52,7 @@ void loading(int n){
 }
 
 void masterpiece(){
-    printf("  ");
+    printf("           ");
     for(int i = 0;i<60;i++){
         delay(50);
         printf("*");    
@@ -62,23 +62,23 @@ void masterpiece(){
 
 
     delay(1000);
-    printf("   ********************************************************\n");
-    printf("   *                   Special Thanks To:                 *\n");
-    printf("   *                  TUHAN YANG MAHA ESA                 *\n");
-    printf("   *  Dosen Pengajar IF2111 Algoritma dan Struktur Data   *\n");
-    printf("   *             All Fabulous IF2111 Assistants           *\n");
-    printf("   *                   Visual Studio Code                 *\n");
-    printf("   *                         GitHub                       *\n");
-    printf("   *                  Internet Connection                 *\n");
-    printf("   *                                                      *\n");
-    printf("   *                       Created By :                   *\n");
-    printf("   *        Kofifan Hertza Haribowo       18220022        *\n");
-    printf("   *        Salimatussholati Az Zahra     18220054        *\n");
-    printf("   *        Tania Junardi Chua            18220067        *\n");
-    printf("   *        Hughie Raymonelika Manggala   18220100        *\n");
-    printf("   *        Thomas Stefen Mardianto       18220106        *\n");
-    printf("   *                                                      *\n");
-    printf("   ********************************************************\n");
+    printf("             ********************************************************\n");
+    printf("             *                   Special Thanks To:                 *\n");
+    printf("             *                  TUHAN YANG MAHA ESA                 *\n");
+    printf("             *  Dosen Pengajar IF2111 Algoritma dan Struktur Data   *\n");
+    printf("             *             All Fabulous IF2111 Assistants           *\n");
+    printf("             *                   Visual Studio Code                 *\n");
+    printf("             *                         GitHub                       *\n");
+    printf("             *                  Internet Connection                 *\n");
+    printf("             *                                                      *\n");
+    printf("             *                       Created By :                   *\n");
+    printf("             *        Kofifan Hertza Haribowo       18220022        *\n");
+    printf("             *        Salimatussholati Az Zahra     18220054        *\n");
+    printf("             *        Tania Junardi Chua            18220067        *\n");
+    printf("             *        Hughie Raymonelika Manggala   18220100        *\n");
+    printf("             *        Thomas Stefen Mardianto       18220106        *\n");
+    printf("             *                                                      *\n");
+    printf("             ********************************************************\n");
 }
 
 void Logo(){
@@ -138,10 +138,12 @@ void startTurn(roundInfo *R,Tele *T, Round *Game){
     int count=1;
     printf("\nGiliran %s Nih...\n", ((*R).Player[0]).Nama);
 
+    
     CopyList(&(*R).Player[0].SkillList, &(Game->TOP->Info.Player[0].SkillList)) ;
     CopyList(&(*R).Player[1].SkillList, &(Game->TOP->Info.Player[1].SkillList)) ;
 
     (*R).Player[0].ActiveSkill = EmptyBuff((*R).Player[0]) ;
+
     (*R).Player[0].SkillList = SkillRandomizer((*R).Player[0]) ;
     commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
     char input[10];

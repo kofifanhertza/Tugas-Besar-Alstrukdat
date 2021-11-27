@@ -19,6 +19,9 @@ typedef struct
    int bykTele;
 } Tele;*/
 
+
+void cekPemenang(User U, User U2) ;
+
 int search (Tele T,User *U);
 // menampilkan idx dari U.Curr pada Tele
 void Inspectt(Tele T, Player P);
