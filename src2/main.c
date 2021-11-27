@@ -139,6 +139,7 @@ void Teleport(Tele *T){
 void startTurn(roundInfo *R,Tele *T, Round *Game){
     int count=1;
     printf("\nGiliran %s Nih...\n", ((*R).Player[0]).Nama);
+
     (*R).Player[0].ActiveSkill = EmptyBuff((*R).Player[0]) ;
     (*R).Player[0].SkillList = SkillRandomizer((*R).Player[0]) ;
     commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
@@ -152,7 +153,7 @@ void startTurn(roundInfo *R,Tele *T, Round *Game){
 
         if (strcmp(input, "SKILL") == 0) {
             if (!roll) {
-            (*R).Player[0] = SKILL(((*R).Player[0]), &((*R).Player[1]),((*R).Player[0]).P, *T);
+                SKILL(&((*R).Player[0]), &((*R).Player[1]),((*R).Player[0]).P, *T);
             } else {
                 printf("%s tidak bisa menggunakan skill karena sudah bergerak!\n", Nama((*R).Player[0])) ;
             }
@@ -205,7 +206,7 @@ void startTurn(roundInfo *R,Tele *T, Round *Game){
 
                     if (strcmp(input, "SKILL") == 0) {
                         if (!roll) {
-                        (*R).Player[1] = SKILL(((*R).Player[1]), &((*R).Player[0]),((*R).Player[1]).P, *T);
+                            SKILL(&((*R).Player[1]), &((*R).Player[0]),((*R).Player[1]).P, *T);
                         } else {
                             printf("%s tidak bisa menggunakan skill karena sudah bergerak!\n", Nama((*R).Player[1])) ;
                         }
@@ -240,6 +241,10 @@ void startTurn(roundInfo *R,Tele *T, Round *Game){
                             endTurn = false ;
                         }
                         else {
+                            printf("\n*********************\n") ;
+                            PrintSkill((*R).Player[0].SkillList) ;
+                            PrintSkill((*R).Player[1].SkillList) ;
+                            printf("\n*********************\n") ;
                             R->rondeKe = R->rondeKe + 1 ;
                             PushR(Game, *R);
                             endTurn = true;
@@ -254,10 +259,14 @@ void startTurn(roundInfo *R,Tele *T, Round *Game){
                         printf("Error! command is not correct.\n");
                     }
                 }
-                endTurn = true ;
+                
             } 
             
-            
+            if (roll!= false){
+                endTurn = true ;
+            } else {
+                endTurn = false ;
+            }
         
         } else if (strcmp(input, "EXIT") == 0){
             printf("Keluar dari game\n") ;
@@ -268,6 +277,9 @@ void startTurn(roundInfo *R,Tele *T, Round *Game){
             printf("Error! command is not correct.\n");
         }
     }
+
+
+
     //setiap turn memunculkan konfigurasi peta, 
     //buff Cermin Pengganda, Senter Pembesar Hoki dan Senter Pengecil Hoki akan di-reset, 
     //serta pemain akan mendapatkan 1 skill secara random.
