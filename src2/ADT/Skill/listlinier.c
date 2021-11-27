@@ -203,18 +203,14 @@ infotype Max (List L) {
 
 }
 
-void Konkat1 (List *L1, List *L2, List *L3){
-    CreateEmpty(L3);
-    First(*L3) = First(*L1);
-    First(*L1) = Nil;
-    if (IsEmpty(*L3)){
-        First(*L3) = First(*L2);
-    } else {
-        address now = First(*L3);
-        while (Next(now) != Nil){
-            now = Next(now);
-        }
-        Next(now) = First(*L2);
+void CopyList (List *L1, List *L2){
+    address AdrL1 ;
+    AdrL1 = First(*L1) ;
+    CreateEmpty(L2);
+    while (AdrL1 != Nil)
+    {
+        InsVLast(L2, Info(AdrL1)) ;
+        AdrL1 = Next(AdrL1) ;
     }
-    First(*L2) = Nil;
+    
 }

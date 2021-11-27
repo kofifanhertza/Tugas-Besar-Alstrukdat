@@ -8,10 +8,9 @@
 int Randomizer (User U) {
     int skill, x, superRandom ;
     srand(time(NULL)) ;
-    superRandom = rand() % 10 + 1 ;
-    for (int i ; i < superRandom ; i++) {
-        x = rand() % 100 + 1;
-    }
+
+    x = rand() % 100 + 1;
+    x = rand() % 100 + 1;
     
 
     printf("%d\n", x);
@@ -403,7 +402,6 @@ List SkillRandomizer (User U) {
     if (NbElmt(SkillList(U)) < 10) {
         
         skill = Randomizer(U) ;
-        srand(time(NULL)) ;
     }
     
 

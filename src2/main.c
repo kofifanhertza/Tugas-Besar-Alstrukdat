@@ -140,6 +140,9 @@ void startTurn(roundInfo *R,Tele *T, Round *Game){
     int count=1;
     printf("\nGiliran %s Nih...\n", ((*R).Player[0]).Nama);
 
+    CopyList(&(*R).Player[0].SkillList, &(Game->TOP->Info.Player[0].SkillList)) ;
+    CopyList(&(*R).Player[1].SkillList, &(Game->TOP->Info.Player[1].SkillList)) ;
+
     (*R).Player[0].ActiveSkill = EmptyBuff((*R).Player[0]) ;
     (*R).Player[0].SkillList = SkillRandomizer((*R).Player[0]) ;
     commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
