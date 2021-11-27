@@ -123,27 +123,3 @@ void Konfigurasi(char fileconfig[], User *U1, User *U2, Tele *TP){
     // printConfig(&((*U2).P), &(*TP));
     // printf("MaxRoll Player 2 saat ini: %d\n", (*U2).MaxRoll);
 }
-
-void printConfig(Player *P, Tele *T){
-
-    printf("Panjang peta: %d\n", (*P).Length);
-    
-    outputPlayerMap((*P));printf("\n");
-    
-    printf("MaxRoll Awal:%d\n", (*P).MaxRollAwal); //MaxRollAwal sesuai dengan file konfigurasi
-
-    printf("Byk tele:%d\n", (*T).bykTele);
-    
-    printf("Before: ");
-    for(int i=1;i<=(*T).bykTele;i++) {   
-        printf("%d ", (*T).BeforeTele[i]);}
-    printf("\n");
-    
-    printf("After: ");
-    for(int i=1;i<=(*T).bykTele;i++) {   
-        printf("%d ", (*T).AfterTele[i]);
-    }
-    
-    printf("\n");
-    
-}
