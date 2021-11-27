@@ -237,7 +237,7 @@ void startTurn(roundInfo *R,Tele *T, Round *Game){
                     } else if (strcmp(input, "ENDTURN") == 0){
                         if (roll == false) {
                             printf("Belum roll, tidak boleh endturn!\n");
-                            endTurn = true ;
+                            endTurn = false ;
                         }
                         else {
                             R->rondeKe = R->rondeKe + 1 ;
@@ -254,8 +254,9 @@ void startTurn(roundInfo *R,Tele *T, Round *Game){
                         printf("Error! command is not correct.\n");
                     }
                 }
+                endTurn = true ;
             } 
-            endTurn = true ;
+            
             
         
         } else if (strcmp(input, "EXIT") == 0){
