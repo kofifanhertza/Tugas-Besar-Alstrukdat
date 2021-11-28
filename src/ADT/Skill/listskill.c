@@ -10,9 +10,8 @@ int Randomizer (User U) {
     int skill, x, superRandom ;
     srand(time(NULL)) ;
 
-    // x = rand() % 100 + 1;
-    // x = rand() % 100 + 1;
-    x = 17 ;
+    x = rand() % 100 + 1;
+    x = rand() % 100 + 1;
 
     if (x > 0 && x <= 10) {
         skill = 1 ; // Pintu Ga Ke Mana Mana 
@@ -360,12 +359,12 @@ void PrintDesc () {
     } else if (i == 6){
         printf("\nBALING BALING JAMBU\n") ;
         printf("Chance  : 10%%\n") ;
-        printf("Desc    : Gunakan skill ini untuk membuat pemain maju sebanyak keluaran dadu!\n\n") ;
+        printf("Desc    : Gunakan skill ini untuk membuat pemain lawan maju sebanyak keluaran dadu!\n\n") ;
             
     } else if (i == 7){
         printf("\nMESIN WAKTU\n") ;
         printf("Chance  : 10%%\n") ;
-        printf("Desc    : Gunakan skill ini untuk membuat pemain mundur sebanyak keluaran dadu!\n\n") ;
+        printf("Desc    : Gunakan skill ini untuk membuat pemain lawan mundur sebanyak keluaran dadu!\n\n") ;
             
     } else {
         printf("\nERROR! Pilihan tidak valid !\n\n") ;
