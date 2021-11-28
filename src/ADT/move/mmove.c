@@ -27,22 +27,7 @@ void startTurn(roundInfo *R,Tele *T, Round *Game){
     while (!endTurn){       
         printf("Masukkan Command 'ROLL': ");
         scanf(" %s", input);
-        if (strcmp(input, "SKILL") == 0) {
-            if (!roll) {
-                SKILL(&((*R).Player[0]), &((*R).Player[1]),((*R).Player[0]).P, *T);
-            } else {
-                printf("%s tidak bisa menggunakan skill karena sudah bergerak!\n", Nama((*R).Player[0])) ;
-            }
-        } else if (strcmp(input, "MAP") == 0){
-            commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
-        } else if (strcmp(input, "DESC") == 0) {
-            PrintDesc() ;
-        } else if (strcmp(input, "BUFF") == 0){
-            PrintBuff(((*R).Player[0]).ActiveSkill, ((*R).Player[0]));
-            printf("\n");
-        } else if (strcmp(input, "INSPECT") == 0){
-            Inspectt(*T, ((*R).Player[0]).P) ;
-        } else if (strcmp(input, "ROLL") == 0){
+        if (strcmp(input, "ROLL") == 0) {
             if (count < 2) {
             roll2(&((*R).Player[0]), &((*R).Player[1]), *T, ((*R).Player[0]).P);
             ((*R).Player[0]).P = UpdateCurrPos((*R).Player[0]);
@@ -52,94 +37,8 @@ void startTurn(roundInfo *R,Tele *T, Round *Game){
             } else {
                 printf("Tidak boleh roll lagi! \n");
             }
-        }  else if (strcmp(input, "UNDO") == 0){
-            if (R->rondeKe != 1) {
-                PopR(Game, R);
-            }
-            endTurn = true ;
-        } else if (strcmp(input, "ENDTURN") == 0){
-            if (roll == false) {
-                printf("Belum roll, tidak boleh endturn!\n");
-            }
-            else {
-                int count=1;
-                printf("\nGiliran %s Nih...\n", ((*R).Player[1]).Nama);
-                ((*R).Player[1]).ActiveSkill = EmptyBuff((*R).Player[1]) ;
-                ((*R).Player[1]).SkillList = SkillRandomizer((*R).Player[1]) ;
-                commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
-                char input[10];
-                boolean endTurn = false;
-                boolean roll = false ;
-                while (!endTurn){
-                    
-                    printf("Masukkan Command 'ROLL': ");
-                    scanf(" %s", input);
-
-                    if (strcmp(input, "SKILL") == 0) {
-                        if (!roll) {
-                            SKILL(&((*R).Player[1]), &((*R).Player[0]),((*R).Player[1]).P, *T);
-                        } else {
-                            printf("%s tidak bisa menggunakan skill karena sudah bergerak!\n", Nama((*R).Player[1])) ;
-                        }
-                    } else if (strcmp(input, "MAP") == 0){
-                        commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
-                    } else if (strcmp(input, "DESC") == 0) {
-                        PrintDesc() ;
-                    } else if (strcmp(input, "BUFF") == 0){
-                        PrintBuff(((*R).Player[1]).ActiveSkill, ((*R).Player[1]));
-                        printf("\n");
-                    } else if (strcmp(input, "INSPECT") == 0){
-                        Inspectt(*T, ((*R).Player[1]).P) ;
-                    } else if (strcmp(input, "ROLL") == 0){
-                        if (count < 2) {
-                        roll2(&((*R).Player[1]), &((*R).Player[0]), *T, ((*R).Player[1]).P);
-                        ((*R).Player[1]).P = UpdateCurrPos((*R).Player[1]);
-                        count += 1;
-                        commandMAP(&(*R).Player[0], &(*R).Player[1]) ;
-                        roll = true ;                
-                        } else {
-                            printf("Tidak boleh roll lagi! \n");
-                        }
-
-                    } else if (strcmp(input, "UNDO") == 0){
-                        endTurn = true ;
-
-                    } else if (strcmp(input, "ENDTURN") == 0){
-                        if (roll == false) {
-                            printf("Belum roll, tidak boleh endturn!\n");
-                            endTurn = false ;
-                        }
-                        else {
-                            R->rondeKe = R->rondeKe + 1 ;
-                            PushR(Game, *R);
-                            endTurn = true;
-                            
-                        }
-                    } else if (strcmp(input, "EXIT") == 0){
-                        printf("Keluar dari game\n") ;
-                        endTurn = true;
-                        endGame = true;
-                        exit(0);
-                    } else {
-                        printf("Error! command is not correct.\n");
-                    }
-                }               
-            }             
-            if (roll!= false){
-                endTurn = true ;
-            } else {
-                endTurn = false ;
-            }
-        
-        } else if (strcmp(input, "EXIT") == 0){
-            printf("Keluar dari game\n") ;
-            endTurn = true;
-            endGame = true;
-            exit(0);
-        } else {
-            printf("Error! command is not correct.\n");
-        }
-    }
+        }              
+     }
 }
 
 
@@ -149,7 +48,7 @@ void startRonde(Tele *T, Round *Game){
     roundInfo R ;
     R = Game->TOP->Info ;
     int n = R.rondeKe ;
-    printf("\nTeng teng... Ronde ke-%d dimulaii \n",n);
+    printf("\n Ronde ke-%d dimulaii \n",n);
     startTurn(&R,T, Game);
 }
 
@@ -161,7 +60,6 @@ boolean isWExist(User *U1, User *U2) {
 
 void awalPermainan(int inputmenu, User *U1, User *U2, Tele *T, Round *Game){
         if (inputmenu == 1){
-        printf("Selanjutnya Konfigurasi Map (meminta input nama file konfigurasi map)\n");
         (*U1).Curr = IdxMin;
         (*U2).Curr = IdxMin;
         char fileConfig[10];
@@ -182,10 +80,7 @@ void awalPermainan(int inputmenu, User *U1, User *U2, Tele *T, Round *Game){
     } 
 }
 
-void InputAngka(int *angka)
-/* Membaca input angka dari user */
-/* Nanti ini dimasukkin ADT Mesin Karakter aja*/
-{
+void InputAngka(int *angka){
     scanf("%d", angka);
 }
 
